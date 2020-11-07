@@ -29,17 +29,17 @@ export class DormListComponent implements OnInit, AfterViewInit {
     let s = this.doc.createElement('script');
     // s.type = 'text/javascript';
     /*Inserts <script> into HTML (direct tag doesn't work)*/
-    s.innerHTML = 'var disqus_config = function () {\n' +
-      '  this.page.url = document.head.querySelector("link[rel=\'canonical\']").href;  // Replace PAGE_URL with your page\'s canonical URL variable\n' +
-      '  this.page.identifier = "dorm-list"; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\n' +
-      '  };\n' +
-      '\n' +
-      '  (function() { // DON\'T EDIT BELOW THIS LINE\n' +
-      '    var d = document, s = d.createElement(\'script\');\n' +
-      '    s.src = \'https://lnudormwatch.disqus.com/embed.js\';\n' +
-      '    s.setAttribute(\'data-timestamp\', +new Date());\n' +
-      '    (d.head || d.body).appendChild(s);\n' +
-      '  })();';
+    s.innerHTML = 'var disqus_config = function () {\n'
+      + '  this.page.url = document.head.querySelector("link[rel=\'canonical\']").href;\n' // Here page's canonical URL variable given
+      + '  this.page.identifier = "dorm-list";\n' // Here page's unique identifier variable given
+      + '  };\n'
+      + '\n'
+      + '  (function() {\n' // DON'T EDIT BELOW THIS LINE
+      + '    var d = document, s = d.createElement(\'script\');\n'
+      + '    s.src = \'https://lnudormwatch.disqus.com/embed.js\';\n'
+      + '    s.setAttribute(\'data-timestamp\', +new Date());\n'
+      + '    (d.head || d.body).appendChild(s);\n'
+      + '  })();';
     // s.src = "http://somedomain.com/somescript";
     this.elementRef.nativeElement.appendChild(s);
   }
