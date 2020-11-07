@@ -1,0 +1,21 @@
+<section>
+  <h1>List of dormitories</h1>
+
+  <article *ngFor="let dorm of dorms;">
+
+    <h3>Dormitory #{{ dorm.number }}</h3>
+
+    <p>
+      Address: {{ dorm.address }}
+    </p>
+
+    <p>
+      Phone: {{ dorm.phoneNumber }}
+    </p>
+
+    <button class="detail" [routerLink]="['/dorms', dorm.id]">
+      Details
+    </button>
+
+  </article>
+</section>
