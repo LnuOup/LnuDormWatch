@@ -1,0 +1,13 @@
+section {
+  padding: 24px;
+}
+
+article {
+  border: gray 1px solid;
+  margin-top: 16px;
+  padding: 16px 16px 32px;
+}
+
+.detail {
+  margin-top: 12px;
+}
