@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LDW.Application;
+using LDW.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +28,6 @@ namespace LDW.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
 
             #region Swagger
             services.AddSwaggerGen(c =>
@@ -39,6 +40,23 @@ namespace LDW.WebAPI
                 });
             });
             #endregion
+
+            #region API Versioning
+            // Add API Versioning to the Project
+            services.AddApiVersioning(config =>
+            {
+                // Specify the default API Version as 1.0
+                config.DefaultApiVersion = new ApiVersion(1, 0);
+                // If the client hasn't specified the API version in the request, use the default API version number 
+                config.AssumeDefaultVersionWhenUnspecified = true;
+                // Advertise the API versions supported for the particular endpoint
+                config.ReportApiVersions = true;
+            });
+            #endregion
+
+            services.AddApplication();
+            services.AddPersistence(Configuration);
+            services.AddControllers();
 
         }
 
@@ -56,11 +74,6 @@ namespace LDW.WebAPI
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
             #region Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -71,6 +84,11 @@ namespace LDW.WebAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "LnuDormWatch");
             });
             #endregion
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
