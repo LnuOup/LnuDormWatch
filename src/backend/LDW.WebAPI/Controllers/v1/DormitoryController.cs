@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LDW.WebAPI.Controllers.v1
 {
-    [ApiController]
     public class DormitoryController : BaseV1Controller
     {
         [HttpGet]
