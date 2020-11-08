@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using LDW.Application.Interfaces;
+﻿using LDW.Application.Interfaces;
 using LDW.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LDW.Application.Features.DormitoryFeatures.Queries
 {
