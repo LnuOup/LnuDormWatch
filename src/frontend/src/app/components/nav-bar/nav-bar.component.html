@@ -13,12 +13,20 @@
   <a routerLink="/request_admission">
     Request admission
   </a>
-  <div class="profile">
+
+  <div class="profile"
+        *ngIf="isSignedIn">
     <a>
       Profile
     </a>
     <a>
       Sign out
+    </a>
+  </div>
+  <div class="profile"
+       *ngIf="!isSignedIn">
+    <a>
+      Sign in
     </a>
   </div>
 </nav>
