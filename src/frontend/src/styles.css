@@ -39,3 +39,8 @@ button:disabled {
   opacity: 0.5;
   cursor: auto;
 }
+
+/* Disqus comments */
+#disqus_thread {
+  margin: 0 2% 1%;
+}
