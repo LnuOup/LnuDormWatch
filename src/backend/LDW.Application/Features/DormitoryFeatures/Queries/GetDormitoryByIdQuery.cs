@@ -1,4 +1,5 @@
 ﻿using LDW.Application.Interfaces;
+using LDW.Domain.Common.Exceptions;
 using LDW.Domain.Entities;
 using MediatR;
 using System.Threading;
@@ -27,6 +28,11 @@ namespace LDW.Application.Features.DormitoryFeatures.Queries
             public async Task<DormitoryEntity> Handle(GetDormitoryByIdQuery query, CancellationToken cancellationToken)
             {
                 var dormitory = await _context.Dormitories.FindAsync(query.Id);
+
+                if (dormitory == null)
+                {
+                    throw new NotFoundException("Dormitory", query.Id);
+                }
 
                 return dormitory;
             }
