@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Inject, Injectable, OnInit} from '@angular/core';
 declare function disqus(pageIdentifier: string): any;
 
-import { dorms } from '../../mockdata/dorms';
+import { mockDorms } from '../../mockdata/mock-dorms';
 import {DOCUMENT} from '@angular/common';
 
 @Component({
@@ -13,7 +13,7 @@ import {DOCUMENT} from '@angular/common';
   providedIn: 'root'
 })
 export class DormListComponent implements OnInit, AfterViewInit {
-  dorms = dorms;
+  dorms = mockDorms;
 
   constructor(@Inject(DOCUMENT) private doc) {
     // Add canonical URL to the page for search optimization and Disqus
