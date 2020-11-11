@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using LDW.Application.Interfaces;
+using LDW.Domain.Common.Exceptions;
 using MediatR;
 
 namespace LDW.Application.Features.DormitoryFeatures.Commands
@@ -26,7 +27,7 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
 
                 if (dormitoryToUpdate == null)
                 {
-                    return default;
+                    throw new NotFoundException("Dormitory", request.Id);
                 }
 
                 dormitoryToUpdate.Number = request.Number;
