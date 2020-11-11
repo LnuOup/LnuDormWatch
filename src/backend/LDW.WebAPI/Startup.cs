@@ -1,5 +1,6 @@
 using LDW.Application;
 using LDW.Persistence;
+using LDW.WebAPI.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,8 @@ namespace LDW.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddMvc(options => { options.Filters.Add<GlobalExceptionFilter>(); });
 
             #region Swagger
             services.AddSwaggerGen(c =>

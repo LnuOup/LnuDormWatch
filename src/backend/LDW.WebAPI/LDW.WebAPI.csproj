@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LDW.Domain\LDW.Domain.csproj" />
     <ProjectReference Include="..\LDW.Persistance\LDW.Persistence.csproj" />
   </ItemGroup>
 
