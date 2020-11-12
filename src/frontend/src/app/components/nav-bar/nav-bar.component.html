@@ -4,7 +4,7 @@
       LnuDormWatch
     </h1>
   </a>
-  <a routerLink="/dorms">
+  <a routerLink="/mockDorms">
     Dormitories
   </a>
   <a routerLink="/forum">
@@ -13,12 +13,21 @@
   <a routerLink="/request_admission">
     Request admission
   </a>
-  <div class="profile">
+
+<!--profile controls-->
+  <div class="profile"
+        *ngIf="isSignedIn">
     <a>
       Profile
     </a>
     <a>
       Sign out
+    </a>
+  </div>
+  <div class="profile"
+       *ngIf="!isSignedIn">
+    <a>
+      Sign in
     </a>
   </div>
 </nav>

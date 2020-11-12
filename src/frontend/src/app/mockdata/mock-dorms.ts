@@ -1,6 +1,8 @@
-// Mock data for dorms
+// Mock data for mockDorms
 
-export const dorms = [
+import {Dormitory} from '../models/dormitory';
+
+export const mockDorms: Dormitory[] = [
   {
     id: 1,
     number: 1,

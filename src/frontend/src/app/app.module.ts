@@ -18,7 +18,7 @@ import { DormDetailComponent } from './components/dorm-detail/dorm-detail.compon
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'dorms', component: DormListComponent },
-      { path: 'dorms/:dormId', component: DormDetailComponent },
+      { path: 'mockDorms/:dormId', component: DormDetailComponent },
       { path: 'forum', component: ForumComponent },
       { path: 'request_admission', component: RequestAdmissionComponent }
     ])
