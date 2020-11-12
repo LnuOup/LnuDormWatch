@@ -40,6 +40,12 @@ button:disabled {
   cursor: auto;
 }
 
+.material-icons.md-36 { font-size: 36px; }
+
+.material-icons.lnu-navy {
+  color: #002561;
+}
+
 /* Disqus comments */
 #disqus_thread {
   margin: 0 2% 1%;

@@ -1,1 +1,32 @@
-<p>forum works!</p>
+<main>
+  <h2>Welcome to the dorm forum!</h2>
+
+  <p>This is the main place for the dormitories' residents and staff to discuss issues, share news, or just socialize.</p>
+
+  <p>To join the conversation, select any of the forum sections below. You need to have a dormitory account to open threads or to send replies.</p>
+
+<!--  sections list-->
+  <section>
+    <header>
+      <h3>
+        Sections
+      </h3>
+    </header>
+
+    <article class="forum-section"
+             *ngFor="let forumSection of forumSections;">
+      <i class="forum-icon material-icons md-36 lnu-navy">forum</i>
+
+      <a>
+        <h3 class="section-title">
+          {{ forumSection.title }}
+        </h3>
+      </a>
+
+      <p class="section-description">
+        {{ forumSection.description }}
+      </p>
+    </article>
+  </section>
+
+</main>
