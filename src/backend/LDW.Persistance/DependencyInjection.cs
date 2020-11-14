@@ -18,5 +18,16 @@ namespace LDW.Persistence
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
         }
+
+        public static void AddIdentityContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("IdentityConnection");
+            services.AddDbContext<UserDbContext>(options =>
+                options.UseSqlServer(
+                    connectionString,
+                    b => b.MigrationsAssembly(typeof(UserDbContext).Assembly.FullName)));
+
+            services.AddScoped<IUserDbContext>(provider => provider.GetService<UserDbContext>());
+        }
     }
 }
