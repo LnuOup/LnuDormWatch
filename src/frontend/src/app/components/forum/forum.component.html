@@ -11,6 +11,14 @@
       <h3>
         Sections
       </h3>
+
+      <h4 id="section-header-threads">
+        Threads
+      </h4>
+
+      <h4 id="section-header-last-reply">
+        Last reply
+      </h4>
     </header>
 
     <article class="forum-section"
@@ -18,13 +26,22 @@
       <i class="forum-icon material-icons md-36 lnu-navy">forum</i>
 
       <a>
-        <h3 class="section-title">
+        <h3 id="section-title">
           {{ forumSection.title }}
         </h3>
       </a>
 
-      <p class="section-description">
+      <p id="section-description">
         {{ forumSection.description }}
+      </p>
+
+      <p id="section-num-of-threads">
+        {{ forumSection.numOfThreads }}
+      </p>
+
+      <p id="section-last-reply"
+          *ngIf="forumSection.lastReply">
+        {{ forumSection.lastReply | date:'medium' }}
       </p>
     </article>
   </section>

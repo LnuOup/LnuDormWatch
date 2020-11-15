@@ -9,5 +9,5 @@ export interface ForumSection {
 
   threads: ForumThread[];
   numOfThreads?: number;
-  lastReply?: Date;
+  lastReply?: string;
 }

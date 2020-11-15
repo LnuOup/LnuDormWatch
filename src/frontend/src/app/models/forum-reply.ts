@@ -3,6 +3,7 @@ export interface ForumReply {
   userId: number;
 
   quote?: ForumReply;
+  posted: string;
 
   content: string;
 }
