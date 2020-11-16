@@ -9,11 +9,17 @@ namespace LDW.Domain.Entities.Options
     public class JwtOptions
     {
         public string Issuer { get; set; }
+
         public string Subject { get; set; }
+
         public string Audience { get; set; }
+
         public DateTime NotBefore => DateTime.UtcNow;
+
         public DateTime IssuedAt => DateTime.UtcNow;
+
         public int TokenExpireInMinutes { get; set; }
+
         public int RefreshTokenExpireInDays { get; set; }
 
         public Func<Task<string>> JtiGenerator =>

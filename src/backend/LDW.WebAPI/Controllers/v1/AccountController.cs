@@ -90,15 +90,5 @@ namespace LDW.WebAPI.Controllers.v1
             }
             return Ok(Translations.VerifyEmailSuccess);
         }
-
-
-        private string GetConfirmationEmailUrl(string email, string code)
-        {
-            var action = "confirm-email";
-            var controller = "account";
-            var protocol = Request.Scheme;
-
-            return Url.Action(action, controller, new { Email = email, Code = code }, protocol);
-        }
     }
 }
