@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 
 namespace LDW.WebAPI.Controllers.v1
 { 
-    [Route("api/v1/account")]
     public class AccountController : BaseV1Controller
     {
         private readonly IEmailService _emailService;
@@ -52,7 +51,7 @@ namespace LDW.WebAPI.Controllers.v1
             };
 
             var result = await Mediator.Send(new CreateUserCommand(userModel, model.Password));
-            var url = GetConfirmationEmailUrl(userModel.Email, result);
+            var url = Url.Action(nameof(ConfirmEmail), "Account", new { email = userModel.Email, code = result }, Request.Scheme);
 
             //Send email verification
             await _emailService.SendVerificationEmail(userModel.UserName, url, _smtpConfig);
