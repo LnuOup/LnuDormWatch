@@ -82,12 +82,3 @@ section header #section-header-last-reply {
   margin-left: 16px;
 }
 
-
-a {
-  cursor: pointer;
-}
-
-a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
-}
