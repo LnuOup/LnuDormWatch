@@ -112,7 +112,7 @@ export const mockForumSections: ForumSection[] = [
   },
   // University
   {
-    id: 0,
+    id: 1,
     isAdminOnly: true,
 
     title: 'University',
@@ -122,7 +122,7 @@ export const mockForumSections: ForumSection[] = [
   },
   // Dorm #1
   {
-    id: 0,
+    id: 2,
     isAdminOnly: true,
 
     title: 'Dorm #1',
