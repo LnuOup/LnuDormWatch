@@ -1,8 +1,10 @@
 import {ForumReply} from './forum-reply';
+import {User} from './user';
 
 export interface ForumThread {
   id: number;
   userId: number; // TODO
+  user?: User;
 
   name: string;
   content: string;
@@ -11,4 +13,5 @@ export interface ForumThread {
   replies: ForumReply[];
   numOfReplies?: number;
   lastReply?: string;
+  lastReplyBy?: User;
 }

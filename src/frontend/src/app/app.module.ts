@@ -13,6 +13,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
+import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { ForumSectionThreadListComponent } from './components/forum-section-thre
     ProfileComponent,
     HomeComponent,
     DormDetailComponent,
-    ForumSectionThreadListComponent
+    ForumSectionThreadListComponent,
+    ForumThreadComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

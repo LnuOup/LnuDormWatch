@@ -8,6 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
+import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'mockDorms/:dormId', component: DormDetailComponent},
   {path: 'forum', component: ForumComponent},
   {path: 'forum/section/:sectionId', component: ForumSectionThreadListComponent},
+  {path: 'forum/thread/:threadId', component: ForumThreadComponent},
   {path: 'request_admission', component: RequestAdmissionComponent},
   {path: 'profile', component: ProfileComponent}
 ];
