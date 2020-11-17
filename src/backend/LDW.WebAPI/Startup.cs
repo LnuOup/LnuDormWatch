@@ -1,19 +1,32 @@
 using LDW.Application;
+using LDW.Application.Interfaces.Services;
+using LDW.Domain.Entities;
+using LDW.Domain.Entities.Options;
+using LDW.Domain.Interfaces.Services;
 using LDW.Persistence;
+using LDW.Persistence.Context;
+using LDW.Persistence.Services;
 using LDW.WebAPI.Filters;
+using LDW.WebAPI.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LDW.WebAPI
 {
     public class Startup
     {
+        private const string TOKEN = "token";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,7 +37,7 @@ namespace LDW.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.Configure<SmtpOptions>(Configuration.GetSection("SmtpConfig"));
             services.AddMvc(options => { options.Filters.Add<GlobalExceptionFilter>(); });
 
             #region Swagger
@@ -54,7 +67,64 @@ namespace LDW.WebAPI
 
             services.AddApplication();
             services.AddPersistence(Configuration);
+            services.AddIdentityContext(Configuration);
             services.AddControllers();
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IEmailService, EmailService>();
+
+            #region Identity
+            services.AddIdentity<UserEntity, IdentityRole>(options =>
+            {
+                options.Password.RequireLowercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<UserDbContext>()
+                .AddDefaultTokenProviders();
+            #endregion
+            
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtOptions));
+
+            var _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["SecretKey"]));
+            
+            services.Configure<JwtOptions>(options =>
+            {
+                options.Issuer = jwtAppSettingOptions[nameof(JwtOptions.Issuer)];
+                options.Audience = jwtAppSettingOptions[nameof(JwtOptions.Audience)];
+                options.TokenExpireInMinutes = int.Parse(jwtAppSettingOptions[nameof(JwtOptions.TokenExpireInMinutes)]);
+                options.RefreshTokenExpireInDays = int.Parse(jwtAppSettingOptions[nameof(JwtOptions.RefreshTokenExpireInDays)]);
+                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+            });
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = jwtAppSettingOptions[nameof(JwtOptions.Issuer)],
+                        ValidateAudience = true,
+                        ValidAudience = jwtAppSettingOptions[nameof(JwtOptions.Audience)],
+                        ValidateLifetime = true,
+                        IssuerSigningKey = _signingKey,
+                        ValidateIssuerSigningKey = true
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            if (context.Request.Query.ContainsKey(TOKEN))
+                            {
+                                context.Token = context.Request.Query[TOKEN];
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
         }
 
@@ -65,6 +135,9 @@ namespace LDW.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            IdentitySeed.InitializeAsync(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .CreateScope().ServiceProvider).Wait();
 
             app.UseHttpsRedirection();
 

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -11,17 +12,12 @@ import { RequestAdmissionComponent } from './components/request-admission/reques
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
+import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'dorms', component: DormListComponent },
-      { path: 'mockDorms/:dormId', component: DormDetailComponent },
-      { path: 'forum', component: ForumComponent },
-      { path: 'request_admission', component: RequestAdmissionComponent }
-    ])
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -31,7 +27,8 @@ import { DormDetailComponent } from './components/dorm-detail/dorm-detail.compon
     RequestAdmissionComponent,
     ProfileComponent,
     HomeComponent,
-    DormDetailComponent
+    DormDetailComponent,
+    ForumSectionThreadListComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
