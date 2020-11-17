@@ -1,12 +1,39 @@
-<section>
-  <h1>List of dormitories</h1>
+<button *ngIf="!openAsMap" (click)="showOnMap()">
+  SHOW AS MAP
+</button>
 
-  <article *ngFor="let dorm of dorms;">
+<button *ngIf="openAsMap" (click)="showOnMap()">
+  SHOW AS LIST
+</button>
+
+<agm-map *ngIf="openAsMap"
+         [latitude]="49.8860354"
+         [longitude]="23.9922207"
+         [zoomControl]="true">
+  <agm-marker
+    *ngFor="let m of dorms; let i = index"
+    (markerClick)="clickedMarker(m.location.address, i)"
+    [latitude]="m.location.lat"
+    [longitude]="m.location.lng"
+    [label]="m.location.name">
+
+    <agm-info-window>
+      <strong>InfoWindow content</strong>
+    </agm-info-window>
+
+  </agm-marker>
+
+</agm-map>
+
+<section *ngIf="!openAsMap">
+
+  <article *ngFor="let dorm of dorms;"
+           (click)="openDormDetailsPage()">
 
     <h3>Dormitory #{{ dorm.number }}</h3>
 
     <p>
-      Address: {{ dorm.address }}
+      Address: {{ dorm.location.address }}
     </p>
 
     <p>

@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule} from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -13,11 +11,16 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
+import {AgmCoreModule} from "@agm/core";
+
 
 @NgModule({
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey : 'AIzaSyAaZgGxzh87e9jXC1LOvz8zZJSMH3E77o0'
+    }),
   ],
   declarations: [
     AppComponent,

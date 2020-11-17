@@ -1,6 +1,8 @@
+import { Location } from "../models/location";
+
 export interface Dormitory {
   id: number;
   number: number;
-  address: string;
   phoneNumber: string;
+  location?: Location;
 }

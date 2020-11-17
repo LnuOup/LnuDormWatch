@@ -11,3 +11,7 @@ article {
 .detail {
   margin-top: 12px;
 }
+
+agm-map {
+  height: 500px;
+}
