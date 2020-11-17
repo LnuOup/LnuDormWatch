@@ -11,8 +11,19 @@ body {
   width: 100%;
 }
 
-a {
+a, a:link, a:visited {
   text-decoration: none;
+  color: #002561;
+  cursor: pointer;
+}
+
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+a:active {
+  opacity: 0.5;
 }
 
 /* Navigation bar */
@@ -38,6 +49,12 @@ button:hover {
 button:disabled {
   opacity: 0.5;
   cursor: auto;
+}
+
+.material-icons.md-36 { font-size: 36px; }
+
+.material-icons.lnu-navy {
+  color: #002561;
 }
 
 /* Disqus comments */
