@@ -12,6 +12,7 @@ export interface ForumThread {
 
   replies: ForumReply[];
   numOfReplies?: number;
+  created: string;
   lastReply?: string;
   lastReplyBy?: User;
 }

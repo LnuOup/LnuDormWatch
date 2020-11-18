@@ -17,6 +17,7 @@ export const mockForumSections: ForumSection[] = [
         isPinned: true,
         userId: 0,
 
+        created: '2015-04-23T18:05:43.511Z',
         lastReply: '2015-04-23T18:55:43.511Z',
 
         name: 'Vivamus iaculis augue ac suscipit',
@@ -61,6 +62,7 @@ export const mockForumSections: ForumSection[] = [
         isPinned: true,
         userId: 2,
 
+        created: '2012-04-23T18:05:43.511Z',
         lastReply: '2012-04-23T18:59:43.511Z',
 
         name: 'Nunc elementum metus ac enim placerat, ut',
@@ -93,6 +95,7 @@ export const mockForumSections: ForumSection[] = [
         isPinned: true,
         userId: 0,
 
+        created: '2009-09-23T12:05:43.511Z',
         lastReply: '2009-09-23T12:25:43.511Z',
 
         name: 'Curabitur quam nunc, eleifend nec aliquet ut',

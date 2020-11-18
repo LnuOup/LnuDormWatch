@@ -1,0 +1,47 @@
+main {
+  padding: 32px;
+}
+
+section {
+  border: 1px gray solid;
+  border-radius: 8px;
+  margin-top: 32px;
+}
+
+section header {
+  background-color: #002561;
+  color: white;
+  padding: 4px 16px;
+  display: flex;
+}
+
+#reply-to-thread {
+  margin-left: 32px;
+  color: white;
+  justify-self: flex-start;
+  align-self: center;
+}
+
+#thread-content {
+  display: flex;
+}
+
+.user-info {
+  padding: 24px;
+}
+.user-info h3 {
+  justify-self: center;
+}
+.user-info img {
+  width: 96px;
+  height: 96px;
+  border-radius: 48px;
+}
+
+.reply-content {
+  padding: 24px 24px 24px 64px;
+}
+
+.thread-reply {
+  display: flex;
+}
