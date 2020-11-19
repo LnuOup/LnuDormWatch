@@ -28,11 +28,35 @@
       </div>
     </article>
 
+
+  </section>
+
+  <section id="replies">
+    <header>
+      <h4>
+        Replies
+      </h4>
+    </header>
     <!--  thread replies-->
     <article class="thread-reply"
              *ngFor="let reply of displayedThread.replies;">
 
+      <div class="user-info">
+
+        <a><h3>{{ reply.user.userName }}</h3></a>
+
+        <img src="{{reply.user.photoUrl}}">
+
+        <p *ngIf="reply.user.isAdmin">Administrator</p>
+        <p *ngIf="!reply.user.isAdmin">Resident</p>
+      </div>
+
+      <div class="reply-content">
+        <h4>Posted on {{reply.posted | date: "medium"}}</h4>
+
+        <p>{{reply.content}}</p>
+      </div>
+
     </article>
   </section>
-
 </main>

@@ -24,13 +24,16 @@ section header {
 
 #thread-content {
   display: flex;
+  min-height: 256px;
 }
 
 .user-info {
-  padding: 24px;
+  padding: 24px 48px;
+  border-right: 1px gray solid;
 }
 .user-info h3 {
   justify-self: center;
+  width: 96px;
 }
 .user-info img {
   width: 96px;
@@ -38,10 +41,20 @@ section header {
   border-radius: 48px;
 }
 
+.user-info p {
+  width: 96px;
+}
+
 .reply-content {
-  padding: 24px 24px 24px 64px;
+  padding: 12px 48px 12px 48px;
+}
+
+#replies header {
+  padding: 0px 16px;
 }
 
 .thread-reply {
   display: flex;
+  border-bottom: 1px gray solid;
 }
+
