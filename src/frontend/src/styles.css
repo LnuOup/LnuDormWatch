@@ -57,6 +57,10 @@ button:disabled {
   color: #002561;
 }
 
+.material-icons.gray {
+  color: lightgray;
+}
+
 /* Disqus comments */
 #disqus_thread {
   margin: 0 2% 1%;

@@ -54,7 +54,18 @@
       <div class="reply-content">
         <h4>Posted on {{reply.posted | date: "medium"}}</h4>
 
+        <div *ngIf="reply.quote" class="reply-quote">
+          <h5>Posted by {{ reply.quote.user.userName }} on {{ reply.quote.posted | date: "medium" }}:</h5>
+
+          <q>{{reply.quote.content}}</q>
+        </div>
+
         <p>{{reply.content}}</p>
+
+        <div class="reply-action-panel"
+            *ngIf="isSignedIn">
+          <a><i class="quote-icon material-icons md-36 gray">comment</i></a>
+        </div>
       </div>
 
     </article>

@@ -32,21 +32,30 @@ section header {
   border-right: 1px gray solid;
 }
 .user-info h3 {
-  justify-self: center;
+  text-align: center;
   width: 96px;
 }
 .user-info img {
   width: 96px;
   height: 96px;
+  object-fit: cover;
   border-radius: 48px;
 }
 
 .user-info p {
+  text-align: center;
   width: 96px;
 }
 
 .reply-content {
   padding: 12px 48px 12px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-content p {
+  flex: 1;
+  margin-top: 0;
 }
 
 #replies header {
@@ -56,5 +65,21 @@ section header {
 .thread-reply {
   display: flex;
   border-bottom: 1px gray solid;
+}
+
+.reply-quote {
+  border: 1px gray solid;
+  background-color: lightgray;
+  padding: 0 16px 16px;
+  margin-bottom: 16px;
+}
+
+.reply-quote q {
+  font-style: italic;
+}
+
+.reply-action-panel {
+  align-self: flex-end;
+  justify-self: end;
 }
 

@@ -31,7 +31,7 @@ export class ForumThreadComponent implements OnInit {
       rpl.user = mockUsers.find(usr => usr.id === rpl.userId);
       if (rpl.quoteId !== undefined)
       {
-        rpl.quote = this.displayedThread.replies.find(repl => repl.quoteId);
+        rpl.quote = this.displayedThread.replies.find(repl => repl.id === rpl.quoteId);
       }
     });
   }

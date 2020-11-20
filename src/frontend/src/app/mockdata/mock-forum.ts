@@ -41,6 +41,7 @@ export const mockForumSections: ForumSection[] = [
             id: 2,
             userId: 0,
             posted: '2015-04-23T18:38:43.511Z',
+            quoteId: 0,
             content: 'Mauris dignissim libero elit, et condimentum nunc placerat et. Donec ultrices leo molestie tellus dictum, a convallis ligula accumsan. Curabitur viverra tincidunt consequat. Phasellus nec massa mauris. Donec a risus quis nibh lacinia pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam enim diam, cursus eu aliquet nec, elementum in tellus. Vestibulum tempor commodo turpis, et fermentum magna volutpat non. Vestibulum eu lacinia lacus. Donec facilisis vel risus et laoreet. Donec tristique purus vitae fermentum tincidunt. Praesent sollicitudin tortor odio, ac commodo urna tempus vitae.'
           },
           {
