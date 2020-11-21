@@ -1,21 +1,24 @@
-<button *ngIf="!openAsMap" (click)="showOnMap()">
+<button *ngIf="!openAsMap" (click)="showOnMap()"
+        class="map-list-button">
   SHOW AS MAP
 </button>
 
-<button *ngIf="openAsMap" (click)="showOnMap()">
+<button *ngIf="openAsMap" (click)="showOnMap()"
+        class="map-list-button">
   SHOW AS LIST
 </button>
 
 <agm-map *ngIf="openAsMap"
-         [latitude]="49.8860354"
-         [longitude]="23.9922207"
-         [zoomControl]="true">
+         [latitude]="initialLat"
+         [longitude]="initialLng"
+         [zoomControl]="true"
+         [zoom]="zoomLevel">
   <agm-marker
     *ngFor="let m of dorms; let i = index"
     (markerClick)="clickedMarker(m.location.address, i)"
     [latitude]="m.location.lat"
     [longitude]="m.location.lng"
-    [label]="m.location.name">
+    [label]="m.number">
 
     <agm-info-window>
       <strong>InfoWindow content</strong>
@@ -27,27 +30,39 @@
 
 <section *ngIf="!openAsMap">
 
-  <article *ngFor="let dorm of dorms;"
-           (click)="openDormDetailsPage()">
+  <article class="dorm-article"
+           *ngFor="let dorm of dorms;">
 
-    <h3>Dormitory #{{ dorm.number }}</h3>
+    <h3 id="dorm-name">Dormitory #{{ dorm.number }}</h3>
 
-    <p>
-      Address: {{ dorm.location.address }}
+    <p id="dorm-address" (click)="showDormOnMap(dorm)">
+      {{ dorm.location.address }}
     </p>
 
-    <p>
-      Phone: {{ dorm.phoneNumber }}
+    <div id="rating-container">
+      <h3 id="dorm-rating-positive">
+        {{dorm.rating.positive}} +
+      </h3>
+
+      <h3 id="dorm-rating-negative">
+        {{dorm.rating.negative}} -
+      </h3>
+    </div>
+
+    <p id="dorm-phone">
+      {{ dorm.phoneNumber }}
     </p>
+
+    <img class="dorm-image" [src]="dorm.mainImageUrl">
 
     <button class="detail" [routerLink]="['/mockDorms', dorm.id]">
       Details
     </button>
 
+    <div id="divider">
+
+    </div>
   </article>
 </section>
 
-<!-- Disqus comments -->
-<div id="disqus_thread"></div>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 

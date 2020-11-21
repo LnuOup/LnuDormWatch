@@ -1,17 +1,97 @@
 section {
-  padding: 24px;
+  padding: 10px 220px 100px;
 }
 
-article {
-  border: gray 1px solid;
-  margin-top: 16px;
-  padding: 16px 16px 32px;
-}
 
 .detail {
   margin-top: 12px;
 }
 
 agm-map {
-  height: 500px;
+  height: 650px;
+  margin-top: -40px;
+}
+
+.dorm-article {
+  display: grid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: transparent;
+  outline: none;
+  grid-template-rows: 50px 50px 70px 1px;
+  grid-template-columns: 170px 1fr 1fr;
+}
+
+.dorm-image {
+  grid-row: 1 / span 3;
+  grid-column: 1;
+  align-self: center;
+  justify-self: center;
+  border-radius: 10px;
+  height: 120px;
+  width: 160px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24), 0 6px 20px 0 rgba(0, 0, 0, 0.24);
+}
+
+.map-list-button{
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 130px;
+}
+
+#rating-container {
+  display: flex;
+  align-items:center;
+  height:100%;
+  text-align: left;
+  justify-content:right;
+  grid-row: 2;
+  grid-column: 2;
+  margin-left: 15px;
+  margin-top: 6px;
+}
+
+#divider{
+  height: 1px;
+  background: gray;
+  width: 80%;
+  grid-row: 4;
+  grid-column: 2/4;
+  margin-top: 5px;
+}
+
+#dorm-rating-negative{
+  color: red;
+  margin-left: 10px;
+}
+
+#dorm-rating-positive{
+  color: green;
+}
+
+#dorm-address{
+  grid-column: 3;
+  grid-row: 3;
+}
+
+#dorm-name{
+  grid-column: 2;
+  grid-row: 1;
+  margin-left: 10px;
+  margin-top: 32px;
+}
+
+#dorm-phone{
+  grid-column: 3;
+  grid-row: 2;
+  margin-left: 10px;
+}
+
+button.detail{
+  grid-column: 2;
+  grid-row: 3;
+  width: 100px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
