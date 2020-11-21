@@ -1,204 +1,141 @@
-<p>request-admission works!</p>
+<main>
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform?embedded=true"
+    width="40%" height="847" frameborder="0" marginheight="0" marginwidth="0"
+    class="google_form">Loading…
+  </iframe>
 
-<div id="colculator" style="
-margin: 2%;
-width: fit-content;
-border: 2px solid royalblue;
-">
+  <h2>Поселення в гуртожиток</h2>
 
-  <table>
-    <tr>
-      <td>Start living:</td>
-      <td>
-        <label>
-          <input id="input_start_living" type="date" placeholder="Початок проживання"/>
-        </label>
-      </td>
-    </tr>
-    <tr>
-      <td>End living:</td>
-      <td>
-        <label>
-          <input id="input_end_living" type="date" placeholder="Початок проживання"/>
-        </label>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="dropdown_dorms">Choose the dorm:</label>
-      </td>
-      <td>
-        <select name="dropdown_dorms" id="dropdown_dorms">
-          <option value="dorm_other">Any of #2-#8</option>
-          <option value="dorm1">#1 (better rooms)</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="dropdown_room_type">Choose room type:</label>
-      </td>
-      <td>
-        <select name="dropdown_room_type" id="dropdown_room_type">
-          <option value="simple">Simple</option>
-        </select>
-      </td>
-    </tr>
+<!--  Calculator begin ------------------------ -->
+  <div id="colculator">
+    <table>
+      <tr>
+        <td>Початок проживання:</td>
+        <td>
+          <label>
+            <input id="input_start_living" type="date" placeholder="Початок проживання"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Кінець проживання:</td>
+        <td>
+          <label>
+            <input id="input_end_living" type="date" placeholder="Кінець проживання"/>
+          </label>
+        </td>
+      </tr>
 
-<!--    -->
-    <tr>
-      <td>
-        <input id="radio_4bed" type="radio" name="num_of_beds"/> <label for="radio_4bed">4-bed room</label>
-      </td>
-      <td>
-        <input id="radio_2bed" type="radio" name="num_of_beds"/> <label for="radio_2bed">2-bed room</label>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input id="checkbox_guest" type="checkbox"/> <label for="checkbox_guest">Guest / enrollee / correspondence student</label> <br/>
-        <input id="checkbox_orphan" type="checkbox"/> <label for="checkbox_orphan">Orphan / disabled person</label> <br/>
-        <input id="checkbox_ATO" type="checkbox"/> <label for="checkbox_ATO">I or my parent ATOshnik</label> <br/>
-        <input id="checkbox_blat" type="checkbox"/> <label for="checkbox_blat">I have a bottle for the dorm commissar</label> <br/>
-      </td>
-    </tr>
-<!--    -->
+      <tr style="height: 1em"></tr>
 
+      <tr>
+        <td>
+          <label for="dropdown_dorms">Оберіть гуртожиток:</label>
+        </td>
+        <td>
+          <select name="dropdown_dorms" id="dropdown_dorms">
+            <option value="dorm_other">№2 – №8</option>
+            <option value="dorm1">№1 (елітний)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="dropdown_room_type">Оберіть тип кімнати:</label>
+        </td>
+        <td>
+          <select name="dropdown_room_type" id="dropdown_room_type">
+            <option value="simple">Проста</option>
+          </select>
+        </td>
+      </tr>
 
-    <tr>
-      <td colspan="2">
-        <div style="text-align: center;">
-          <input id="button_calculate" type="button" value="Coclulate price" style="font-size: 1.2em;"/>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Total price:
-      </td>
-      <td>
-        <div style="background-color: lightgrey; padding-left: 1em; border-radius: 2px;">
-          <span id="total_price">0</span> UAH
-        </div>
-      </td>
-    </tr>
-  </table>
-</div>
+      <tr style="height: 1em"></tr>
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform?embedded=true" width="100%" height="847" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      <tr>
+        <td colspan="2">
+          <input id="checkbox_guest" type="checkbox"/> <label for="checkbox_guest">Гість / абітурієнт / заочник</label>
+          <br/>
+          <input id="checkbox_orphan" type="checkbox"/> <label for="checkbox_orphan">Сирота / інвалід</label> <br/>
+          <input id="checkbox_ATO" type="checkbox"/> <label for="checkbox_ATO">Атошник</label> <br/>
+          <input id="checkbox_blat" type="checkbox"/> <label for="checkbox_blat">Маю пляшку для коменданта</label> <br/>
+        </td>
+      </tr>
+
+      <tr style="height: 1em"></tr>
+
+      <tr>
+        <td colspan="2">
+          <div style="text-align: center;">
+            <button id="button_calculate" value="Coclulate price">Обчислити вартість</button>
+          </div>
+        </td>
+      </tr>
+
+      <tr style="height: 1em"></tr>
+
+      <tr>
+        <td style="width: fit-content;">
+          Загалом:
+        </td>
+        <td style="width: auto;">
+          <div class="total_price">
+            <span id="total_price">0</span> UAH
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+<!--  Calculator end ------------------------ -->
+
+  <p>request-admission works! Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+    ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+    Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+    ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Слава ЛНУ!
+    Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+    ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+
+  <p>request-admission works! Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+    ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+    Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem Прєподам слава!
+    ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Слава ЛНУ!
+    Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+    ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+
+  <p>Ой, об шкло лупилась муха та й себе знурила —
+    Так на іспиті прогульник вибився із сили.
+
+    Не учив студент нічого, сподівав списати —
+    І вже чрез півроку його взяли у солдати.
+
+    Щойно вимитий підсвинок знов заліз в багнюку —
+    Тільки іспити минули, люд забув науку.
+
+    Прогуляли пару групой, нагло прогуляли,
+    І тепер чогось в журналі «енок» є немало.</p>
+  <p>
+    «Бомби» кинули балбеси і п'ятірки мають —
+    Їх тепер роботодавці на бабло кидають.
+
+    Хто із лекцій забирався, бо сі лінь спіткала,
+    Той на платні нині курси гроші губить вдало.
+
+    Думав, буде «автоматом», так що вивчив мало —
+    Розкричався брудним матом: балів не дістало.
+
+    На гулянки і на п'янки не ходи багато,
+    Бо назавтра ти на парах будеш ледь втикати.
+
+    Бездипломний розумака двірник є донині,
+    Але дурні із дипломом шкодять всій країні.
+
+    Хто купив свою диплому та й пішов по світу —
+    Відловіть таких і дайте справжнюю освіту!
+  </p>
+</main>
 
 <!-- Disqus comments -->
 <div id="disqus_thread"></div>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-<script>
-  function getNumberOfDays() {
-    let a = document.getElementById("input_start_living");
-    let b = document.getElementById("input_end_living");
-    let d1 = new Date(a.value);
-    let d2 = new Date(b.value);
-
-    return Math.floor((d2 - d1) / (1000*60*60*24));
-  }
-
-  function updateAvailableRoomTypes() {
-    if (document.getElementById("dropdown_dorms").value === "dorm1") {
-      document.getElementById("dropdown_room_type").innerHTML =
-        '<option value="lux">Lux</option>' +
-        '<option value="halflux">Half-lux</option>' +
-        '<option value="single_bed">Single bed room</option>' +
-        '<option value="two_beds">Two beds room</option>';
-    }
-    else if (document.getElementById("checkbox_guest").checked) {
-      document.getElementById("dropdown_room_type").innerHTML =
-        '<option value="simple">Simple</option>' +
-        '<option value="better">Better</option>';
-    }
-    else {
-      document.getElementById("dropdown_room_type").innerHTML =
-        '<option value="simple">Simple</option>';
-    }
-  }
-
-  function getLivingPrice() {
-    /* All in UAH */
-    const PRICE_PER_MONTH = 520; //For one bed
-
-    const PRICE_PER_DAY_GUEST = 55; //For one bed
-    const PRICE_PER_DAY_GUEST_BETTER_ROOM = 100; //For one bed
-    const PRICE_PER_DAY_LUX = 1050; //For the whole room
-    const PRICE_PER_DAY_HALF_LUX = 840; //For the whole room
-    const PRICE_PER_DAY_1PLACE = 600; //For the whole room with one bed
-    const PRICE_PER_DAY_2PLACES = 750; //For the whole room
-
-    const MINIMAL_PRICE = 100; //UAH
-
-    /* Coefficients */
-    const PRICE_MODIFIER_ORPHAN = 0; // Free
-    const PRICE_MODIFIER_ATO = 0.5; // -50%
-    const PRICE_MODIFIER_BLAT = 0.9; // -10%
-
-    var price;
-
-    let dormName = document.getElementById("dropdown_dorms").value;
-    let roomType = document.getElementById("dropdown_room_type").value;
-    if (dormName === "dorm1") {
-      switch (roomType) {
-        case "single_bed":
-          price = PRICE_PER_DAY_1PLACE * getNumberOfDays();
-          break;
-        case "two_beds":
-          price = PRICE_PER_DAY_2PLACES * getNumberOfDays();
-          break;
-        case "halflux":
-          price = PRICE_PER_DAY_HALF_LUX * getNumberOfDays();
-          break;
-        case "lux":
-        default:
-          price = PRICE_PER_DAY_LUX * getNumberOfDays();
-          break;
-      }
-    }
-    else if (document.getElementById("checkbox_guest").checked) {
-      switch (roomType) {
-        case "better":
-          price = PRICE_PER_DAY_GUEST_BETTER_ROOM * getNumberOfDays();
-          break;
-        case "simple":
-        default:
-          price = PRICE_PER_DAY_GUEST * getNumberOfDays();
-          break;
-      }
-    }
-    else { //TODO Only full months are allowed
-      price = Math.ceil(PRICE_PER_MONTH * getNumberOfDays() / 30);
-    }
-
-    //Types of discount
-    if(document.getElementById("checkbox_orphan").checked) {
-      price *= PRICE_MODIFIER_ORPHAN;
-    }
-    if(document.getElementById("checkbox_ATO").checked) {
-      price *= PRICE_MODIFIER_ATO;
-    }
-    if(document.getElementById("checkbox_blat").checked) {
-      price *= PRICE_MODIFIER_BLAT;
-    }
-
-    return price; //Math.max(price, MINIMAL_PRICE);
-  }
-
-  function setDormNumberOnChange() {
-    document.getElementById("dropdown_dorms").setAttribute("onChange",
-      "updateAvailableRoomTypes();");
-    document.getElementById("checkbox_guest").setAttribute("onChange",
-      "updateAvailableRoomTypes();");
-  }
-
-  function setCalculateOnClick() {
-    document.getElementById("button_calculate").setAttribute("onClick",
-      'document.getElementById("total_price").innerText = getLivingPrice();')
-  }
-
-</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+  Disqus.</a></noscript>
