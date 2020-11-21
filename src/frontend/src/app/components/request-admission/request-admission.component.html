@@ -1,6 +1,64 @@
 <p>request-admission works!</p>
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform?embedded=true" width="100%" height="847" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+<div id="colculator" style="
+margin: 2%;
+width: fit-content;
+border: 2px solid royalblue;
+">
+
+  <table>
+    <tr>
+      <td>Start living:</td>
+      <td>
+        <label>
+          <input id="input_start_living" type="date" placeholder="Початок проживання"/>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>End living:</td>
+      <td>
+        <label>
+          <input id="input_end_living" type="date" placeholder="Початок проживання"/>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input id="radio_4bed" type="radio" name="num_of_beds"/> <label for="radio_4bed">4-bed room</label>
+      </td>
+      <td>
+        <input id="radio_2bed" type="radio" name="num_of_beds"/> <label for="radio_2bed">2-bed room</label>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input id="checkbox_syrota" type="checkbox"/> <label for="checkbox_syrota">I'm an orphan</label> <br/>
+        <input id="checkbox_ATO" type="checkbox"/> <label for="checkbox_ATO">I or my parent ATOshnik</label> <br/>
+        <input id="checkbox_blat" type="checkbox"/> <label for="checkbox_blat">I have a bottle for the dorm commissar</label> <br/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div style="text-align: center;">
+          <input id="button_calculate" type="button" value="Coclulate price" style="font-size: 1.2em;"/>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total price:
+      </td>
+      <td>
+        <div style="background-color: lightgrey; padding-left: 1em; border-radius: 2px;">
+          <span id="total_price">0</span> UAH
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform?embedded=true" width="100%" height="847" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
 <!-- Disqus comments -->
 <div id="disqus_thread"></div>
