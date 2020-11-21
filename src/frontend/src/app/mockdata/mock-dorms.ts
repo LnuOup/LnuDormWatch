@@ -1,6 +1,7 @@
 // Mock data for mockDorms
 
 import {Dormitory} from '../models/dormitory';
+import {Image} from "@ks89/angular-modal-gallery";
 
 export const mockDorms: Dormitory[] = [
   {
@@ -16,7 +17,80 @@ export const mockDorms: Dormitory[] = [
     rating: {
       negative: 10,
       positive: 25
-    }
+    },
+    images: [
+      new Image(
+        0,
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/milan-pegasus-gallery-statue.jpg',
+          description: 'Description 1'
+        },
+        { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-milan-pegasus-gallery-statue.jpg',
+          title: 'First image title',
+          alt: 'First image alt',
+          ariaLabel: 'First image aria-label' }
+      ),
+      new Image(1, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-47223.jpeg' }, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-47223.jpg' }),
+      new Image(
+        2,
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-52062.jpeg',
+          description: 'Description 3',
+          title: 'Third image title',
+          alt: 'Third image alt',
+          ariaLabel: 'Third image aria-label'
+        },
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-52062.jpg',
+          description: 'Description 3'
+        }
+      ),
+      new Image(1, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-47223.jpeg' }, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-47223.jpg' }),
+      new Image(
+        2,
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-52062.jpeg',
+          description: 'Description 3',
+          title: 'Third image title',
+          alt: 'Third image alt',
+          ariaLabel: 'Third image aria-label'
+        },
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-52062.jpg',
+          description: 'Description 3'
+        }
+      ),
+      new Image(1, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-47223.jpeg' }, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-47223.jpg' }),
+      new Image(
+        2,
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-52062.jpeg',
+          description: 'Description 3',
+          title: 'Third image title',
+          alt: 'Third image alt',
+          ariaLabel: 'Third image aria-label'
+        },
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-52062.jpg',
+          description: 'Description 3'
+        }
+      ),
+      new Image(1, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-47223.jpeg' }, { img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-47223.jpg' }),
+      new Image(
+        2,
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/pexels-photo-52062.jpeg',
+          description: 'Description 3',
+          title: 'Third image title',
+          alt: 'Third image alt',
+          ariaLabel: 'Third image aria-label'
+        },
+        {
+          img: 'https://raw.githubusercontent.com/Ks89/angular-modal-gallery/master/examples/systemjs/assets/images/gallery/thumbs/t-pexels-photo-52062.jpg',
+          description: 'Description 3'
+        }
+      ),
+    ]
   },
   {
     id: 2,
@@ -32,7 +106,7 @@ export const mockDorms: Dormitory[] = [
       negative: 100,
       positive: 1000
     }
-    },
+  },
   {
     id: 3,
     number: 8,

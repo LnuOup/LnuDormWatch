@@ -12,6 +12,9 @@ import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import {AgmCoreModule} from "@agm/core";
+import 'hammerjs';
+import 'mousetrap';
+import {GalleryModule} from "@ks89/angular-modal-gallery";
 
 
 @NgModule({
@@ -21,6 +24,7 @@ import {AgmCoreModule} from "@agm/core";
     AgmCoreModule.forRoot({
       apiKey : 'AIzaSyAaZgGxzh87e9jXC1LOvz8zZJSMH3E77o0'
     }),
+    GalleryModule.forRoot()
   ],
   declarations: [
     AppComponent,
