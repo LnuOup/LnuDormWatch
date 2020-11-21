@@ -29,11 +29,18 @@ border: 2px solid royalblue;
       </td>
       <td>
         <select name="dropdown_dorms" id="dropdown_dorms">
+          <option value="dorm_other">Any of #2-#8</option>
           <option value="dorm1">#1 (better rooms)</option>
-          <option value="dorm2">#2, #3</option>
-          <option value="dorm4">#4 (cheaper)</option>
-          <option value="dorm5">#5, #6</option>
-          <option value="dorm7">#7, #8</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="dropdown_room_type">Choose room type:</label>
+      </td>
+      <td>
+        <select name="dropdown_room_type" id="dropdown_room_type">
+          <option value="simple">Simple</option>
         </select>
       </td>
     </tr>
@@ -49,7 +56,8 @@ border: 2px solid royalblue;
     </tr>
     <tr>
       <td colspan="2">
-        <input id="checkbox_orphan" type="checkbox"/> <label for="checkbox_orphan">I'm an orphan</label> <br/>
+        <input id="checkbox_guest" type="checkbox"/> <label for="checkbox_guest">Guest / enrollee / correspondence student</label> <br/>
+        <input id="checkbox_orphan" type="checkbox"/> <label for="checkbox_orphan">Orphan / disabled person</label> <br/>
         <input id="checkbox_ATO" type="checkbox"/> <label for="checkbox_ATO">I or my parent ATOshnik</label> <br/>
         <input id="checkbox_blat" type="checkbox"/> <label for="checkbox_blat">I have a bottle for the dorm commissar</label> <br/>
       </td>
@@ -94,34 +102,77 @@ border: 2px solid royalblue;
     return Math.floor((d2 - d1) / (1000*60*60*24));
   }
 
+  function updateAvailableRoomTypes() {
+    if (document.getElementById("dropdown_dorms").value === "dorm1") {
+      document.getElementById("dropdown_room_type").innerHTML =
+        '<option value="lux">Lux</option>' +
+        '<option value="halflux">Half-lux</option>' +
+        '<option value="single_bed">Single bed room</option>' +
+        '<option value="two_beds">Two beds room</option>';
+    }
+    else if (document.getElementById("checkbox_guest").checked) {
+      document.getElementById("dropdown_room_type").innerHTML =
+        '<option value="simple">Simple</option>' +
+        '<option value="better">Better</option>';
+    }
+    else {
+      document.getElementById("dropdown_room_type").innerHTML =
+        '<option value="simple">Simple</option>';
+    }
+  }
+
   function getLivingPrice() {
     /* All in UAH */
-    const PRICE_PER_MONTH = 520; //For one bed. Really ranges from 490 to 520
-    const PRICE_PER_MONTH_DORM4 = 430;
+    const PRICE_PER_MONTH = 520; //For one bed
 
-    const PRICE_PER_DAY_GUEST = 50; //For one bed
-    const PRICE_PER_DAY_GUEST_BETTER_ROOM = 90; //For one bed
-    const PRICE_PER_DAY_LUX = 805; //For the whole room
-    const PRICE_PER_DAY_HALF_LUX = 644; //For the whole room
-    const PRICE_PER_DAY_1PLACE = 460; //For the whole room with one bed
-    const PRICE_PER_DAY_2PLACES = 575; //For the whole room
+    const PRICE_PER_DAY_GUEST = 55; //For one bed
+    const PRICE_PER_DAY_GUEST_BETTER_ROOM = 100; //For one bed
+    const PRICE_PER_DAY_LUX = 1050; //For the whole room
+    const PRICE_PER_DAY_HALF_LUX = 840; //For the whole room
+    const PRICE_PER_DAY_1PLACE = 600; //For the whole room with one bed
+    const PRICE_PER_DAY_2PLACES = 750; //For the whole room
 
-    const DEFAULT_PRICE_4BED = 500; //UAH per day
-    const DEFAULT_PRICE_2BED = 650; //UAH per day
     const MINIMAL_PRICE = 100; //UAH
 
     /* Coefficients */
-    const PRICE_MODIFIER_ORPHAN = 0.75; // -25%
-    const PRICE_MODIFIER_ATO = 0.6; // -40%
+    const PRICE_MODIFIER_ORPHAN = 0; // Free
+    const PRICE_MODIFIER_ATO = 0.5; // -50%
     const PRICE_MODIFIER_BLAT = 0.9; // -10%
 
     var price;
-    //Type of room
-    if (document.getElementById("radio_4bed").checked) {
-      price = DEFAULT_PRICE_4BED;
+
+    let dormName = document.getElementById("dropdown_dorms").value;
+    let roomType = document.getElementById("dropdown_room_type").value;
+    if (dormName === "dorm1") {
+      switch (roomType) {
+        case "single_bed":
+          price = PRICE_PER_DAY_1PLACE * getNumberOfDays();
+          break;
+        case "two_beds":
+          price = PRICE_PER_DAY_2PLACES * getNumberOfDays();
+          break;
+        case "halflux":
+          price = PRICE_PER_DAY_HALF_LUX * getNumberOfDays();
+          break;
+        case "lux":
+        default:
+          price = PRICE_PER_DAY_LUX * getNumberOfDays();
+          break;
+      }
     }
-    else if (document.getElementById("radio_2bed").checked) {
-      price = DEFAULT_PRICE_2BED;
+    else if (document.getElementById("checkbox_guest").checked) {
+      switch (roomType) {
+        case "better":
+          price = PRICE_PER_DAY_GUEST_BETTER_ROOM * getNumberOfDays();
+          break;
+        case "simple":
+        default:
+          price = PRICE_PER_DAY_GUEST * getNumberOfDays();
+          break;
+      }
+    }
+    else { //TODO Only full months are allowed
+      price = Math.ceil(PRICE_PER_MONTH * getNumberOfDays() / 30);
     }
 
     //Types of discount
@@ -135,7 +186,19 @@ border: 2px solid royalblue;
       price *= PRICE_MODIFIER_BLAT;
     }
 
-    return Math.max(price, MINIMAL_PRICE);
+    return price; //Math.max(price, MINIMAL_PRICE);
+  }
+
+  function setDormNumberOnChange() {
+    document.getElementById("dropdown_dorms").setAttribute("onChange",
+      "updateAvailableRoomTypes();");
+    document.getElementById("checkbox_guest").setAttribute("onChange",
+      "updateAvailableRoomTypes();");
+  }
+
+  function setCalculateOnClick() {
+    document.getElementById("button_calculate").setAttribute("onClick",
+      'document.getElementById("total_price").innerText = getLivingPrice();')
   }
 
 </script>
