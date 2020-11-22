@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -14,11 +14,14 @@ import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
+import { CreateThreadComponent } from './components/create-thread/create-thread.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -30,7 +33,8 @@ import { ForumThreadComponent } from './components/forum-thread/forum-thread.com
     HomeComponent,
     DormDetailComponent,
     ForumSectionThreadListComponent,
-    ForumThreadComponent
+    ForumThreadComponent,
+    CreateThreadComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

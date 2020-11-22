@@ -1,0 +1,22 @@
+<main>
+  <h2>Create a new thread</h2>
+
+  <p>Please enter your question and a description for it below, to help other people better address your concern.</p>
+
+  <form [formGroup]="newThreadForm"
+    (ngSubmit)="addThread()">
+    <label>
+      Name:
+      <input placeholder="Enter thread name" formControlName="threadName" required>
+    </label>
+
+    <label>
+      Content:
+      <textarea type="text" placeholder="Enter content" formControlName="threadContent" required></textarea>
+    </label>
+
+    <button type="submit" class="detail">
+      Create thread
+    </button>
+  </form>
+</main>
