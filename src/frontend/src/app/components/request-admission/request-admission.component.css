@@ -3,6 +3,7 @@ main {
 }
 .google_form {
   float: right;
+  min-width: fit-content;
 }
 #colculator {
   margin: 0 1em 0.5em 0;
