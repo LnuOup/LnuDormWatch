@@ -20,13 +20,13 @@
     <a>
       Profile
     </a>
-    <a>
+    <a (click)="logOut()">
       Sign out
     </a>
   </div>
   <div class="profile"
        *ngIf="!isSignedIn">
-    <a>
+    <a (click)="signIn()">
       Sign in
     </a>
   </div>
