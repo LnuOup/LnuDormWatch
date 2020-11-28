@@ -27,7 +27,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/Disqus.js"
+              "src/assets/Disqus.js",
+              "src/assets/DormPriceCalculator.js"
             ]
           },
           "configurations": {

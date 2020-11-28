@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 declare function disqus(pageIdentifier: string): any;
+declare function getNumberOfDays(): any;
+declare function updateAvailableRoomTypes(): any;
+declare function getLivingPrice(): any;
 
 @Component({
   selector: 'app-request-admission',
@@ -22,6 +25,14 @@ export class RequestAdmissionComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     disqus('request-admission');
+
+    document.getElementById('dropdown_dorms').setAttribute('onChange',
+      'updateAvailableRoomTypes();');
+    document.getElementById('checkbox_guest').setAttribute('onChange',
+      'updateAvailableRoomTypes();');
+
+    document.getElementById('button_calculate').setAttribute('onClick',
+      'document.getElementById("total_price").innerText = getLivingPrice();');
   }
 
 }
