@@ -105,7 +105,7 @@ namespace LDW.WebAPI.Controllers.v1
             var isPasswordCorrect = await Mediator.Send(new GetUserLoginQuery(model.Email, model.Password));
             if (!isPasswordCorrect)
             {
-                return BadRequest(message: Translations.LOGIN_PASSWORD_INCORRECT);
+                return Unauthorized(Translations.LOGIN_PASSWORD_INCORRECT);
             }
 
             var response = await Mediator.Send(new GetTokensQuery(model.Email, _jwtOptions));
