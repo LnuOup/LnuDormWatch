@@ -21,7 +21,6 @@ import {AgmCoreModule} from '@agm/core';
 import 'hammerjs';
 import 'mousetrap';
 import {GalleryModule} from '@ks89/angular-modal-gallery';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -31,7 +30,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AgmCoreModule.forRoot({
       apiKey : 'AIzaSyAaZgGxzh87e9jXC1LOvz8zZJSMH3E77o0'
     }),
-    GalleryModule.forRoot()
+    GalleryModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
@@ -48,7 +47,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ForumSectionThreadListComponent,
     ForumThreadComponent,
     CreateThreadComponent,
-    ThreadReplyComponent
+    ThreadReplyComponent,
     LoginComponent
   ],
   providers: [],
