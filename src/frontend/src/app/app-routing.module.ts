@@ -9,10 +9,12 @@ import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
+import {LoginComponent} from './components/login/login.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'dorms', component: DormListComponent},
   {path: 'mockDorms/:dormId', component: DormDetailComponent},
   {path: 'forum', component: ForumComponent},
