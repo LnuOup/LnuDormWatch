@@ -15,6 +15,7 @@ import { DormDetailComponent } from './components/dorm-detail/dorm-detail.compon
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
 import { CreateThreadComponent } from './components/create-thread/create-thread.component';
+import { ThreadReplyComponent } from './components/thread-reply/thread-reply.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { CreateThreadComponent } from './components/create-thread/create-thread.
     DormDetailComponent,
     ForumSectionThreadListComponent,
     ForumThreadComponent,
-    CreateThreadComponent
+    CreateThreadComponent,
+    ThreadReplyComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

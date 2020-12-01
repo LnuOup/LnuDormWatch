@@ -35,6 +35,11 @@ main {
   padding: 16px;
 }
 
+/* Text styles */
+.error-msg {
+  color: red;
+}
+
 /* Button styles */
 button {
   background-color: #002561;

@@ -3,16 +3,18 @@
 
   <p>Please enter your question and a description for it below, to help other people better address your concern.</p>
 
+  <p class="error-msg" *ngIf="errorMessage">{{errorMessage}}</p>
+
   <form [formGroup]="newThreadForm"
     (ngSubmit)="addThread()">
     <label>
       Name:
-      <input placeholder="Enter thread name" formControlName="threadName" required>
+      <input placeholder="Enter thread name" maxlength="128" formControlName="threadName" required>
     </label>
 
-    <label>
+    <label id="new-thread-content-label">
       Content:
-      <textarea type="text" placeholder="Enter content" formControlName="threadContent" required></textarea>
+      <textarea type="text" rows="10" maxlength="1024" placeholder="Enter content" formControlName="threadContent" required></textarea>
     </label>
 
     <button type="submit" class="detail">

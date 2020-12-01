@@ -6,7 +6,8 @@
         Thread
       </h3>
 
-      <a *ngIf="isSignedIn" id="reply-to-thread"> >> Reply to this thread</a>
+      <a *ngIf="isSignedIn" id="reply-to-thread"
+         routerLink="/forum/new_thread"> >> Reply to this thread</a>
     </header>
 
     <!-- thread content-->
