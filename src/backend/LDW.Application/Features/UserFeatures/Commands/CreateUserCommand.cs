@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LDW.Application.Features.DormitoryFeatures.Commands
+namespace LDW.Application.Features.UserFeatures.Commands
 {
     public class CreateUserCommand : IRequest<string>
     {

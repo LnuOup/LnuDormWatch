@@ -151,6 +151,15 @@ namespace LDW.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login or password is wrong..
+        /// </summary>
+        public static string LOGIN_PASSWORD_INCORRECT {
+            get {
+                return ResourceManager.GetString("LOGIN_PASSWORD_INCORRECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is required..
         /// </summary>
         public static string PASSWORD_REQUIRED {

@@ -1,10 +1,11 @@
 ﻿using LDW.WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 
 namespace LDW.WebAPI.Controllers.v1.Base
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiVersion("1.0")]
     public class BaseV1Controller : BaseApiController
     {
