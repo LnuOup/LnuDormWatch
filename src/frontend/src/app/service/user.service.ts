@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {User} from '../models/user';
+import {mockUsers} from '../mockdata/mock-users';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +8,11 @@ import { Injectable } from '@angular/core';
 export class UserService {
   static isSignedIn: boolean;
 
-  constructor() { }
+  activeUser: User;
+
+  constructor() {
+    this.activeUser = mockUsers[0];
+  }
 
   signIn(): void {
     UserService.isSignedIn = true;
