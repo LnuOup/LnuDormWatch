@@ -1,10 +1,6 @@
 ﻿using LDW.Domain.Constants;
 using LDW.Domain.Resources;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LDW.WebAPI.Models
 {

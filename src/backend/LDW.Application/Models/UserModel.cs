@@ -8,10 +8,10 @@ namespace LDW.Application.Models
     {
         public string PhotoUrl { get; set; }
 
+        public string CompressedPhotoUrl { get; set; }
+
         public string UserName { get; set; }
 
         public string Email { get; set; }
-
-        public bool EmailConfirmed { get; set; }
     }
 }
