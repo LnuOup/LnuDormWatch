@@ -16,4 +16,27 @@ ul li:before {
   font-size: 1.4em;
 }
 
+img {
+  border-radius: 10px;
+}
+
+.div-button {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+button {
+  font-size: 120%;
+}
+
+.my-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+}
+
+img {
+  max-width:100%;
+}
+
 
