@@ -16,6 +16,21 @@ ul li:before {
   font-size: 1.4em;
 }
 
+#first-image {
+  width: 30%;
+  float: right;
+  margin: 0 0 1em 1.5em;
+  overflow: hidden;
+  border-radius: 10px;
+  min-width: 300px;
+}
+
+#second-image {
+  width: 33%;
+  float: left;
+  margin: 0 1.5em 1em 0;
+}
+
 img {
   border-radius: 10px;
 }
@@ -39,9 +54,12 @@ img {
   max-width:100%;
 }
 
-/*.my-grid > img {*/
-/*  overflow: hidden;*/
-/*}*/
+.image-wrapper {
+  border-radius: 10px;
+  height: 25vh;
+  min-height: 150px;
+  overflow: hidden;
+}
 
 footer {
   width: 100%;
