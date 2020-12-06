@@ -127,8 +127,8 @@ namespace LDW.WebAPI.Controllers.v1
             var userModel = new UserModel
             {
                 UserName = user.UserName,
-                PhotoUrl = user.PhotoUrl,
-                CompressedPhotoUrl = user.CompressedPhotoUrl,
+                PhotoUrl = photoUrl,
+                CompressedPhotoUrl = compressedPhotoUrl,
                 Email = user.Email
             };
 

@@ -17,6 +17,7 @@ namespace LDW.Persistence.Services
             var blobClient = GetBlobClient(storageConfig);
             var container = blobClient.GetContainerReference(isCompressed ? storageConfig.ThumbnailContainer : storageConfig.ImageContainer);
             var blockBlob = container.GetBlockBlobReference(fileName);
+            blockBlob.Properties.ContentType = "image/png";
             try
             {
                 await blockBlob.UploadFromStreamAsync(fileStream);
