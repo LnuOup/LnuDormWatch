@@ -45,6 +45,7 @@ namespace LDW.WebAPI
             #region Swagger
             services.AddSwaggerGen(c =>
             {
+                c.OperationFilter<SwaggerFileOperationFilter>();
                 c.IncludeXmlComments($@"{AppDomain.CurrentDomain.BaseDirectory}\LnuDormWatch.xml");
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
