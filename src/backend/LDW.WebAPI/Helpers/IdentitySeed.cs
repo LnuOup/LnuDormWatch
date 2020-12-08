@@ -14,7 +14,6 @@ namespace LDW.WebAPI.Helpers
 		public static async Task InitializeAsync(IServiceProvider serviceProvider)
 		{
 			var context = serviceProvider.GetRequiredService<UserDbContext>();
-			context.Database.EnsureCreated();
 
 			var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 			string[] roleNames = { "Admin", "User" };
