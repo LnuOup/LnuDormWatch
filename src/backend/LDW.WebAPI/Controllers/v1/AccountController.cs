@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using LDW.Application.Features.DormitoryFeatures.Commands;
 using LDW.Application.Features.DormitoryFeatures.Queries;
 using LDW.Application.Features.UserFeatures.Commands;
@@ -14,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace LDW.WebAPI.Controllers.v1
-{ 
+{
     public class AccountController : BaseV1Controller
     {
         private readonly IEmailService _emailService;
@@ -47,8 +46,7 @@ namespace LDW.WebAPI.Controllers.v1
             var userModel = new UserModel
             {
                 Email = model.Email,
-                UserName = model.Email,
-                EmailConfirmed = false
+                UserName = model.Email
             };
 
             var result = await Mediator.Send(new CreateUserCommand(userModel, model.Password));

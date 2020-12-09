@@ -9,5 +9,7 @@ namespace LDW.Domain.Entities
     public class UserEntity : IdentityUser
     {
         public string PhotoUrl { get; set; }
+
+        public string CompressedPhotoUrl { get; set; }
     }
 }

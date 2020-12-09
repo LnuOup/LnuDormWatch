@@ -39,11 +39,13 @@ namespace LDW.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<SmtpOptions>(Configuration.GetSection("SmtpConfig"));
+            services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorageConfig"));
             services.AddMvc(options => { options.Filters.Add<GlobalExceptionFilter>(); });
 
             #region Swagger
             services.AddSwaggerGen(c =>
             {
+                c.OperationFilter<SwaggerFileOperationFilter>();
                 c.IncludeXmlComments($@"{AppDomain.CurrentDomain.BaseDirectory}\LnuDormWatch.xml");
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
@@ -95,7 +97,7 @@ namespace LDW.WebAPI
             services.AddControllers();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IEmailService, EmailService>();
-
+            services.AddScoped<IImageService, ImageService>();
             #region Identity
             services.AddIdentity<UserEntity, IdentityRole>(options =>
             {
