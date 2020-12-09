@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -15,12 +16,15 @@ import { DormDetailComponent } from './components/dorm-detail/dorm-detail.compon
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
 import { LoginComponent } from './components/login/login.component';
+import {JwtInterceptor} from './helpers/jwt.interceptor';
+import {ErrorInterceptor} from './helpers/error.interceptor';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -35,7 +39,10 @@ import { LoginComponent } from './components/login/login.component';
     ForumThreadComponent,
     LoginComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

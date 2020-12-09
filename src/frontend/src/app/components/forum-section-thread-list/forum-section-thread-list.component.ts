@@ -3,7 +3,7 @@ import {ForumSection} from '../../models/forum-section';
 import {mockForumSections} from '../../mockdata/mock-forum';
 import {ActivatedRoute} from '@angular/router';
 import {mockUsers} from '../../mockdata/mock-users';
-import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-forum-section-thread-list',
@@ -13,7 +13,7 @@ import {UserService} from '../../service/user.service';
 export class ForumSectionThreadListComponent implements OnInit {
   displayedSection: ForumSection;
   get isSignedIn(): boolean {
-    return UserService.isSignedIn;
+    return AuthService.isSignedIn();
   }
 
   constructor(private route: ActivatedRoute) { }

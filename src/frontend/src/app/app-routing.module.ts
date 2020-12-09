@@ -10,6 +10,7 @@ import { DormDetailComponent } from './components/dorm-detail/dorm-detail.compon
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
 import {LoginComponent} from './components/login/login.component';
+import {AuthGuard} from './helpers/auth.guard';
 
 
 const routes: Routes = [
@@ -21,7 +22,10 @@ const routes: Routes = [
   {path: 'forum/section/:sectionId', component: ForumSectionThreadListComponent},
   {path: 'forum/thread/:threadId', component: ForumThreadComponent},
   {path: 'request_admission', component: RequestAdmissionComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

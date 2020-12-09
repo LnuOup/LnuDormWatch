@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://lnudormwatchapi.azurewebsites.net",
+    "secure": false
+  }
+}

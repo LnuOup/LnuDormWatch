@@ -3,7 +3,7 @@ import {mockForumSections} from '../../mockdata/mock-forum';
 import {ActivatedRoute} from '@angular/router';
 import {ForumThread} from '../../models/forum-thread';
 import {mockUsers} from '../../mockdata/mock-users';
-import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-forum-thread',
@@ -13,7 +13,7 @@ import {UserService} from '../../service/user.service';
 export class ForumThreadComponent implements OnInit {
   displayedThread: ForumThread;
   get isSignedIn(): boolean {
-    return UserService.isSignedIn;
+    return AuthService.isSignedIn();
   }
 
   constructor(private route: ActivatedRoute) { }
