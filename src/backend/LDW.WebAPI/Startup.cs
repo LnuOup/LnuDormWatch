@@ -6,6 +6,7 @@ using LDW.Domain.Interfaces.Services;
 using LDW.Persistence;
 using LDW.Persistence.Context;
 using LDW.Persistence.Services;
+using LDW.Persistence.Settings;
 using LDW.WebAPI.Filters;
 using LDW.WebAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -40,6 +41,8 @@ namespace LDW.WebAPI
         {
             services.Configure<SmtpOptions>(Configuration.GetSection("SmtpConfig"));
             services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorageConfig"));
+            services.Configure<EnvironmentSettings>(Configuration.GetSection("ClientEnvironment"));
+
             services.AddMvc(options => { options.Filters.Add<GlobalExceptionFilter>(); });
 
             #region Swagger
@@ -91,6 +94,7 @@ namespace LDW.WebAPI
             });
             #endregion
 
+            services.AddCors();
             services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddIdentityContext(Configuration);
@@ -123,7 +127,7 @@ namespace LDW.WebAPI
                 options.RefreshTokenExpireInDays = int.Parse(jwtAppSettingOptions[nameof(JwtOptions.RefreshTokenExpireInDays)]);
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
-            
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -157,6 +161,8 @@ namespace LDW.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var envSettings = Configuration.GetSection("ClientEnvironment").Get<EnvironmentSettings>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -168,6 +174,13 @@ namespace LDW.WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder
+            .WithOrigins(envSettings.WebClientUrl.ToString().TrimEnd('/'))
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .Build());
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -188,5 +201,6 @@ namespace LDW.WebAPI
                 endpoints.MapControllers();
             });
         }
+
     }
 }
