@@ -117,16 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AzureAuthFailed" xml:space="preserve">
+    <value>Azure account storage authorization failed.</value>
+  </data>
+  <data name="AzureImageContainerNotProvided" xml:space="preserve">
+    <value>Image container is not provided</value>
+  </data>
+  <data name="AzureImageUploadFailed" xml:space="preserve">
+    <value>Failed to upload image to storage.</value>
+  </data>
+  <data name="BestRegards" xml:space="preserve">
+    <value>Best regards</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>Click here!</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Email already confirmed.</value>
+  </data>
+  <data name="EMAIL_ALREADY_EXIST" xml:space="preserve">
+    <value>User with this email is already created.</value>
+  </data>
   <data name="EXCEPTION MESSAGE" xml:space="preserve">
     <value>Exception message: {0}</value>
   </data>
   <data name="EXCEPTION_OCCURED_WHILE_PROCESSING_REQUEST" xml:space="preserve">
     <value>Exception occured while processing request: {0}</value>
   </data>
+  <data name="E_EmailNotConfirmed" xml:space="preserve">
+    <value>Email not confirmed.</value>
+  </data>
+  <data name="FILE_REQUIRED" xml:space="preserve">
+    <value>File is required.</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="INNER_EXCEPTION" xml:space="preserve">
     <value>Inner exception:  {0}</value>
   </data>
+  <data name="INVALID_EMAIL" xml:space="preserve">
+    <value>Email format is invalid.</value>
+  </data>
+  <data name="LOGIN_PASSWORD_INCORRECT" xml:space="preserve">
+    <value>Login or password is wrong.</value>
+  </data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
   <data name="STACK_TRACE" xml:space="preserve">
     <value>Stack trace:  {0}</value>
+  </data>
+  <data name="VerifyEmail" xml:space="preserve">
+    <value>Please click on the link bellow to verify your email address</value>
+  </data>
+  <data name="VerifyEmailSubject" xml:space="preserve">
+    <value>Email verification</value>
+  </data>
+  <data name="VerifyEmailSuccess" xml:space="preserve">
+    <value>Email was successfully verified.</value>
   </data>
 </root>

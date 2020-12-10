@@ -41,7 +41,7 @@ main {
 }
 
 /* Button styles */
-button {
+button, .div-button {
   background-color: #002561;
   color: white;
   border: none;

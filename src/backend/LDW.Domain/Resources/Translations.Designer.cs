@@ -36,7 +36,7 @@ namespace LDW.Domain.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LDW.Domain.Resources.Translations", typeof(Translations).Assembly);
@@ -61,6 +61,78 @@ namespace LDW.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Azure account storage authorization failed..
+        /// </summary>
+        public static string AzureAuthFailed {
+            get {
+                return ResourceManager.GetString("AzureAuthFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image container is not provided.
+        /// </summary>
+        public static string AzureImageContainerNotProvided {
+            get {
+                return ResourceManager.GetString("AzureImageContainerNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to upload image to storage..
+        /// </summary>
+        public static string AzureImageUploadFailed {
+            get {
+                return ResourceManager.GetString("AzureImageUploadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Best regards.
+        /// </summary>
+        public static string BestRegards {
+            get {
+                return ResourceManager.GetString("BestRegards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here!.
+        /// </summary>
+        public static string ClickHere {
+            get {
+                return ResourceManager.GetString("ClickHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email not confirmed..
+        /// </summary>
+        public static string E_EmailNotConfirmed {
+            get {
+                return ResourceManager.GetString("E_EmailNotConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User with this email is already created..
+        /// </summary>
+        public static string EMAIL_ALREADY_EXIST {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email already confirmed..
+        /// </summary>
+        public static string EmailConfirmed {
+            get {
+                return ResourceManager.GetString("EmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exception message: {0}.
         /// </summary>
         public static string EXCEPTION_MESSAGE {
@@ -79,6 +151,24 @@ namespace LDW.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File is required..
+        /// </summary>
+        public static string FILE_REQUIRED {
+            get {
+                return ResourceManager.GetString("FILE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inner exception:  {0}.
         /// </summary>
         public static string INNER_EXCEPTION {
@@ -88,11 +178,65 @@ namespace LDW.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email format is invalid..
+        /// </summary>
+        public static string INVALID_EMAIL {
+            get {
+                return ResourceManager.GetString("INVALID_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login or password is wrong..
+        /// </summary>
+        public static string LOGIN_PASSWORD_INCORRECT {
+            get {
+                return ResourceManager.GetString("LOGIN_PASSWORD_INCORRECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required..
+        /// </summary>
+        public static string PASSWORD_REQUIRED {
+            get {
+                return ResourceManager.GetString("PASSWORD_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stack trace:  {0}.
         /// </summary>
         public static string STACK_TRACE {
             get {
                 return ResourceManager.GetString("STACK_TRACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please click on the link bellow to verify your email address.
+        /// </summary>
+        public static string VerifyEmail {
+            get {
+                return ResourceManager.GetString("VerifyEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email verification.
+        /// </summary>
+        public static string VerifyEmailSubject {
+            get {
+                return ResourceManager.GetString("VerifyEmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email was successfully verified..
+        /// </summary>
+        public static string VerifyEmailSuccess {
+            get {
+                return ResourceManager.GetString("VerifyEmailSuccess", resourceCulture);
             }
         }
     }
