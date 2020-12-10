@@ -5,13 +5,13 @@ form {
 
 form input
 {
-  width: 100%;
+  width: 95%;
   padding: 4px 8px;
   font-size: medium;
 }
 
 form textarea {
-  width: 100%;
+  width: 98%;
   padding: 12px;
   font-size: medium;
 }

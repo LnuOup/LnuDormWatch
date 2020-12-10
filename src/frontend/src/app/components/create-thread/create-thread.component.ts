@@ -29,11 +29,12 @@ export class CreateThreadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('sectionId');
-    this.displayedSection = mockForumSections.find(sct =>
-      sct.id === id);
+    this.route.queryParams.subscribe((params: any) => {
+      const id = +params.sectionId;
 
-
+      this.displayedSection = mockForumSections.find(sct =>
+        sct.id === id);
+    });
   }
 
   addThread(): void {

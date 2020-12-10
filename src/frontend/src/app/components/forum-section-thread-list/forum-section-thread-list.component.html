@@ -11,7 +11,8 @@
       </h3>
 
       <a *ngIf="isSignedIn" id="start-new-thread"
-        routerLink="/forum/new_thread">
+        routerLink="/forum/new_thread"
+         [queryParams]="{sectionId: displayedSection.id}">
         >> Start a new thread
       </a>
 

@@ -1,1 +1,27 @@
-<p>thread-reply works!</p>
+<main>
+  <h2>Reply to thread '{{ displayedThread.name }}'</h2>
+
+  <p>Please enter your reply for the posted question. You can quote another reply by clicking the corresponding button on that reply.</p>
+
+  <p class="error-msg" *ngIf="errorMessage">{{errorMessage}}</p>
+
+  <form [formGroup]="newReplyForm"
+        (ngSubmit)="addReply()">
+
+    <!--quote content-->
+    <div *ngIf="selectedQuote" class="reply-quote">
+      <h5>Posted by {{ selectedQuote.user.userName }} on {{ selectedQuote.posted | date: "medium" }}:</h5>
+
+      <q>{{selectedQuote.content}}</q>
+    </div>
+
+    <label id="new-reply-content-label">
+      Content:
+      <textarea type="text" rows="10" maxlength="1024" placeholder="Enter content" formControlName="replyContent" required></textarea>
+    </label>
+
+    <button type="submit" class="detail">
+      Post a reply
+    </button>
+  </form>
+</main>
