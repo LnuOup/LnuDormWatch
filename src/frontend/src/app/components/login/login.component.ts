@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   login: FormGroup;
+  isInProgress: boolean;
+  isLoginFailed: boolean;
 
   constructor(private userService: AuthService,
               private router: Router,
@@ -25,12 +27,19 @@ export class LoginComponent implements OnInit {
   signIn(): void {
     const val = this.login.value;
 
-    if (val.email && val.password)
+    if (val.email && val.password && !this.isInProgress)
     {
+      this.isInProgress = true;
+
       this.userService.signIn(val.email, val.password)
         .subscribe(res => {
+          this.isInProgress = false;
+
           if (res !== undefined) {
             this.router.navigateByUrl(``);
+          }
+          else {
+            this.isLoginFailed = true; // show error msg
           }
         });
 

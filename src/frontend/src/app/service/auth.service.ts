@@ -24,7 +24,8 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public static isSignedIn(): boolean {
-    return localStorage.getItem('user_token') === undefined;
+    const token = localStorage.getItem('user_token');
+    return token !== null;
   }
 
   getToken(): string {
