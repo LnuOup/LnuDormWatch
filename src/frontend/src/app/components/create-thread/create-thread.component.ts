@@ -3,8 +3,8 @@ import {ForumThread} from '../../models/forum-thread';
 import {mockForumSections} from '../../mockdata/mock-forum';
 import {ForumSection} from '../../models/forum-section';
 import {ActivatedRoute, Router, ParamMap } from '@angular/router';
-import {UserService} from '../../service/user.service';
 import {Form, FormBuilder, FormGroup} from '@angular/forms';
+import {UserService} from '../../service/user.service';
 
 @Component({
   selector: 'app-create-thread',

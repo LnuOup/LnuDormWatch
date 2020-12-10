@@ -1,0 +1,24 @@
+<main>
+  <h2>Resident's login</h2>
+
+  <p class="error-msg" *ngIf="isLoginFailed">Login failed. Try re-entering your credentials</p>
+
+  <form [formGroup]="login"
+        (ngSubmit)="signIn()">
+    <label>
+      Email:
+      <input placeholder="student@lnu.edu.ua" formControlName="email" required>
+    </label>
+
+    <label id="password">
+      Password:
+      <input type="password" placeholder="Password" formControlName="password" required>
+    </label>
+
+    <button type="submit" class="detail" [disabled]="isInProgress">
+      Login
+    </button>
+  </form>
+
+  <p id="disclaimer">If you are a dormitory resident and don't have credentials, please visit the Ministry of Education headquarters (10 Peremohy Ave, Kyiv 01135).</p>
+</main>

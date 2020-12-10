@@ -11,19 +11,25 @@ import { ForumSectionThreadListComponent } from './components/forum-section-thre
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
 import {CreateThreadComponent} from './components/create-thread/create-thread.component';
 import {ThreadReplyComponent} from './components/thread-reply/thread-reply.component';
+import {LoginComponent} from './components/login/login.component';
+import {AuthGuard} from './helpers/auth.guard';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'dorms', component: DormListComponent},
   {path: 'mockDorms/:dormId', component: DormDetailComponent},
   {path: 'forum', component: ForumComponent},
-  {path: 'forum/new_thread', component: CreateThreadComponent},
-  {path: 'forum/thread_reply', component: ThreadReplyComponent},
+  {path: 'forum/new_thread', component: CreateThreadComponent, canActivate: [AuthGuard]},
+  {path: 'forum/thread_reply', component: ThreadReplyComponent, canActivate: [AuthGuard]},
   {path: 'forum/section/:sectionId', component: ForumSectionThreadListComponent},
   {path: 'forum/thread/:threadId', component: ForumThreadComponent},
   {path: 'request_admission', component: RequestAdmissionComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
