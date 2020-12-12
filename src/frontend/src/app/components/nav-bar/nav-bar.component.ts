@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,10 +9,11 @@ import {UserService} from '../../service/user.service';
 })
 export class NavBarComponent implements OnInit {
   get isSignedIn(): boolean {
-    return UserService.isSignedIn;
+    return AuthService.isSignedIn();
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,9 +21,6 @@ export class NavBarComponent implements OnInit {
 
   logOut(): void {
     this.userService.logOut();
-  }
-
-  signIn(): void {
-    this.userService.signIn();
+    this.router.navigateByUrl('');
   }
 }

@@ -6,6 +6,7 @@ import {AfterViewChecked, Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewChecked {
+
   title = 'frontend';
 
   ngAfterViewChecked(): void {

@@ -31,6 +31,11 @@ app-nav-bar {
 
 }
 
+/* Text styles */
+.error-msg {
+  color: red;
+}
+
 /* Button styles */
 button, .div-button {
   background-color: #002561;
