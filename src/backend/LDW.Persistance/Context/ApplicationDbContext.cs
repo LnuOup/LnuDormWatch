@@ -26,6 +26,7 @@ namespace LDW.Persistence.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new DormitoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserRefConfiguration());
         }
     }
 }
