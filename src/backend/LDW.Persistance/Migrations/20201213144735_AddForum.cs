@@ -8,20 +8,20 @@ namespace LDW.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ForumSectionEntity",
+                name: "ForumSections",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    SectionTitle = table.Column<string>(nullable: true),
-                    SectionDescription = table.Column<string>(nullable: true),
+                    SectionTitle = table.Column<string>(maxLength: 100, nullable: false),
+                    SectionDescription = table.Column<string>(maxLength: 200, nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     AuthorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ForumSectionEntity", x => x.Id);
+                    table.PrimaryKey("PK_ForumSections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ForumSectionEntity_UserRefs_AuthorId",
+                        name: "FK_ForumSections_UserRefs_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "UserRefs",
                         principalColumn: "Id",
@@ -29,110 +29,108 @@ namespace LDW.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ForumThreadEntity",
+                name: "ForumThreads",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    ThreadTitle = table.Column<string>(nullable: true),
-                    ThreadBody = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<string>(nullable: true),
+                    ThreadTitle = table.Column<string>(maxLength: 200, nullable: false),
+                    ThreadBody = table.Column<string>(maxLength: 5000, nullable: false),
+                    AuthorId = table.Column<string>(nullable: false),
                     ForumSectionId = table.Column<Guid>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ForumThreadEntity", x => x.Id);
+                    table.PrimaryKey("PK_ForumThreads", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ForumThreadEntity_UserRefs_AuthorId",
+                        name: "FK_ForumThreads_UserRefs_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "UserRefs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ForumThreadEntity_ForumSectionEntity_ForumSectionId",
+                        name: "FK_ForumThreads_ForumSections_ForumSectionId",
                         column: x => x.ForumSectionId,
-                        principalTable: "ForumSectionEntity",
+                        principalTable: "ForumSections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ForumThreadReplyEntity",
+                name: "ForumThreadReplies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    AuthorId = table.Column<Guid>(nullable: false),
-                    ReplyBody = table.Column<string>(nullable: true),
-                    ParentForumThreadId = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<string>(nullable: false),
+                    ReplyBody = table.Column<string>(maxLength: 5000, nullable: false),
+                    ParentForumThreadId = table.Column<Guid>(nullable: false),
                     ParentForumThreadReplyId = table.Column<Guid>(nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: false),
-                    AuthorId1 = table.Column<string>(nullable: true),
-                    ForumThreadId = table.Column<Guid>(nullable: true)
+                    CreationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ForumThreadReplyEntity", x => x.Id);
+                    table.PrimaryKey("PK_ForumThreadReplies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ForumThreadReplyEntity_UserRefs_AuthorId1",
-                        column: x => x.AuthorId1,
+                        name: "FK_ForumThreadReplies_UserRefs_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "UserRefs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ForumThreadReplyEntity_ForumThreadEntity_ForumThreadId",
-                        column: x => x.ForumThreadId,
-                        principalTable: "ForumThreadEntity",
+                        name: "FK_ForumThreadReplies_ForumThreads_ParentForumThreadId",
+                        column: x => x.ParentForumThreadId,
+                        principalTable: "ForumThreads",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ForumThreadReplyEntity_ForumThreadReplyEntity_ParentForumThreadReplyId",
+                        name: "FK_ForumThreadReplies_ForumThreadReplies_ParentForumThreadReplyId",
                         column: x => x.ParentForumThreadReplyId,
-                        principalTable: "ForumThreadReplyEntity",
+                        principalTable: "ForumThreadReplies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumSectionEntity_AuthorId",
-                table: "ForumSectionEntity",
+                name: "IX_ForumSections_AuthorId",
+                table: "ForumSections",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumThreadEntity_AuthorId",
-                table: "ForumThreadEntity",
+                name: "IX_ForumThreadReplies_AuthorId",
+                table: "ForumThreadReplies",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumThreadEntity_ForumSectionId",
-                table: "ForumThreadEntity",
-                column: "ForumSectionId");
+                name: "IX_ForumThreadReplies_ParentForumThreadId",
+                table: "ForumThreadReplies",
+                column: "ParentForumThreadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumThreadReplyEntity_AuthorId1",
-                table: "ForumThreadReplyEntity",
-                column: "AuthorId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ForumThreadReplyEntity_ForumThreadId",
-                table: "ForumThreadReplyEntity",
-                column: "ForumThreadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ForumThreadReplyEntity_ParentForumThreadReplyId",
-                table: "ForumThreadReplyEntity",
+                name: "IX_ForumThreadReplies_ParentForumThreadReplyId",
+                table: "ForumThreadReplies",
                 column: "ParentForumThreadReplyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ForumThreads_AuthorId",
+                table: "ForumThreads",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ForumThreads_ForumSectionId",
+                table: "ForumThreads",
+                column: "ForumSectionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ForumThreadReplyEntity");
+                name: "ForumThreadReplies");
 
             migrationBuilder.DropTable(
-                name: "ForumThreadEntity");
+                name: "ForumThreads");
 
             migrationBuilder.DropTable(
-                name: "ForumSectionEntity");
+                name: "ForumSections");
         }
     }
 }

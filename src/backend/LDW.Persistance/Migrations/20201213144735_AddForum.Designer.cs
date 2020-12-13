@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LDW.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201213144355_AddForumConfigurations")]
-    partial class AddForumConfigurations
+    [Migration("20201213144735_AddForum")]
+    partial class AddForum
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
