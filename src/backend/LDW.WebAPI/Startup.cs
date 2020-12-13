@@ -6,6 +6,7 @@ using LDW.Domain.Interfaces.Services;
 using LDW.Persistence;
 using LDW.Persistence.Context;
 using LDW.Persistence.Services;
+using LDW.Persistence.Settings;
 using LDW.WebAPI.Filters;
 using LDW.WebAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,16 +40,43 @@ namespace LDW.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<SmtpOptions>(Configuration.GetSection("SmtpConfig"));
+            services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorageConfig"));
+            services.Configure<EnvironmentSettings>(Configuration.GetSection("ClientEnvironment"));
+
             services.AddMvc(options => { options.Filters.Add<GlobalExceptionFilter>(); });
 
             #region Swagger
             services.AddSwaggerGen(c =>
             {
+                c.OperationFilter<SwaggerFileOperationFilter>();
                 c.IncludeXmlComments($@"{AppDomain.CurrentDomain.BaseDirectory}\LnuDormWatch.xml");
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "LnuDormWatch",
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Scheme = "Bearer", 
+                    BearerFormat = "JWT",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                   {
+                     new OpenApiSecurityScheme
+                     {
+                       Reference = new OpenApiReference
+                       {
+                         Type = ReferenceType.SecurityScheme,
+                         Id = "Bearer"
+                       }
+                      },
+                      new string[] { }
+                    }
                 });
             });
             #endregion
@@ -65,13 +94,14 @@ namespace LDW.WebAPI
             });
             #endregion
 
+            services.AddCors();
             services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddIdentityContext(Configuration);
             services.AddControllers();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IEmailService, EmailService>();
-
+            services.AddScoped<IImageService, ImageService>();
             #region Identity
             services.AddIdentity<UserEntity, IdentityRole>(options =>
             {
@@ -97,7 +127,7 @@ namespace LDW.WebAPI
                 options.RefreshTokenExpireInDays = int.Parse(jwtAppSettingOptions[nameof(JwtOptions.RefreshTokenExpireInDays)]);
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
-            
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -131,6 +161,8 @@ namespace LDW.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var envSettings = Configuration.GetSection("ClientEnvironment").Get<EnvironmentSettings>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -143,6 +175,14 @@ namespace LDW.WebAPI
 
             app.UseRouting();
 
+            app.UseCors(builder => builder
+            .WithOrigins(envSettings.WebClientUrl.ToString().TrimEnd('/'))
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .Build());
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             #region Swagger
@@ -161,5 +201,6 @@ namespace LDW.WebAPI
                 endpoints.MapControllers();
             });
         }
+
     }
 }

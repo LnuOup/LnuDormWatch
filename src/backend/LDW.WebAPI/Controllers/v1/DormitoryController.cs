@@ -1,6 +1,7 @@
 ﻿using LDW.Application.Features.DormitoryFeatures.Commands;
 using LDW.Application.Features.DormitoryFeatures.Queries;
 using LDW.WebAPI.Controllers.v1.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace LDW.WebAPI.Controllers.v1
     public class DormitoryController : BaseV1Controller
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var dormitoryList = await Mediator.Send(new GetAllDormitoriesQuery());
@@ -16,6 +18,7 @@ namespace LDW.WebAPI.Controllers.v1
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetById(int id)
         {
             var dormitory = await Mediator.Send(new GetDormitoryByIdQuery(id));

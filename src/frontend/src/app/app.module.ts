@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { DormListComponent } from './components/dorm-list/dorm-list.component';
@@ -16,6 +16,10 @@ import 'hammerjs';
 import 'mousetrap';
 import {GalleryModule} from "@ks89/angular-modal-gallery";
 
+import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
+import { LoginComponent } from './components/login/login.component';
+import {JwtInterceptor} from './helpers/jwt.interceptor';
+import {ErrorInterceptor} from './helpers/error.interceptor';
 
 @NgModule({
   imports: [
@@ -24,7 +28,9 @@ import {GalleryModule} from "@ks89/angular-modal-gallery";
     AgmCoreModule.forRoot({
       apiKey : 'AIzaSyAaZgGxzh87e9jXC1LOvz8zZJSMH3E77o0'
     }),
-    GalleryModule.forRoot()
+    GalleryModule.forRoot(),
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -35,9 +41,14 @@ import {GalleryModule} from "@ks89/angular-modal-gallery";
     ProfileComponent,
     HomeComponent,
     DormDetailComponent,
-    ForumSectionThreadListComponent
+    ForumSectionThreadListComponent,
+    ForumThreadComponent,
+    LoginComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

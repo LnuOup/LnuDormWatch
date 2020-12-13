@@ -1,0 +1,44 @@
+main {
+  padding: 24px;
+}
+.google_form {
+  float: right;
+  min-width: fit-content;
+}
+#colculator {
+  margin: 0 1em 0.5em 0;
+  float: left;
+  width: fit-content;
+  border: 5px solid #002561;
+  border-radius: 10px;
+  padding: 1em;
+}
+#button_calculate {
+  font-size: 1.2em;
+}
+div.total_price {
+  background-color: lightgrey;
+  padding-left: 1em;
+  border-radius: 2px;
+}
+
+ul {
+  list-style: none;
+  margin-left: 1rem;
+}
+
+ul li {
+  font-size: 1.2em;
+}
+
+ul li.do:before {
+  content: '✓ ';
+  color: darkgreen;
+  font-size: 1.4em;
+}
+
+ul li.dont:before {
+  content: 'x ';
+  color: darkred;
+  font-size: 1.4em;
+}

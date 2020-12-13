@@ -31,8 +31,13 @@ app-nav-bar {
 
 }
 
+/* Text styles */
+.error-msg {
+  color: red;
+}
+
 /* Button styles */
-button {
+button, .div-button {
   background-color: #002561;
   color: white;
   border: none;
@@ -55,6 +60,10 @@ button:disabled {
 
 .material-icons.lnu-navy {
   color: #002561;
+}
+
+.material-icons.gray {
+  color: lightgray;
 }
 
 /* Disqus comments */

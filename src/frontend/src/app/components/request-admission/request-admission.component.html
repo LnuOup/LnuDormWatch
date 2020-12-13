@@ -1,7 +1,143 @@
-<p>request-admission works!</p>
+<main>
+  <h2>Поселення в гуртожиток</h2>
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform?embedded=true" width="100%" height="847" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform?embedded=true"
+    width="40%" height="847" frameborder="0" marginheight="0" marginwidth="0"
+    class="google_form">Loading…
+  </iframe>
+
+<!--  Calculator begin ------------------------ -->
+  <div id="colculator">
+    <table>
+      <tr>
+        <td>Початок проживання:</td>
+        <td>
+          <label>
+            <input id="input_start_living" type="date" placeholder="Початок проживання"/>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Кінець проживання:</td>
+        <td>
+          <label>
+            <input id="input_end_living" type="date" placeholder="Кінець проживання"/>
+          </label>
+        </td>
+      </tr>
+
+      <tr style="height: 1em"></tr>
+
+      <tr>
+        <td>
+          <label for="dropdown_dorms">Оберіть гуртожиток:</label>
+        </td>
+        <td>
+          <select name="dropdown_dorms" id="dropdown_dorms">
+            <option value="dorm_other">№2 – №8</option>
+            <option value="dorm1">№1 (елітний)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="dropdown_room_type">Оберіть тип кімнати:</label>
+        </td>
+        <td>
+          <select name="dropdown_room_type" id="dropdown_room_type">
+            <option value="simple">Проста</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr style="height: 1em"></tr>
+
+      <tr>
+        <td colspan="2">
+          <input id="radio_resident" type="radio" name="is_resident" value="guest" checked="checked"/>
+          <label for="radio_resident">ЛНУшник</label>
+          <br />
+          <input id="radio_guest" type="radio" name="is_resident" value="guest"/>
+          <label for="radio_guest">Гість / абітурієнт / заочник</label>
+          <br/>
+          <input id="checkbox_orphan" type="checkbox"/> <label for="checkbox_orphan">Сирота / інвалід</label> <br/>
+          <input id="checkbox_ATO" type="checkbox"/> <label for="checkbox_ATO">Атошник</label> <br/>
+          <input id="checkbox_blat" type="checkbox"/> <label for="checkbox_blat">Маю пляшку для коменданта</label> <br/>
+        </td>
+      </tr>
+
+      <tr style="height: 1em"></tr>
+
+      <tr>
+        <td colspan="2">
+          <div style="text-align: center;">
+            <button id="button_calculate" value="Coclulate price">Обчислити вартість</button>
+          </div>
+        </td>
+      </tr>
+
+      <tr style="height: 1em"></tr>
+
+      <tr>
+        <td style="width: fit-content;">
+          Загалом:
+        </td>
+        <td style="width: auto;">
+          <div class="total_price">
+            <span id="total_price">0</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+<!--  Calculator end ------------------------ -->
+
+  <p>
+    Ну нарешті ви таки вирішили заселитися!
+    Щиро раді бачити вас у будь-якому з наших гуртожитків — тільки поводьтесь адекватно.
+  </p>
+
+  <p>
+    Скористайтеся вбудованим калькулятором, щоби оцінити очікувані витрати на проживання.
+    Заповніть та надішліть
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeApB4_XeUbDrXkA33lUlhZb993C-P_0djtR7bksGMpwz8ZJQ/viewform"
+       target="_blank">форму</a>,
+    щоби вам почали готувати тепленьке місце в гуртожитку.
+  </p>
+
+  <h3>Правила перебування в гуртожитку:</h3>
+  <ul>
+    <li class="do">
+      Поважати коменданта
+    </li>
+    <li class="do">
+      Поважати сусідів
+    </li>
+    <li class="do">
+      Економити воду та електроенергію
+    </li>
+    <li class="do">
+      Споживати відповідально (бухати в міру)
+    </li>
+    <li class="dont">
+      Не палити
+    </li>
+    <li class="dont">
+      Не гадити
+    </li>
+    <li class="dont">
+      Не приводити котів, собак, худобу та сумнівних людей
+    </li>
+    <li class="do">
+      Своєчасно платити
+    </li>
+  </ul>
+
+  Якщо вас щось бентежить, або щось незрозуміло, звертайтеся за номером: <b>+38 (032) 271-21-33</b>.
+</main>
 
 <!-- Disqus comments -->
 <div id="disqus_thread"></div>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+  Disqus.</a></noscript>

@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using LDW.Application.Features.DormitoryFeatures.Commands;
 using LDW.Application.Features.DormitoryFeatures.Queries;
+using LDW.Application.Features.UserFeatures.Commands;
 using LDW.Application.Interfaces.Services;
 using LDW.Application.Models;
 using LDW.Domain.Entities.Options;
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace LDW.WebAPI.Controllers.v1
-{ 
+{
     public class AccountController : BaseV1Controller
     {
         private readonly IEmailService _emailService;
@@ -46,8 +46,7 @@ namespace LDW.WebAPI.Controllers.v1
             var userModel = new UserModel
             {
                 Email = model.Email,
-                UserName = model.Email,
-                EmailConfirmed = false
+                UserName = model.Email
             };
 
             var result = await Mediator.Send(new CreateUserCommand(userModel, model.Password));
@@ -89,6 +88,27 @@ namespace LDW.WebAPI.Controllers.v1
                 return BadRequest(message: Translations.E_EmailNotConfirmed);
             }
             return Ok(Translations.VerifyEmailSuccess);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserApiModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isPasswordCorrect = await Mediator.Send(new GetUserLoginQuery(model.Email, model.Password));
+            if (!isPasswordCorrect)
+            {
+                return Unauthorized(Translations.LOGIN_PASSWORD_INCORRECT);
+            }
+
+            var response = await Mediator.Send(new GetTokensQuery(model.Email, _jwtOptions));
+
+            return Ok(response);
         }
     }
 }

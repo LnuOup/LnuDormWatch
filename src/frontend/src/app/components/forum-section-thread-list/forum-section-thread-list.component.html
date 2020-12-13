@@ -1,1 +1,53 @@
-<p>Displaying section {{ displayedSection.title }} (id: {{ displayedSection.id }})</p>
+<main>
+  <h2>{{ displayedSection.title }}</h2>
+
+  <p>{{ displayedSection.description }}</p>
+
+  <!--  thread list-->
+  <section>
+    <header>
+      <h3>
+        Threads
+      </h3>
+
+      <a *ngIf="isSignedIn" id="start-new-thread"> >> Start a new thread</a>
+
+      <h4 id="thread-header-replies">
+        Replies
+      </h4>
+
+      <h4 id="thread-header-last-reply">
+        Last reply
+      </h4>
+    </header>
+
+    <article class="section-thread"
+             *ngFor="let thread of displayedSection.threads;">
+      <i class="forum-icon material-icons md-36 lnu-navy">forum</i>
+
+      <a routerLink="/forum/thread/{{thread.id}}">
+        <h3 id="thread-title">
+          {{ thread.name }}
+        </h3>
+      </a>
+
+      <p id="thread-creator">
+        by {{ thread.user.userName }}
+      </p>
+
+      <p id="thread-num-of-replies">
+        {{ thread.numOfReplies }}
+      </p>
+
+      <p id="thread-last-reply"
+         *ngIf="thread.lastReply">
+        {{ thread.lastReply | date:'medium' }}
+      </p>
+
+      <p id="thread-last-reply-by"
+         *ngIf="thread.lastReplyBy">
+        by {{ thread.lastReplyBy.userName }}
+      </p>
+    </article>
+  </section>
+</main>

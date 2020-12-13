@@ -61,6 +61,33 @@ namespace LDW.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Azure account storage authorization failed..
+        /// </summary>
+        public static string AzureAuthFailed {
+            get {
+                return ResourceManager.GetString("AzureAuthFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image container is not provided.
+        /// </summary>
+        public static string AzureImageContainerNotProvided {
+            get {
+                return ResourceManager.GetString("AzureImageContainerNotProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to upload image to storage..
+        /// </summary>
+        public static string AzureImageUploadFailed {
+            get {
+                return ResourceManager.GetString("AzureImageUploadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Best regards.
         /// </summary>
         public static string BestRegards {
@@ -124,6 +151,15 @@ namespace LDW.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File is required..
+        /// </summary>
+        public static string FILE_REQUIRED {
+            get {
+                return ResourceManager.GetString("FILE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         public static string Hello {
@@ -147,6 +183,15 @@ namespace LDW.Domain.Resources {
         public static string INVALID_EMAIL {
             get {
                 return ResourceManager.GetString("INVALID_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login or password is wrong..
+        /// </summary>
+        public static string LOGIN_PASSWORD_INCORRECT {
+            get {
+                return ResourceManager.GetString("LOGIN_PASSWORD_INCORRECT", resourceCulture);
             }
         }
         
