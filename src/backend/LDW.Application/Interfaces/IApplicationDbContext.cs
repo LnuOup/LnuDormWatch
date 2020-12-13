@@ -8,9 +8,9 @@ namespace LDW.Application.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<DormitoryEntity> Dormitories { get; set; }
-        DbSet<ForumSectionEntity> ForumSectionEntities { get; set; }
-        DbSet<ForumThreadEntity> ForumThreadEntities { get; set; }
-        DbSet<ForumThreadReplyEntity> ForumThreadReplyEntities { get; set; }
+        DbSet<ForumSectionEntity> ForumSectionEntities { get; set; } //TODO: rename
+        DbSet<ForumThreadEntity> ForumThreadEntities { get; set; } //TODO: rename
+        DbSet<ForumThreadReplyEntity> ForumThreadReplyEntities { get; set; } //TODO: rename
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
