@@ -6,6 +6,7 @@ import {catchError, tap, shareReplay} from 'rxjs/operators';
 import * as moment from 'moment';
 import {AuthData} from '../models/auth-data';
 import {environment} from '../../environments/environment';
+import {LocalStorage} from '../helpers/local-storage.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,7 @@ export class AuthService {
   httpOptions = {
     headers: new HttpHeaders(
       {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://lnudormwatchapi.azurewebsites.net'
+        'Content-Type': 'application/json'
       },
     )
   };
@@ -24,12 +24,12 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public static isSignedIn(): boolean {
-    const token = localStorage.getItem('user_token');
+    const token = localStorage.getItem(LocalStorage.USER_TOKEN);
     return token !== null;
   }
 
   getToken(): string {
-    return localStorage.getItem('user_token');
+    return localStorage.getItem(LocalStorage.USER_TOKEN);
   }
 
   signIn(email: string, password: string): Observable<AuthData> {
@@ -43,13 +43,13 @@ export class AuthService {
   }
 
   logOut(): void {
-    localStorage.removeItem('user_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem(LocalStorage.USER_TOKEN);
+    localStorage.removeItem(LocalStorage.REFRESH_TOKEN);
   }
 
   private setupSession(authResult: AuthData): void {
-    localStorage.setItem('user_token', authResult.token);
-    localStorage.setItem('refresh_token', authResult.refreshToken);
+    localStorage.setItem(LocalStorage.USER_TOKEN, authResult.token);
+    localStorage.setItem(LocalStorage.REFRESH_TOKEN, authResult.refreshToken);
   }
 
   // tslint:disable-next-line:typedef
