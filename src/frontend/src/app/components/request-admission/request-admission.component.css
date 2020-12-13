@@ -21,3 +21,24 @@ div.total_price {
   padding-left: 1em;
   border-radius: 2px;
 }
+
+ul {
+  list-style: none;
+  margin-left: 1rem;
+}
+
+ul li {
+  font-size: 1.2em;
+}
+
+ul li.do:before {
+  content: '✓ ';
+  color: darkgreen;
+  font-size: 1.4em;
+}
+
+ul li.dont:before {
+  content: 'x ';
+  color: darkred;
+  font-size: 1.4em;
+}
