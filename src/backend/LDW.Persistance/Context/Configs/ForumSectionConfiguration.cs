@@ -30,7 +30,7 @@ namespace LDW.Persistence.Context.Configs
                 .HasOne(fs => fs.Author)
                 .WithMany(u => u.ForumSections)
                 .HasForeignKey(fs => fs.AuthorId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
 	}
 }

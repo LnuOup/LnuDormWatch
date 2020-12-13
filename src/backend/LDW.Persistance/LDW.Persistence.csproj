@@ -16,6 +16,10 @@
     <Compile Remove="Migrations\20201212233130_AddUserRef.Designer.cs" />
     <Compile Remove="Migrations\20201212234358_AddForum.cs" />
     <Compile Remove="Migrations\20201212234358_AddForum.Designer.cs" />
+    <Compile Remove="Migrations\20201213143207_AddForumConfigurations.cs" />
+    <Compile Remove="Migrations\20201213143207_AddForumConfigurations.Designer.cs" />
+    <Compile Remove="Migrations\20201213144231_AddForumConfigurations.cs" />
+    <Compile Remove="Migrations\20201213144231_AddForumConfigurations.Designer.cs" />
     <Compile Remove="Migrations\UserDb\20201113214211_removeOddId.cs" />
     <Compile Remove="Migrations\UserDb\20201113214211_removeOddId.Designer.cs" />
   </ItemGroup>

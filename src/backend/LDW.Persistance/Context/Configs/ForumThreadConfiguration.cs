@@ -37,7 +37,7 @@ namespace LDW.Persistence.Context.Configs
                 .HasOne(ft => ft.Author)
                 .WithMany(u => u.ForumThreads)
                 .HasForeignKey(ft => ft.AuthorId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder
                 .HasOne(ft => ft.ForumSection)

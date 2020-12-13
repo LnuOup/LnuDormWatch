@@ -6,9 +6,9 @@ namespace LDW.Domain.Entities
 {
 	public class ForumThreadReplyEntity : BaseEntity<Guid>
 	{
-		public Guid AuthorId { get; set; }
+		public string AuthorId { get; set; }
 		public string ReplyBody { get; set; }
-		public string ParentForumThreadId { get; set; }
+		public Guid ParentForumThreadId { get; set; }
 		public Guid? ParentForumThreadReplyId { get; set; }
 		public DateTime CreationDate { get; set; }
 

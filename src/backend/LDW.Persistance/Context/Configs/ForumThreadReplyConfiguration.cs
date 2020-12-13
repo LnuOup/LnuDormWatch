@@ -30,7 +30,7 @@ namespace LDW.Persistence.Context.Configs
 				.HasOne(ftr => ftr.Author)
 				.WithMany(u => u.ForumThreadReplies)
 				.HasForeignKey(ftr => ftr.AuthorId)
-				.OnDelete(DeleteBehavior.SetNull);
+				.OnDelete(DeleteBehavior.ClientSetNull);
 
 			builder
 				.HasOne(ftr => ftr.ForumThread)
@@ -42,7 +42,7 @@ namespace LDW.Persistence.Context.Configs
 				.HasOne(ftr => ftr.ParentForumThreadReply)
 				.WithMany(ftr => ftr.ForumThreadReplies)
 				.HasForeignKey(ftr => ftr.ParentForumThreadReplyId)
-				.OnDelete(DeleteBehavior.Cascade);
+				.OnDelete(DeleteBehavior.ClientSetNull);
 		}
 	}
 }
