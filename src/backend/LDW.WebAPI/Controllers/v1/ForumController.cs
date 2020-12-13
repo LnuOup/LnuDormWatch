@@ -15,8 +15,9 @@ namespace LDW.WebAPI.Controllers.v1
 		[Route("sections")]
 		public async Task<IActionResult> GetAllForumSectionsAsync()
 		{
-			var sectionList = await Mediator.Send(new GetAllForumSectionsQuery());
-			return Ok(sectionList);
+			var sectionModels = await Mediator.Send(new GetAllForumSectionsQuery());
+			return Ok(sectionModels);
+		}
 		}
 	}
 }
