@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LDW.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201213144735_AddForum")]
+    [Migration("20201213153735_AddForum")]
     partial class AddForum
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,14 +49,16 @@ namespace LDW.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("AuthorId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("SectionDescription")
                         .HasColumnType("nvarchar(200)")
@@ -78,7 +80,8 @@ namespace LDW.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("AuthorId")
                         .IsRequired()
@@ -86,7 +89,8 @@ namespace LDW.Persistence.Migrations
 
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<Guid>("ForumSectionId")
                         .HasColumnType("uniqueidentifier");
@@ -114,7 +118,8 @@ namespace LDW.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("AuthorId")
                         .IsRequired()
@@ -122,7 +127,8 @@ namespace LDW.Persistence.Migrations
 
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<Guid>("ParentForumThreadId")
                         .HasColumnType("uniqueidentifier");
@@ -149,6 +155,7 @@ namespace LDW.Persistence.Migrations
             modelBuilder.Entity("LDW.Domain.Entities.UserRefEntity", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");

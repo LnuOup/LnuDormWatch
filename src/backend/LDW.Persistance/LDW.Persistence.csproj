@@ -22,6 +22,24 @@
     <Compile Remove="Migrations\20201213144231_AddForumConfigurations.Designer.cs" />
     <Compile Remove="Migrations\20201213144707_AddForum.cs" />
     <Compile Remove="Migrations\20201213144707_AddForum.Designer.cs" />
+    <Compile Remove="Migrations\20201213145743_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213145743_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213150339_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213150339_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213151019_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213151019_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213151159_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213151159_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213151223_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213151223_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213151328_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213151328_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213152140_IdentityIdForAllEntities.cs" />
+    <Compile Remove="Migrations\20201213152140_IdentityIdForAllEntities.Designer.cs" />
+    <Compile Remove="Migrations\20201213153713_AddForum.cs" />
+    <Compile Remove="Migrations\20201213153713_AddForum.Designer.cs" />
+    <Compile Remove="Migrations\20201213153933_AddForum1.cs" />
+    <Compile Remove="Migrations\20201213153933_AddForum1.Designer.cs" />
     <Compile Remove="Migrations\UserDb\20201113214211_removeOddId.cs" />
     <Compile Remove="Migrations\UserDb\20201113214211_removeOddId.Designer.cs" />
   </ItemGroup>

@@ -15,6 +15,9 @@ namespace LDW.Persistence.Context.Configs
 
             builder.HasKey(e => e.Id);
 
+            builder.Property(e => e.Id)
+                .HasDefaultValueSql("NEWID()");
+
             builder.Property(e => e.ForumSectionId)
                 .IsRequired();
 
@@ -31,7 +34,8 @@ namespace LDW.Persistence.Context.Configs
 
             builder.Property(e => e.CreationDate)
                 .IsRequired()
-                .ValueGeneratedOnAdd();
+                .HasDefaultValueSql("GETDATE()");
+
 
             builder
                 .HasOne(ft => ft.Author)

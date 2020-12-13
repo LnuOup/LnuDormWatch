@@ -15,6 +15,9 @@ namespace LDW.Persistence.Context.Configs
 
             builder.HasKey(e => e.Id);
 
+            builder.Property(e => e.Id)
+                .HasDefaultValueSql("NEWID()");
+
             builder.Property(e => e.SectionTitle)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -24,7 +27,7 @@ namespace LDW.Persistence.Context.Configs
 
             builder.Property(e => e.CreationDate)
                 .IsRequired()
-                .ValueGeneratedOnAdd();
+                .HasDefaultValueSql("GETDATE()");
 
             builder
                 .HasOne(fs => fs.Author)

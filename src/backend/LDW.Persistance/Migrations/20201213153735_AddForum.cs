@@ -11,10 +11,10 @@ namespace LDW.Persistence.Migrations
                 name: "ForumSections",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     SectionTitle = table.Column<string>(maxLength: 100, nullable: false),
                     SectionDescription = table.Column<string>(maxLength: 200, nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     AuthorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -32,12 +32,12 @@ namespace LDW.Persistence.Migrations
                 name: "ForumThreads",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     ThreadTitle = table.Column<string>(maxLength: 200, nullable: false),
                     ThreadBody = table.Column<string>(maxLength: 5000, nullable: false),
                     AuthorId = table.Column<string>(nullable: false),
                     ForumSectionId = table.Column<Guid>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: false)
+                    CreationDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -60,12 +60,12 @@ namespace LDW.Persistence.Migrations
                 name: "ForumThreadReplies",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     AuthorId = table.Column<string>(nullable: false),
                     ReplyBody = table.Column<string>(maxLength: 5000, nullable: false),
                     ParentForumThreadId = table.Column<Guid>(nullable: false),
                     ParentForumThreadReplyId = table.Column<Guid>(nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: false)
+                    CreationDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
