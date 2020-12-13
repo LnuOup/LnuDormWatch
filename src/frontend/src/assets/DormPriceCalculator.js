@@ -23,7 +23,7 @@ function updateAvailableRoomTypes() {
       '<option value="halflux">Напівлюкс</option>' +
       '<option value="single_bed">Одномісна</option>' +
       '<option value="two_beds">Двомісна</option>';
-  } else if (document.getElementById("checkbox_guest").checked) {
+  } else if (document.getElementById("radio_guest").checked) {
     document.getElementById("dropdown_room_type").innerHTML =
       '<option value="simple">Проста</option>' +
       '<option value="better">Поліпшена</option>';
@@ -75,7 +75,7 @@ function getLivingPrice() {
         price = PRICE_PER_DAY_LUX * getNumberOfDays();
         break;
     }
-  } else if (document.getElementById("checkbox_guest").checked) {
+  } else if (document.getElementById("radio_guest").checked) {
     switch (roomType) {
       case "better":
         price = PRICE_PER_DAY_GUEST_BETTER_ROOM * getNumberOfDays();
@@ -103,14 +103,18 @@ function getLivingPrice() {
   return price; //Math.max(price, MINIMAL_PRICE);
 }
 
-function setDormNumberOnChange() {
-  document.getElementById("dropdown_dorms").setAttribute("onChange",
-    "updateAvailableRoomTypes();");
-  document.getElementById("checkbox_guest").setAttribute("onChange",
-    "updateAvailableRoomTypes();");
+/**
+ * Same as getLivingPrice(), but handles NaN and negative values and adds 'UAH' to the output
+ */
+function getLivingPriceHandled() {
+  const price = getLivingPrice();
+  let result;
+  if (isNaN(price) || price < 0) {
+    result = "Помилка!\nОберіть коректні дати";
+  }
+  else {
+    result = price + " UAH";
+  }
+  return result;
 }
 
-function setCalculateOnClick() {
-  document.getElementById("button_calculate").setAttribute("onClick",
-    'document.getElementById("total_price").innerText = getLivingPrice();')
-}
