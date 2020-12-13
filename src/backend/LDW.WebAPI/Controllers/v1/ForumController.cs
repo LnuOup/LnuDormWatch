@@ -12,7 +12,7 @@ namespace LDW.WebAPI.Controllers.v1
 	{
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<IActionResult> GetAllForumSections()
+		public async Task<IActionResult> GetAllForumSectionsAsync()
 		{
 			var sectionList = await Mediator.Send(new GetAllForumSectionsQuery());
 			return Ok(sectionList);
