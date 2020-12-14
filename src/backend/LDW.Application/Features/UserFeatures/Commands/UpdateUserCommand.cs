@@ -12,16 +12,19 @@ using System.Threading.Tasks;
 
 namespace LDW.Application.Features.UserFeatures.Commands
 {
-    public class UpdateUserCommand : IRequest<string>
+    public class UpdateUserCommand : IRequest<UserEntity>
     {
         public UserModel User { get; set; }
 
-        public UpdateUserCommand(UserModel userModel)
+        public string UserId { get; set; }
+
+        public UpdateUserCommand(UserModel userModel, string userId)
         {
             User = userModel;
+            UserId = userId;
         }
 
-        public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, string>
+        public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserEntity>
         {
             private readonly UserManager<UserEntity> _userManager;
             private readonly IUserDbContext _userDbContext;
@@ -31,14 +34,15 @@ namespace LDW.Application.Features.UserFeatures.Commands
                 this._userManager = userManager;
                 this._userDbContext = dbContext;
             }
-            public async Task<string> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
+            public async Task<UserEntity> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
             {
-                var user = await _userManager.FindByNameAsync(command.User.UserName);
+                var user = await _userManager.FindByIdAsync(command.UserId);
 
                 user.PhotoUrl = command.User.PhotoUrl;
                 user.CompressedPhotoUrl = command.User.CompressedPhotoUrl;
                 user.Email = command.User.Email;
                 user.UserName = command.User.UserName;
+                user.PhoneNumber = command.User.PhoneNumber;
 
                 var result = await _userManager.UpdateAsync(user);
 
@@ -50,7 +54,7 @@ namespace LDW.Application.Features.UserFeatures.Commands
 
                 await _userDbContext.SaveChangesAsync(cancellationToken);
 
-                return user.Id;
+                return user;
             }
         }
     }
