@@ -28,7 +28,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 				if (forumSectionToUpdate == null)
 				{
-					throw new NotFoundException("ForumSection", request.Id);
+					throw new NotFoundException("ForumThread", request.Id);
 				}
 
 				forumSectionToUpdate.SectionTitle = request.SectionTitle;

@@ -20,7 +20,6 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 			private readonly IApplicationDbContext _context;
 			private readonly IHttpContextAccessor _httpContextAccessor;
 
-
 			public CreateForumSectionCommandHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
 			{
 				_context = context;

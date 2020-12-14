@@ -34,6 +34,5 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 				return forumSectionToDelete.Id;
 			}
 		}
-
 	}
 }
