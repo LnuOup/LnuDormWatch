@@ -21,14 +21,14 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 			public async Task<Guid> Handle(DeleteForumSectionCommand request, CancellationToken cancellationToken)
 			{
-				var forumSectionToDelete = await _context.ForumSectionEntities.FindAsync(request.Id);
+				var forumSectionToDelete = await _context.ForumSections.FindAsync(request.Id);
 
 				if (forumSectionToDelete == null)
 				{
 					throw new NotFoundException("ForumSection", request.Id);
 				}
 
-				_context.ForumSectionEntities.Remove(forumSectionToDelete);
+				_context.ForumSections.Remove(forumSectionToDelete);
 				await _context.SaveChangesAsync(cancellationToken);
 
 				return forumSectionToDelete.Id;

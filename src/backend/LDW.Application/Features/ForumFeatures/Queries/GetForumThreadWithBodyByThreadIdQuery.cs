@@ -29,7 +29,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 
 			public async Task<ForumThreadWithBodyModel> Handle(GetForumThreadWithBodyByThreadIdQuery request, CancellationToken cancellationToken)
 			{
-				var forumThreadEntity = await _context.ForumThreadEntities.FindAsync(request.Id);
+				var forumThreadEntity = await _context.ForumThreads.FindAsync(request.Id);
 
 				if (forumThreadEntity == null)
 				{

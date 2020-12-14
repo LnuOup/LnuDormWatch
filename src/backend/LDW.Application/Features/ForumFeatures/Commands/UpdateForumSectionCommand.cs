@@ -24,7 +24,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 			public async Task<Guid> Handle(UpdateForumSectionCommand request, CancellationToken cancellationToken)
 			{
-				var forumSectionToUpdate = await _context.ForumSectionEntities.FindAsync(request.Id);
+				var forumSectionToUpdate = await _context.ForumSections.FindAsync(request.Id);
 
 				if (forumSectionToUpdate == null)
 				{

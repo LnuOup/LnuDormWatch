@@ -23,14 +23,14 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 			public async Task<Guid> Handle(DeleteForumThreadCommand request, CancellationToken cancellationToken)
 			{
-				var forumThreadToDelete = await _context.ForumThreadEntities.FindAsync(request.Id);
+				var forumThreadToDelete = await _context.ForumThreads.FindAsync(request.Id);
 
 				if (forumThreadToDelete == null)
 				{
 					throw new NotFoundException("ForumThread", request.Id);
 				}
 
-				_context.ForumThreadEntities.Remove(forumThreadToDelete);
+				_context.ForumThreads.Remove(forumThreadToDelete);
 				await _context.SaveChangesAsync(cancellationToken);
 
 				return forumThreadToDelete.Id;

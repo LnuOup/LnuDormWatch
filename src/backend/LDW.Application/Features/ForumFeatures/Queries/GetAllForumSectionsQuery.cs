@@ -24,7 +24,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 
 			public async Task<IEnumerable<ForumSectionModel>> Handle(GetAllForumSectionsQuery request, CancellationToken cancellationToken)
 			{
-				var forumSessionEntities = await _context.ForumSectionEntities.ToListAsync(cancellationToken);
+				var forumSessionEntities = await _context.ForumSections.ToListAsync(cancellationToken);
 
 				IQueryable<ForumThreadReplyEntity> forumThreadRepliesQuery;
 				int numberOfThreads;
@@ -35,12 +35,12 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 				{
 					var forumSessionModels = forumSessionEntities.Select(entity =>
 					{
-						numberOfThreads = _context.ForumThreadEntities
+						numberOfThreads = _context.ForumThreads
 							.Count(ft => ft.ForumSectionId == entity.Id);
 
-						var a = _context.ForumThreadEntities.Include(ft => ft.ForumThreadReplies).Where(x => x.ForumSectionId == entity.Id).SelectMany(x => x.ForumThreadReplies).ToList();
+						var a = _context.ForumThreads.Include(ft => ft.ForumThreadReplies).Where(x => x.ForumSectionId == entity.Id).SelectMany(x => x.ForumThreadReplies).ToList();
 
-						forumThreadRepliesQuery = _context.ForumThreadEntities
+						forumThreadRepliesQuery = _context.ForumThreads
 							.Include(ft => ft.ForumThreadReplies)
 							.Where(ft => ft.ForumSectionId == entity.Id)
 							.SelectMany(ft => ft.ForumThreadReplies);

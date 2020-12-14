@@ -15,9 +15,9 @@ namespace LDW.Persistence.Context
         }
 
         public DbSet<DormitoryEntity> Dormitories { get; set; }
-		public DbSet<ForumSectionEntity> ForumSectionEntities { get; set; }
-		public DbSet<ForumThreadEntity> ForumThreadEntities { get; set; }
-		public DbSet<ForumThreadReplyEntity> ForumThreadReplyEntities { get; set; }
+		public DbSet<ForumSectionEntity> ForumSections { get; set; }
+		public DbSet<ForumThreadEntity> ForumThreads { get; set; }
+		public DbSet<ForumThreadReplyEntity> ForumThreadReplies { get; set; }
 
 		public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

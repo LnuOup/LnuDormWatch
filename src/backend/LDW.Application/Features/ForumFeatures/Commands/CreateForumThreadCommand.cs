@@ -36,7 +36,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 					AuthorId = currentLoggedInUserId
 				};
 
-				await _context.ForumThreadEntities.AddAsync(newForumThreadEntity, cancellationToken: cancellationToken);
+				await _context.ForumThreads.AddAsync(newForumThreadEntity, cancellationToken: cancellationToken);
 				await _context.SaveChangesAsync(cancellationToken);
 
 				return newForumThreadEntity.Id;

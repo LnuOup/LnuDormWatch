@@ -37,7 +37,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 					AuthorId = currentLoggedInUserId
 				};
 
-				await _context.ForumSectionEntities.AddAsync(newForumSectionEntity, cancellationToken: cancellationToken);
+				await _context.ForumSections.AddAsync(newForumSectionEntity, cancellationToken: cancellationToken);
 				await _context.SaveChangesAsync(cancellationToken);
 
 				return newForumSectionEntity.Id;
