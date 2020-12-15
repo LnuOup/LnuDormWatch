@@ -51,7 +51,7 @@ export class ThreadReplyComponent implements OnInit {
 
       this.newReply = {
         id: this.displayedThread.replies.length,
-        userId: this.userService.activeUser.id,
+        userId: 0,
         posted: Date.now().toString(),
 
         content: this.newReplyForm.value.replyContent

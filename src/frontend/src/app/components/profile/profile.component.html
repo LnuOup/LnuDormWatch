@@ -1,1 +1,45 @@
-<p>profile works!</p>
+<main>
+  <h2>Resident's profile</h2>
+
+  <p class="error-msg" *ngIf="isSavingFailed">Failed to save user info</p>
+
+  <article class="profile-info">
+
+    <div class="user-info">
+
+      <h3>{{ user.userName }}</h3>
+
+      <img src="{{ user.photoUrl }}"
+           *ngIf="user.photoUrl">
+      <img src="assets/images/account_circle-black-48dp.svg"
+           *ngIf="!user.photoUrl">
+
+      <p *ngIf="user.isAdmin">Administrator</p>
+      <p *ngIf="!user.isAdmin">Resident</p>
+
+      <button [disabled]="isInProgress">
+        Upload photo
+      </button>
+    </div>
+
+    <div class="edit-profile">
+      <form [formGroup]="editProfile"
+            (ngSubmit)="saveChanges()">
+        <label>
+          Email:
+          <input placeholder="student@lnu.edu.ua" formControlName="email">
+        </label>
+
+        <label id="password">
+          Phone number:
+          <input type="tel" placeholder="380xxxxxxxxx" formControlName="phoneNumber">
+        </label>
+
+        <button type="submit" class="detail" [disabled]="isInProgress">
+          Save changes
+        </button>
+      </form>
+    </div>
+
+  </article>
+</main>

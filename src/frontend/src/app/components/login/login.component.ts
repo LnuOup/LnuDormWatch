@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   isInProgress: boolean;
   isLoginFailed: boolean;
 
-  constructor(private userService: AuthService,
+  constructor(private authService: AuthService,
               private router: Router,
               private formBuilder: FormBuilder) { }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     {
       this.isInProgress = true;
 
-      this.userService.signIn(val.email, val.password)
+      this.authService.signIn(val.email, val.password)
         .subscribe(res => {
           this.isInProgress = false;
 
