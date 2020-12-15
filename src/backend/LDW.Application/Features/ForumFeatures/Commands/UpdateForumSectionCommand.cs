@@ -13,11 +13,11 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 		public string SectionTitle { get; set; }
 		public string SectionDescription { get; set; }
 
-		public class CreateForumSectionCommandHandler : IRequestHandler<UpdateForumSectionCommand, Guid>
+		public class UpdateForumSectionCommandHandler : IRequestHandler<UpdateForumSectionCommand, Guid>
 		{
 			private readonly IApplicationDbContext _context;
 
-			public CreateForumSectionCommandHandler(IApplicationDbContext context)
+			public UpdateForumSectionCommandHandler(IApplicationDbContext context)
 			{
 				_context = context;
 			}
