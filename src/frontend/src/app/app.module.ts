@@ -15,6 +15,8 @@ import { HomeComponent } from './components/home/home.component';
 import { DormDetailComponent } from './components/dorm-detail/dorm-detail.component';
 import { ForumSectionThreadListComponent } from './components/forum-section-thread-list/forum-section-thread-list.component';
 import { ForumThreadComponent } from './components/forum-thread/forum-thread.component';
+import { CreateThreadComponent } from './components/create-thread/create-thread.component';
+import { ThreadReplyComponent } from './components/thread-reply/thread-reply.component';
 import { LoginComponent } from './components/login/login.component';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
@@ -37,6 +39,8 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     DormDetailComponent,
     ForumSectionThreadListComponent,
     ForumThreadComponent,
+    CreateThreadComponent,
+    ThreadReplyComponent,
     LoginComponent
   ],
   providers: [
