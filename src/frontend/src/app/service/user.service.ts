@@ -47,9 +47,10 @@ export class UserService {
   }
 
   // PUT image
-  uploadUserPhoto(imageFile: File): Observable<any> {
+  uploadUserPhoto(imageFile: FormData): Observable<any> {
     if (AuthService.isSignedIn()) {
-      return this.http.put(`${environment.apiUrl}/api/v${environment.apiVersion}/User/upload-user-photo`, imageFile)
+      return this.http.put(`${environment.apiUrl}/api/v${environment.apiVersion}/User/upload-user-photo`, imageFile,
+        { responseType: 'text' })
         .pipe(
           catchError(this.handleError<object>('uploadUserPhoto'))
         );

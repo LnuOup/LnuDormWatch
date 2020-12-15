@@ -2,6 +2,7 @@
   <h2>Resident's profile</h2>
 
   <p class="error-msg" *ngIf="isSavingFailed">Failed to save user info</p>
+  <p *ngIf="isInProgress">Loading...</p>
 
   <article class="profile-info">
 
@@ -17,9 +18,13 @@
       <p *ngIf="user.isAdmin">Administrator</p>
       <p *ngIf="!user.isAdmin">Resident</p>
 
-      <button [disabled]="isInProgress">
-        Upload photo
-      </button>
+      <input
+        style="display: none"
+        type="file" (change)="onFileChanged($event)"
+        #fileInput>
+      <button (click)="fileInput.click()" [disabled]="isInProgress">Select File</button>
+      <h5 *ngIf="fileInput.files.length > 0">{{fileInput.files[0].name}}</h5>
+      <button (click)="uploadPhoto()" [disabled]="!newImageFile || isInProgress">Upload new photo</button>
     </div>
 
     <div class="edit-profile">

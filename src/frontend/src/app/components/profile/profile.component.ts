@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
 
   user: User;
 
+  newImageFile: File;
+
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private userService: UserService) {
@@ -45,6 +47,29 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  onFileChanged(event: Event): void {
+    this.newImageFile = event.target.files[0]; // pick the image
+  }
+
+  uploadPhoto(): void {
+    this.isInProgress = true;
+
+    const uploadData: FormData = new FormData();
+    uploadData.append('formFile', this.newImageFile, this.newImageFile.name);
+
+    this.userService.uploadUserPhoto(uploadData)
+      .subscribe(res => {
+        this.isInProgress = false;
+
+        if (res !== undefined) {
+          this.router.navigateByUrl('');
+        }
+        else {
+          this.isSavingFailed = true; // show error msg
+        }
+      });
+  }
+
   saveChanges(): void {
     const val = this.editProfile.value;
 
@@ -69,4 +94,5 @@ export class ProfileComponent implements OnInit {
 
     }
   }
+
 }

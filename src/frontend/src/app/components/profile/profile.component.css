@@ -14,27 +14,34 @@ main {
 }
 
 .user-info {
-  padding: 24px 48px;
   border-right: 1px gray solid;
+  width: 30%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+  padding-right: 40px;
 }
-.user-info h3 {
+.user-info h3, p {
+  display: block;
+  width: 100%;
   text-align: center;
-  width: 96px;
+}
+.user-info h5 {
+  width: 128px;
+  text-align: center;
 }
 .user-info img {
   width: 96px;
   height: 96px;
+  margin: auto;
   object-fit: cover;
+  text-align: center;
   border-radius: 48px;
 }
 
-.user-info p {
-  text-align: center;
-  width: 96px;
-}
-
 .user-info button {
-  width: 96px;
+  margin-top: 8px;
 }
 
 .edit-profile {
@@ -47,7 +54,6 @@ main {
 }
 
 .edit-profile p {
-  flex: 1;
   margin-top: 0
 }
 
@@ -67,12 +73,4 @@ form button {
   margin-left: 48px;
   margin-right: 48px;
   margin-top: 24px;
-}
-
-form #password {
-  margin-top: 16px;
-}
-
-#disclaimer {
-  text-align: center;
 }
