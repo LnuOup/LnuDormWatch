@@ -65,6 +65,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 
 						forumThreadModel = new ForumThreadModel
 						{
+							Id = entity.Id,
 							ThreadTitle = entity.ThreadTitle,
 							AuthorId = entity.AuthorId,
 							CreationDate = entity.CreationDate,

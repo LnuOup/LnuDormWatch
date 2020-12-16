@@ -38,8 +38,6 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 						numberOfThreads = _context.ForumThreads
 							.Count(ft => ft.ForumSectionId == entity.Id);
 
-						var a = _context.ForumThreads.Include(ft => ft.ForumThreadReplies).Where(x => x.ForumSectionId == entity.Id).SelectMany(x => x.ForumThreadReplies).ToList();
-
 						forumThreadRepliesQuery = _context.ForumThreads
 							.Include(ft => ft.ForumThreadReplies)
 							.Where(ft => ft.ForumSectionId == entity.Id)
@@ -56,6 +54,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 
 						forumSectionModel = new ForumSectionModel
 						{
+							id = entity.Id,
 							SectionTitle = entity.SectionTitle,
 							SectionDescription = entity.SectionDescription,
 							AuthorId = entity.AuthorId,

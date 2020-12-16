@@ -38,6 +38,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 
 				return new ForumThreadWithBodyModel
 				{
+					Id = forumThreadEntity.Id,
 					ThreadTitle = forumThreadEntity.ThreadTitle,
 					ThreadBody = forumThreadEntity.ThreadBody,
 					AuthorId = forumThreadEntity.AuthorId,

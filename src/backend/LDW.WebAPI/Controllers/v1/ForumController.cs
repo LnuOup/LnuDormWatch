@@ -22,6 +22,15 @@ namespace LDW.WebAPI.Controllers.v1
 			return Ok(sectionModels);
 		}
 
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("sections/{id}")]
+		public async Task<IActionResult> GetForumSectionByIdAsync(Guid id)
+		{
+			var sectionModel = await Mediator.Send(new GetForumSectionByIdQuery(id));
+			return Ok(sectionModel);
+		}
+
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("sections")]
@@ -106,6 +115,15 @@ namespace LDW.WebAPI.Controllers.v1
 		{
 			var forumThreadReplyModels = await Mediator.Send(new GetForumThreadRepliesByThreadIdQuery(threadId));
 			return Ok(forumThreadReplyModels);
+		}
+
+		[HttpGet]
+		[Route("replies/{id}")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetForumThreadReplyById(Guid id)
+		{
+			var forumThreadReplyModel = await Mediator.Send(new GetForumThreadReplyByIdQuery(id));
+			return Ok(forumThreadReplyModel);
 		}
 
 		[HttpPost]
