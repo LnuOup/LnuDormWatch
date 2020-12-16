@@ -11,6 +11,8 @@ namespace LDW.Application.Interfaces
         DbSet<ForumSectionEntity> ForumSections { get; set; }
         DbSet<ForumThreadEntity> ForumThreads { get; set; }
         DbSet<ForumThreadReplyEntity> ForumThreadReplies { get; set; }
+        DbSet<UserRefEntity> UserRefs { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

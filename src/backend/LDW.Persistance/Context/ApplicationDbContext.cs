@@ -18,8 +18,10 @@ namespace LDW.Persistence.Context
 		public DbSet<ForumSectionEntity> ForumSections { get; set; }
 		public DbSet<ForumThreadEntity> ForumThreads { get; set; }
 		public DbSet<ForumThreadReplyEntity> ForumThreadReplies { get; set; }
+        public DbSet<UserRefEntity> UserRefs { get; set; }
 
-		public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             return await base.SaveChangesAsync(cancellationToken);
         }

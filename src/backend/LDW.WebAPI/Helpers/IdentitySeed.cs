@@ -3,7 +3,6 @@ using LDW.Persistence.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +12,8 @@ namespace LDW.WebAPI.Helpers
 	{
 		public static async Task InitializeAsync(IServiceProvider serviceProvider)
 		{
-			var context = serviceProvider.GetRequiredService<UserDbContext>();
+			var userDbContext = serviceProvider.GetRequiredService<UserDbContext>();
+			var applicationDbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
 			var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 			string[] roleNames = { "Admin", "User" };
@@ -24,13 +24,13 @@ namespace LDW.WebAPI.Helpers
 				if (!roleExist)
 				{
 					await roleManager.CreateAsync(new IdentityRole(roleName));
-					await context.SaveChangesAsync();
+					await userDbContext.SaveChangesAsync();
 				}
 			}
 
 			var userManager = serviceProvider.GetRequiredService<UserManager<UserEntity>>();
 
-			if (!context.Users.Any())
+			if (!userDbContext.Users.Any())
 			{
 				var superAdmin = new UserEntity()
 				{
@@ -40,10 +40,15 @@ namespace LDW.WebAPI.Helpers
 				};
 
 
-				var result = await userManager.CreateAsync(superAdmin, "P@$$word123");
+				await userManager.CreateAsync(superAdmin, "P@$$word123");
 				await userManager.AddToRoleAsync(superAdmin, "Admin");
+				await userDbContext.SaveChangesAsync();
 			}
-			await context.SaveChangesAsync();
+
+			var userIds = userDbContext.Users.Select(u => u.Id).ToList();
+
+			await applicationDbContext.UserRefs.AddRangeAsync(userIds.Select(uid => new UserRefEntity { Id = uid }));
+			await applicationDbContext.SaveChangesAsync();
 		}
 	}
 }
