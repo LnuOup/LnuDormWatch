@@ -49,6 +49,10 @@ namespace LDW.WebAPI.Filters
 			{
 				statusCode = HttpStatusCode.NotFound;
 			}
+			else if (context.Exception is AccessForbiddenException)
+			{
+				statusCode = HttpStatusCode.Forbidden;
+			}
 			else if (context.Exception is UnauthorizedAccessException)
 			{
 				statusCode = HttpStatusCode.Unauthorized;
