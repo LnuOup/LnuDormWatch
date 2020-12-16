@@ -43,6 +43,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 				var forumThreadReplyModel = new ForumThreadReplyModel
 				{
+					Id = newForumThreadReplyEntity.Id,
 					AuthorId = newForumThreadReplyEntity.AuthorId,
 					ReplyBody = newForumThreadReplyEntity.ReplyBody,
 					ParentForumThreadId = newForumThreadReplyEntity.ParentForumThreadId,

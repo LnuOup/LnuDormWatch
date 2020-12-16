@@ -39,6 +39,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 				{
 					var forumThreadReplyModel = new ForumThreadReplyModel
 					{
+						Id = entity.Id,
 						AuthorId = entity.AuthorId,
 						CreationDate = entity.CreationDate,
 						ParentForumThreadId = entity.ParentForumThreadId,
