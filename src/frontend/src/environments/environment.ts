@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'localhost:44369',
+  apiUrl: 'https://lnudormwatchapi.azurewebsites.net',
   apiVersion: '1'
 };
 

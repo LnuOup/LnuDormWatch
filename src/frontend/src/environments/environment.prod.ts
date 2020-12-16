@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: '44369',
+  apiUrl: 'https://lnudormwatchapi.azurewebsites.net',
   apiVersion: '1'
 };
