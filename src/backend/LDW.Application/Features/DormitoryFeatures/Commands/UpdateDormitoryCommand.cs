@@ -12,8 +12,10 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
         public int Number { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
+		public double Latitude { get; set; }
+		public double Longitude { get; set; }
 
-        public class UpdateDormitoryCommandHandler : IRequestHandler<UpdateDormitoryCommand, int>
+		public class UpdateDormitoryCommandHandler : IRequestHandler<UpdateDormitoryCommand, int>
         {
             private readonly IApplicationDbContext _context;
             public UpdateDormitoryCommandHandler(IApplicationDbContext context)
@@ -33,6 +35,8 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
                 dormitoryToUpdate.Number = request.Number;
                 dormitoryToUpdate.Address = request.Address;
                 dormitoryToUpdate.PhoneNumber = request.PhoneNumber;
+				dormitoryToUpdate.Latitude = request.Latitude;
+				dormitoryToUpdate.Longitude = request.Longitude;
 
                 await _context.SaveChangesAsync(cancellationToken: cancellationToken);
 
