@@ -12,6 +12,7 @@ namespace LDW.Application.Interfaces
         DbSet<ForumThreadEntity> ForumThreads { get; set; }
         DbSet<ForumThreadReplyEntity> ForumThreadReplies { get; set; }
         DbSet<UserRefEntity> UserRefs { get; set; }
+        DbSet<DormitoryPictureEntity> DormitoryPictures { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
