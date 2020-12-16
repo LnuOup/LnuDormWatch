@@ -27,12 +27,14 @@ namespace LDW.Application.Features.UserFeatures.Commands
         {
             private readonly UserManager<UserEntity> _userManager;
             private readonly IUserDbContext _userDbContext;
-            public CreateUserCommandHandler(UserManager<UserEntity> userManager, IUserDbContext dbContext)
-            {
-                this._userManager = userManager;
-                this._userDbContext = dbContext;
-            }
-            public async Task<string> Handle(CreateUserCommand command, CancellationToken cancellationToken)
+            private readonly IApplicationDbContext _applicationDbContext;
+			public CreateUserCommandHandler(UserManager<UserEntity> userManager, IUserDbContext dbContext, IApplicationDbContext applicationDbContext)
+			{
+				_userManager = userManager;
+				_userDbContext = dbContext;
+				_applicationDbContext = applicationDbContext;
+			}
+			public async Task<string> Handle(CreateUserCommand command, CancellationToken cancellationToken)
             {
                 var newUser = new UserEntity
                 {
@@ -45,6 +47,9 @@ namespace LDW.Application.Features.UserFeatures.Commands
                 await _userManager.CreateAsync(newUser, command.Password);
                 await _userManager.AddToRoleAsync(newUser, "User");
                 await _userDbContext.SaveChangesAsync(cancellationToken);
+
+                await _applicationDbContext.UserRefs.AddAsync(new UserRefEntity { Id = newUser.Id });
+                await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 var createdUser = await _userManager.FindByNameAsync(newUser.Email);
                 var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(createdUser);

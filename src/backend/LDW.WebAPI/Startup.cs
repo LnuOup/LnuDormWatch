@@ -99,6 +99,7 @@ namespace LDW.WebAPI
             services.AddPersistence(Configuration);
             services.AddIdentityContext(Configuration);
             services.AddControllers();
+            services.AddHttpContextAccessor();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IImageService, ImageService>();

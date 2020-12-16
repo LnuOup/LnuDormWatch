@@ -49,13 +49,21 @@ section header {
 
 .reply-content {
   padding: 12px 48px 12px 48px;
+  flex: 1;
   display: flex;
+  width: available;
   flex-direction: column;
+  place-content: stretch;
+}
+
+.reply-content h4 {
+  display: block;
+  width: 100%;
 }
 
 .reply-content p {
   flex: 1;
-  margin-top: 0;
+  margin-top: 0
 }
 
 #replies header {

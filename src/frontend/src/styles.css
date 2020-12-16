@@ -31,6 +31,10 @@ app-nav-bar {
 
 }
 
+main {
+  padding: 16px;
+}
+
 /* Text styles */
 .error-msg {
   color: red;

@@ -17,7 +17,7 @@
 <!--profile controls-->
   <div class="profile"
         *ngIf="isSignedIn">
-    <a>
+    <a routerLink="/profile">
       Profile
     </a>
     <a (click)="logOut()">

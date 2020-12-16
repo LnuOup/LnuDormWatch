@@ -1,7 +1,11 @@
 export interface User {
-  id: number;
+  id?: number;
   userName: string;
-  photoUrl: string;
+  photoUrl?: string;
+  compressedPhotoUrl?: string;
   email: string;
-  isAdmin: boolean;
+  phoneNumber?: string;
+  isEmailConfirmed?: boolean;
+
+  isAdmin?: boolean;
 }

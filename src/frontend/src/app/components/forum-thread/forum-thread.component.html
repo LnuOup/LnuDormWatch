@@ -6,7 +6,9 @@
         Thread
       </h3>
 
-      <a *ngIf="isSignedIn" id="reply-to-thread"> >> Reply to this thread</a>
+      <a *ngIf="isSignedIn" id="reply-to-thread"
+         [routerLink]="['/forum/thread_reply']"
+         [queryParams]="{threadId: displayedThread.id}"> >> Reply to this thread</a>
     </header>
 
     <!-- thread content-->
@@ -15,7 +17,10 @@
 
         <a><h3>{{ displayedThread.user.userName }}</h3></a>
 
-        <img src="{{displayedThread.user.photoUrl}}">
+        <img src="{{ displayedThread.user.photoUrl }}"
+             *ngIf="displayedThread.user.photoUrl">
+        <img src="assets/images/account_circle-black-48dp.svg"
+             *ngIf="!displayedThread.user.photoUrl">
 
         <p *ngIf="displayedThread.user.isAdmin">Administrator</p>
         <p *ngIf="!displayedThread.user.isAdmin">Resident</p>
@@ -54,6 +59,7 @@
       <div class="reply-content">
         <h4>Posted on {{reply.posted | date: "medium"}}</h4>
 
+        <!--quote content-->
         <div *ngIf="reply.quote" class="reply-quote">
           <h5>Posted by {{ reply.quote.user.userName }} on {{ reply.quote.posted | date: "medium" }}:</h5>
 
@@ -64,7 +70,10 @@
 
         <div class="reply-action-panel"
             *ngIf="isSignedIn">
-          <a><i class="quote-icon material-icons md-36 gray">comment</i></a>
+          <a [routerLink]="['/forum/thread_reply']"
+             [queryParams]="{threadId: displayedThread.id, quoteId: reply.id}">
+            <i class="quote-icon material-icons md-36 gray">comment</i>
+          </a>
         </div>
       </div>
 

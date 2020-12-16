@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using System;
+using LDW.WebAPI.Models;
 
 namespace LDW.WebAPI.Controllers.v1
 {
@@ -46,7 +47,9 @@ namespace LDW.WebAPI.Controllers.v1
                 user.Email,
                 user.EmailConfirmed,
                 user.PhoneNumber,
-                user.PhotoUrl
+                user.PhotoUrl,
+                user.CompressedPhotoUrl,
+                user.UserRoles
             };
 
             return Ok(response);
@@ -129,26 +132,40 @@ namespace LDW.WebAPI.Controllers.v1
                 UserName = user.UserName,
                 PhotoUrl = photoUrl,
                 CompressedPhotoUrl = compressedPhotoUrl,
-                Email = user.Email
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
             };
 
-            var updateResult = await Mediator.Send(new UpdateUserCommand(userModel));
-            return Ok(updateResult);
+            var updateResult = await Mediator.Send(new UpdateUserCommand(userModel, User.Identity.Name));
+            var response = new
+            {
+                photoUrl = updateResult.PhotoUrl,
+                compressedPhotoUrl = updateResult.CompressedPhotoUrl
+            };
+            return Ok(response);
         }
 
 
         [HttpPatch]
         [Route("update-user-info")]
-        public async Task<IActionResult> UpdateUserInfo([FromBody] UserModel userModel)
+        public async Task<IActionResult> UpdateUserInfo([FromBody] UpdateUserApiModel userModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await Mediator.Send(new UpdateUserCommand(userModel));
+            var updateModel = new UserModel
+            {
+                UserName = userModel.UserName,
+                Email = userModel.Email,
+                PhoneNumber = userModel.PhoneNumber,
+                PhotoUrl = userModel.PhotoUrl,
+                CompressedPhotoUrl = userModel.CompressedPhotoUrl
+            };
+            await Mediator.Send(new UpdateUserCommand(updateModel, User.Identity.Name));
 
-            return Ok(result);
+            return Ok(userModel);
         }
     }
 }

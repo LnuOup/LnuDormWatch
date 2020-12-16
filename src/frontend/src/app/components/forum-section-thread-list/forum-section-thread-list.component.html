@@ -10,7 +10,11 @@
         Threads
       </h3>
 
-      <a *ngIf="isSignedIn" id="start-new-thread"> >> Start a new thread</a>
+      <a *ngIf="isSignedIn" id="start-new-thread"
+        routerLink="/forum/new_thread"
+         [queryParams]="{sectionId: displayedSection.id}">
+        >> Start a new thread
+      </a>
 
       <h4 id="thread-header-replies">
         Replies
