@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LDW.Domain.Entities
+﻿namespace LDW.Domain.Entities
 {
 	public class DormitoryPictureEntity
 	{
