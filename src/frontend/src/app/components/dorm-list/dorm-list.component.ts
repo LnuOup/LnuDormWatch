@@ -5,6 +5,7 @@ import { mockDorms } from '../../mockdata/mock-dorms';
 import {DOCUMENT} from '@angular/common';
 import {Dormitory} from "../../models/dormitory";
 import { Location } from "../../models/location";
+import {DormitoryService} from "../../service/dormitory.service";
 
 @Component({
   selector: 'app-dorm-list',
@@ -21,11 +22,13 @@ export class DormListComponent implements OnInit, AfterViewInit {
   initialLng: number;
   zoomLevel: number;
 
+
   clickedMarker(label: string, index: number): void{
     console.log(`clicked the marker: ${label || index}`);
   }
 
-  constructor(@Inject(DOCUMENT) private doc) {
+  constructor(@Inject(DOCUMENT) private doc,
+              private dormService: DormitoryService) {
     // Add canonical URL to the page for search optimization and Disqus
     const link: HTMLLinkElement = doc.createElement('link');
     link.setAttribute('rel', 'canonical');
@@ -37,10 +40,15 @@ export class DormListComponent implements OnInit, AfterViewInit {
     this.initialLat = 49.8440995;
     this.initialLng = 24.0262646;
     this.zoomLevel = 13;
+    this.dormService.getAllDormitories()
+      .subscribe(res => {
+          this.dorms = res;
+        }
+      );
   }
 
   ngAfterViewInit(): void {
-    disqus('dorm-list');
+    // disqus('dorm-list');
   }
 
   showOnMap(): void {
