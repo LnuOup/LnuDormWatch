@@ -35,12 +35,12 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 				if (forumSectionToUpdate == null)
 				{
-					throw new NotFoundException("ForumThread", request.Id);
+					throw new NotFoundException("ForumSection", request.Id);
 				}
 
 				if (forumSectionToUpdate.AuthorId != currentLoggedInUserId)
 				{
-					throw new AccessForbiddenException("ForumThread", request.Id);
+					throw new AccessForbiddenException("ForumSection", request.Id);
 				}
 
 				forumSectionToUpdate.SectionTitle = request.SectionTitle;

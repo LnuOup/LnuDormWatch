@@ -34,7 +34,7 @@ namespace LDW.WebAPI.Controllers.v1
 		[HttpPut]
 		[Authorize(Roles = "Admin")]
 		[Route("sections")]
-		public async Task<IActionResult> UpdateForumSectionAsync(UpdateForumThreadReplyCommand updateForumSectionCommand)
+		public async Task<IActionResult> UpdateForumSectionAsync(UpdateForumSectionCommand updateForumSectionCommand)
 		{
 			var updatedSectionId = await Mediator.Send(updateForumSectionCommand);
 			return Ok(updatedSectionId);
