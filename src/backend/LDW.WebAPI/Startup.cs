@@ -163,6 +163,7 @@ namespace LDW.WebAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var envSettings = Configuration.GetSection("ClientEnvironment").Get<EnvironmentSettings>();
+            var devSettingsUrl = "http://localhost:4200";
 
             if (env.IsDevelopment())
             {
@@ -177,7 +178,7 @@ namespace LDW.WebAPI
             app.UseRouting();
 
             app.UseCors(builder => builder
-            .WithOrigins(envSettings.WebClientUrl.ToString().TrimEnd('/'))
+            .WithOrigins(envSettings.WebClientUrl.ToString().TrimEnd('/'), devSettingsUrl)
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
