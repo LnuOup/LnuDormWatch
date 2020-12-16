@@ -9,5 +9,6 @@ namespace LDW.Application.Models.Forum
 		public string ThreadBody { get; set; }
 		public string AuthorId { get; set; }
 		public DateTime CreationDate { get; set; }
+		public ForumAuthorInfo AuthorInfo { get; set; }
 	}
 }
