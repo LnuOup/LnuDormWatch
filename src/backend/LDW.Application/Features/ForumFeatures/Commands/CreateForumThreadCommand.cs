@@ -11,6 +11,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 {
 	public class CreateForumThreadCommand : IRequest<Guid>
 	{
+		public Guid SectionId { get; set; }
 		public string ThreadTitle { get; set; }
 		public string ThreadBody { get; set; }
 
@@ -31,6 +32,7 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 				var newForumThreadEntity = new ForumThreadEntity
 				{
+					ForumSectionId = request.SectionId,
 					ThreadTitle = request.ThreadTitle,
 					ThreadBody = request.ThreadBody,
 					AuthorId = currentLoggedInUserId
