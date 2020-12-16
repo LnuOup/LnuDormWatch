@@ -7,49 +7,84 @@ using System.Threading.Tasks;
 
 namespace LDW.WebAPI.Controllers.v1
 {
-    public class DormitoryController : BaseV1Controller
-    {
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAll()
-        {
-            var dormitoryList = await Mediator.Send(new GetAllDormitoriesQuery());
-            return Ok(dormitoryList);
-        }
+	public class DormitoryController : BaseV1Controller
+	{
+		#region Dormitory
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var dormitory = await Mediator.Send(new GetDormitoryByIdQuery(id));
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetAll()
+		{
+			var dormitoryList = await Mediator.Send(new GetAllDormitoriesQuery());
+			return Ok(dormitoryList);
+		}
 
-            if (dormitory == null)
-            {
-                return NotFound();
-            }
+		[HttpGet("{id}")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetById(int id)
+		{
+			var dormitory = await Mediator.Send(new GetDormitoryByIdQuery(id));
 
-            return Ok(dormitory);
-        }
+			if (dormitory == null)
+			{
+				return NotFound();
+			}
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateDormitoryCommand command)
-        {
-            var createdDormitoryId = await Mediator.Send(command);
-            return Ok(createdDormitoryId);
-        }
+			return Ok(dormitory);
+		}
 
-        [HttpPut]
-        public async Task<IActionResult> Update(UpdateDormitoryCommand command)
-        {
-            var updatedDormitoryId = await Mediator.Send(command);
-            return Ok(updatedDormitoryId);
-        }
+		[HttpPost]
+		public async Task<IActionResult> Create(CreateDormitoryCommand command)
+		{
+			var createdDormitoryId = await Mediator.Send(command);
+			return Ok(createdDormitoryId);
+		}
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(DeleteDormitoryByIdCommand command)
-        {
-            var deletedDormitoryId = await Mediator.Send(command);
-            return Ok(deletedDormitoryId);
-        }
-    }
+		[HttpPut]
+		public async Task<IActionResult> Update(UpdateDormitoryCommand command)
+		{
+			var updatedDormitoryId = await Mediator.Send(command);
+			return Ok(updatedDormitoryId);
+		}
+
+		[HttpDelete]
+		public async Task<IActionResult> Delete(DeleteDormitoryByIdCommand command)
+		{
+			var deletedDormitoryId = await Mediator.Send(command);
+			return Ok(deletedDormitoryId);
+		}
+
+		#endregion
+
+		#region Dormitory Picture
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("pictures")]
+		public async Task<IActionResult> GetDormitoryPicturesByDormitoryIdAsync([FromQuery] int dormitoryId)
+		{
+			var dormitoryPictures = await Mediator.Send(new GetDormitoryPicturesByDormitoryIdQuery(dormitoryId));
+			return Ok(dormitoryPictures);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[Route("pictures")]
+		public async Task<IActionResult> UploadDormitoryPictureAsync(UploadDormitoryPictureCommand uploadDormitoryPictureCommand)
+		{
+			var newDormitoryPicture = await Mediator.Send(uploadDormitoryPictureCommand);
+			return Ok(newDormitoryPicture);
+		}
+
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		[Route("pictures/{id}")]
+		public async Task<IActionResult> DeleteDormitoryPictureAsync(int id)
+		{
+			await Mediator.Send(new DeleteDormitoryPictureByIdCommand(id));
+			return NoContent();
+		}
+
+		#endregion
+	}
 }
