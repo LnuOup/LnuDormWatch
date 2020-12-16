@@ -2,17 +2,15 @@ import {ForumReply} from './forum-reply';
 import {User} from './user';
 
 export interface ForumThread {
-  id: number;
-  userId: number; // TODO
-  user?: User;
+  id: string;
+  authorId: string;
+  author?: User;
 
-  name: string;
-  content: string;
-  isPinned: boolean;
+  threadTitle: string;
+  threadBody?: string;
 
-  replies: ForumReply[];
-  numOfReplies?: number;
-  created: string;
+  replies?: ForumReply[];
+  numberOfReplies: number;
+  creationDate: string;
   lastReply?: string;
-  lastReplyBy?: User;
 }

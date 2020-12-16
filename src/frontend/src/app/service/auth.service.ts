@@ -42,6 +42,15 @@ export class AuthService {
       );
   }
 
+  refreshToken(): Observable<AuthData> {
+    return this.http.get<AuthData>(`${environment.apiUrl}/api/v${environment.apiVersion}/Account/login`, this.httpOptions)
+      .pipe(
+        tap(res => this.setupSession(res)),
+        catchError(this.handleError<AuthData>('refreshToken')),
+        shareReplay()
+      );
+  }
+
   logOut(): void {
     localStorage.removeItem(LocalStorage.USER_TOKEN);
     localStorage.removeItem(LocalStorage.REFRESH_TOKEN);

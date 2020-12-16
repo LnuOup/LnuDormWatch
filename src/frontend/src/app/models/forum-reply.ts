@@ -1,13 +1,12 @@
 import {User} from './user';
 
 export interface ForumReply {
-  id: number;
-  userId: number;
-  user?: User;
+  id: string;
+  authorId: number;
+  author?: User;
 
-  quoteId?: number;
-  quote?: ForumReply;
-  posted: string;
+  parentForumThreadReply?: ForumReply;
+  creationDate: string;
 
-  content: string;
+  replyBody: string;
 }

@@ -1,13 +1,15 @@
 import {ForumThread} from './forum-thread';
 
 export interface ForumSection {
-  id: number;
+  id: string;
 
-  title: string;
-  description: string;
-  isAdminOnly: boolean;
+  sectionTitle: string;
+  sectionDescription: string;
+  isAdminOnly?: boolean;
 
-  threads: ForumThread[];
-  numOfThreads?: number;
+  creationDate: string;
+
+  threads?: ForumThread[];
+  numberOfThreads?: number;
   lastReply?: string;
 }

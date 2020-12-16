@@ -1,5 +1,5 @@
 <main>
-  <h2>Reply to thread '{{ displayedThread.name }}'</h2>
+  <h2>Reply to thread '{{ displayedThread?.threadTitle }}'</h2>
 
   <p>Please enter your reply for the posted question. You can quote another reply by clicking the corresponding button on that reply.</p>
 
@@ -10,9 +10,9 @@
 
     <!--quote content-->
     <div *ngIf="selectedQuote" class="reply-quote">
-      <h5>Posted by {{ selectedQuote.user.userName }} on {{ selectedQuote.posted | date: "medium" }}:</h5>
+      <h5>Posted by {{ selectedQuote.author.userName }} on {{ selectedQuote.creationDate | date: "medium" }}:</h5>
 
-      <q>{{selectedQuote.content}}</q>
+      <q>{{selectedQuote.replyBody}}</q>
     </div>
 
     <label id="new-reply-content-label">

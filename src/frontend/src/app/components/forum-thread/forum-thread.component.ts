@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ForumThread} from '../../models/forum-thread';
 import {mockUsers} from '../../mockdata/mock-users';
 import {AuthService} from '../../service/auth.service';
+import {ForumService} from '../../service/forum.service';
 
 @Component({
   selector: 'app-forum-thread',
@@ -16,24 +17,31 @@ export class ForumThreadComponent implements OnInit {
     return AuthService.isSignedIn();
   }
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private forumService: ForumService) { }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('threadId');
+    const id = this.route.snapshot.paramMap.get('threadId');
 
-    this.displayedThread = mockForumSections.find(sct =>
-        sct.threads.find(thrd => thrd.id === id) !== undefined)
-      .threads.find(thrd => thrd.id === id);
+    this.forumService.getThreadById(id)
+      .subscribe(res => {
+        if (res !== undefined) {
+          this.forumService.getReplies(id)
+            .subscribe(replRes => {
+              if (replRes !== undefined) {
+                // fetch replies
+                res.replies = replRes.sort((repl1, repl2) =>
+                  (new Date(repl1.creationDate)).getTime() - (new Date(repl2.creationDate)).getTime());
 
-    this.displayedThread.user = mockUsers.find(usr => usr.id === this.displayedThread.userId);
+                // TODO
+                res.author = mockUsers[1];
+                res.replies.forEach(repl => repl.author = mockUsers[0]);
 
-    this.displayedThread.replies.forEach(rpl => {
-      rpl.user = mockUsers.find(usr => usr.id === rpl.userId);
-      if (rpl.quoteId !== undefined)
-      {
-        rpl.quote = this.displayedThread.replies.find(repl => repl.id === rpl.quoteId);
-      }
-    });
+                this.displayedThread = res;
+              }
+            });
+        }
+      });
   }
 
 }

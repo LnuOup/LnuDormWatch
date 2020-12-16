@@ -1,7 +1,7 @@
 <main>
-  <h2>{{ displayedSection.title }}</h2>
+  <h2>{{ displayedSection?.sectionTitle }}</h2>
 
-  <p>{{ displayedSection.description }}</p>
+  <p>{{ displayedSection?.sectionDescription }}</p>
 
   <!--  thread list-->
   <section>
@@ -12,7 +12,7 @@
 
       <a *ngIf="isSignedIn" id="start-new-thread"
         routerLink="/forum/new_thread"
-         [queryParams]="{sectionId: displayedSection.id}">
+         [queryParams]="{sectionId: displayedSection?.id}">
         >> Start a new thread
       </a>
 
@@ -26,21 +26,21 @@
     </header>
 
     <article class="section-thread"
-             *ngFor="let thread of displayedSection.threads;">
+             *ngFor="let thread of displayedSection?.threads;">
       <i class="forum-icon material-icons md-36 lnu-navy">forum</i>
 
       <a routerLink="/forum/thread/{{thread.id}}">
         <h3 id="thread-title">
-          {{ thread.name }}
+          {{ thread.threadTitle }}
         </h3>
       </a>
 
-      <p id="thread-creator">
-        by {{ thread.user.userName }}
-      </p>
+<!--      <p id="thread-creator">-->
+<!--        by {{ thread.author.userName }}-->
+<!--      </p>-->
 
       <p id="thread-num-of-replies">
-        {{ thread.numOfReplies }}
+        {{ thread.numberOfReplies }}
       </p>
 
       <p id="thread-last-reply"
@@ -48,10 +48,10 @@
         {{ thread.lastReply | date:'medium' }}
       </p>
 
-      <p id="thread-last-reply-by"
-         *ngIf="thread.lastReplyBy">
-        by {{ thread.lastReplyBy.userName }}
-      </p>
+<!--      <p id="thread-last-reply-by"-->
+<!--         *ngIf="thread.lastReplyBy">-->
+<!--        by {{ thread.lastReplyBy.userName }}-->
+<!--      </p>-->
     </article>
   </section>
 </main>

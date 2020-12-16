@@ -5,6 +5,7 @@ import {ForumSection} from '../../models/forum-section';
 import {ActivatedRoute, Router, ParamMap } from '@angular/router';
 import {Form, FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../service/user.service';
+import {ForumService} from '../../service/forum.service';
 
 @Component({
   selector: 'app-create-thread',
@@ -12,7 +13,7 @@ import {UserService} from '../../service/user.service';
   styleUrls: ['./create-thread.component.css']
 })
 export class CreateThreadComponent implements OnInit {
-  displayedSection: ForumSection;
+  displayedSectionId: string;
   @Input() newThread: ForumThread;
 
   errorMessage: string;
@@ -21,7 +22,8 @@ export class CreateThreadComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private forumService: ForumService) {
     this.newThreadForm = this.formBuilder.group({
       threadName: '',
       threadContent: ''
@@ -30,10 +32,7 @@ export class CreateThreadComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: any) => {
-      const id = +params.sectionId;
-
-      this.displayedSection = mockForumSections.find(sct =>
-        sct.id === id);
+      this.displayedSectionId = params.sectionId;
     });
   }
 
@@ -45,21 +44,15 @@ export class CreateThreadComponent implements OnInit {
     } else {
       this.errorMessage = undefined;
 
-      this.newThread = {
-        id: this.displayedSection.threads.length,
-        userId: 0,
-        created: Date.now().toString(),
-        replies: [],
+      this.forumService.postThread(this.displayedSectionId, this.newThreadForm.value.threadName, this.newThreadForm.value.threadContent)
+        .subscribe(res => {
+          if (res !== undefined) {
+            this.router.navigateByUrl(`/forum/section/${this.displayedSectionId}`);
+          } else {
+            this.errorMessage = 'Failed to create thread';
+          }
+        });
 
-        isPinned: false,
-
-        name: this.newThreadForm.value.threadName,
-        content: this.newThreadForm.value.threadContent
-      };
-
-      this.displayedSection.threads.push(this.newThread);
-
-      this.router.navigateByUrl(`/forum/section/${this.displayedSection.id}`);
     }
   }
 

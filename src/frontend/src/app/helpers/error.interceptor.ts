@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       .pipe(
         catchError(err => {
           if ([401, 403].includes(err.status) && AuthService.isSignedIn()) {
-            this.authService.logOut();
+            this.authService.refreshToken();
           }
 
           const error = (err && err.error && err.error.message) || err.statusText;
