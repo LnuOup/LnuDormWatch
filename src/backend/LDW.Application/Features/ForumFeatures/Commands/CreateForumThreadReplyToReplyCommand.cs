@@ -34,14 +34,14 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 			{
 				var currentLoggedInUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-				var parentForumThreadReply = await _context.ForumThreadReplies.FindAsync(request.ParentThreadReplyId);
+				var parentForumThreadReplyEntity = await _context.ForumThreadReplies.FindAsync(request.ParentThreadReplyId);
 
-				if (parentForumThreadReply == null)
+				if (parentForumThreadReplyEntity == null)
 				{
 					throw new NotFoundException("ForumThreadReply", request.ParentThreadReplyId);
 				}
 
-				var parentForumThreadId = parentForumThreadReply.ParentForumThreadId;
+				var parentForumThreadId = parentForumThreadReplyEntity.ParentForumThreadId;
 
 				var newForumThreadReplyEntity = new ForumThreadReplyEntity
 				{
@@ -56,16 +56,18 @@ namespace LDW.Application.Features.ForumFeatures.Commands
 
 				var forumThreadReplyModel = new ForumThreadReplyModel
 				{
+					Id = newForumThreadReplyEntity.Id,
 					AuthorId = newForumThreadReplyEntity.AuthorId,
 					ReplyBody = newForumThreadReplyEntity.ReplyBody,
 					ParentForumThreadId = newForumThreadReplyEntity.ParentForumThreadId,
 					CreationDate = newForumThreadReplyEntity.CreationDate,
 					ParentForumThreadReply = new ForumThreadReplyModel
 					{
-						AuthorId = parentForumThreadReply.AuthorId,
-						ReplyBody = parentForumThreadReply.ReplyBody,
-						ParentForumThreadId = parentForumThreadReply.ParentForumThreadId,
-						CreationDate = parentForumThreadReply.CreationDate
+						Id = parentForumThreadReplyEntity.Id,
+						AuthorId = parentForumThreadReplyEntity.AuthorId,
+						ReplyBody = parentForumThreadReplyEntity.ReplyBody,
+						ParentForumThreadId = parentForumThreadReplyEntity.ParentForumThreadId,
+						CreationDate = parentForumThreadReplyEntity.CreationDate
 					}
 				};
 
