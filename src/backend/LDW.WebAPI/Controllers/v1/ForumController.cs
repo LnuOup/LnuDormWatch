@@ -34,7 +34,7 @@ namespace LDW.WebAPI.Controllers.v1
 		[HttpPut]
 		[Authorize(Roles = "Admin")]
 		[Route("sections")]
-		public async Task<IActionResult> UpdateForumSectionAsync(UpdateForumSectionCommand updateForumSectionCommand)
+		public async Task<IActionResult> UpdateForumSectionAsync(UpdateForumThreadReplyToThreadCommand updateForumSectionCommand)
 		{
 			var updatedSectionId = await Mediator.Send(updateForumSectionCommand);
 			return Ok(updatedSectionId);
@@ -93,6 +93,51 @@ namespace LDW.WebAPI.Controllers.v1
 		{
 			var deletedForumThreadId = await Mediator.Send(deleteForumThreadCommand);
 			return Ok(deletedForumThreadId);
+		}
+
+		#endregion
+
+		#region Replies
+
+		[HttpGet]
+		[Route("replies")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetForumThreadRepliesByThreadId([FromQuery] Guid threadId)
+		{
+			var forumThreadReplyModels = await Mediator.Send(new GetForumThreadRepliesByThreadIdQuery(threadId));
+			return Ok(forumThreadReplyModels);
+		}
+
+		[HttpPost]
+		[Route("replies/reply-to-thread")]
+		public async Task<IActionResult> CreateForumThreadReplyToThread(CreateForumThreadReplyToThreadCommand createForumThreadReplyToThreadCommand)
+		{
+			var newForumThreadReplyModel = await Mediator.Send(createForumThreadReplyToThreadCommand);
+			return Ok(newForumThreadReplyModel);
+		}
+
+		[HttpPost]
+		[Route("replies/reply-to-reply")]
+		public async Task<IActionResult> CreateForumThreadReplyToReply(CreateForumThreadReplyToReplyCommand createForumThreadReplyToReplyCommand)
+		{
+			var newForumThreadReplyModel = await Mediator.Send(createForumThreadReplyToReplyCommand);
+			return Ok(newForumThreadReplyModel);
+		}
+
+		[HttpPut]
+		[Route("replies")]
+		public async Task<IActionResult> UpdateForumThreadReplyToThread(UpdateForumThreadReplyToThreadCommand updateForumThreadReplyToThreadCommand)
+		{
+			var updatedForumThreadReplyId = await Mediator.Send(updateForumThreadReplyToThreadCommand);
+			return Ok(updatedForumThreadReplyId);
+		}
+
+		[HttpDelete]
+		[Route("replies")]
+		public async Task<IActionResult> DeleteForumThreadReplyToThread(DeleteForumThreadReplyCommand deleteForumThreadReplyToThreadCommand)
+		{
+			var deletedForumThreadReplyId = await Mediator.Send(deleteForumThreadReplyToThreadCommand);
+			return Ok(deletedForumThreadReplyId);
 		}
 
 		#endregion
