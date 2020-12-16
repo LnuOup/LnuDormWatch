@@ -34,7 +34,7 @@ namespace LDW.WebAPI.Controllers.v1
 		[HttpPut]
 		[Authorize(Roles = "Admin")]
 		[Route("sections")]
-		public async Task<IActionResult> UpdateForumSectionAsync(UpdateForumThreadReplyToThreadCommand updateForumSectionCommand)
+		public async Task<IActionResult> UpdateForumSectionAsync(UpdateForumThreadReplyCommand updateForumSectionCommand)
 		{
 			var updatedSectionId = await Mediator.Send(updateForumSectionCommand);
 			return Ok(updatedSectionId);
@@ -126,7 +126,7 @@ namespace LDW.WebAPI.Controllers.v1
 
 		[HttpPut]
 		[Route("replies")]
-		public async Task<IActionResult> UpdateForumThreadReplyToThread(UpdateForumThreadReplyToThreadCommand updateForumThreadReplyToThreadCommand)
+		public async Task<IActionResult> UpdateForumThreadReply(UpdateForumThreadReplyCommand updateForumThreadReplyToThreadCommand)
 		{
 			var updatedForumThreadReplyId = await Mediator.Send(updateForumThreadReplyToThreadCommand);
 			return Ok(updatedForumThreadReplyId);

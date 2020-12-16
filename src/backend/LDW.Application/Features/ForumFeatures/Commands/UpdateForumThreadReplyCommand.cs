@@ -11,40 +11,43 @@ using System.Threading.Tasks;
 
 namespace LDW.Application.Features.ForumFeatures.Commands
 {
-	public class DeleteForumThreadReplyCommand : IRequest<Guid>
+	public class UpdateForumThreadReplyCommand : IRequest<Guid>
 	{
 		public Guid Id { get; set; }
+		public string ReplyBody { get; set; }
 
-		public class DeleteForumThreadReplyCommandHandler : IRequestHandler<DeleteForumThreadReplyCommand, Guid>
+		public class UpdateForumThreadReplyToHandler : IRequestHandler<UpdateForumThreadReplyCommand, Guid>
 		{
 			private readonly IApplicationDbContext _context;
 			private readonly IHttpContextAccessor _httpContextAccessor;
 
-			public DeleteForumThreadReplyCommandHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+			public UpdateForumThreadReplyToHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
 			{
 				_context = context;
 				_httpContextAccessor = httpContextAccessor;
 			}
 
-			public async Task<Guid> Handle(DeleteForumThreadReplyCommand request, CancellationToken cancellationToken)
+			public async Task<Guid> Handle(UpdateForumThreadReplyCommand request, CancellationToken cancellationToken)
 			{
-				var forumThreadReplyToDelete = await _context.ForumThreadReplies.FindAsync(request.Id);
+				var forumThreadReplyToUpdate = await _context.ForumThreadReplies.FindAsync(request.Id);
 				var currentLoggedInUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-				if (forumThreadReplyToDelete == null)
+
+				if (forumThreadReplyToUpdate == null)
 				{
 					throw new NotFoundException("ForumThreadReply", request.Id);
 				}
 
-				if (forumThreadReplyToDelete.AuthorId != currentLoggedInUserId)
+				if (forumThreadReplyToUpdate.AuthorId != currentLoggedInUserId)
 				{
 					throw new AccessForbiddenException("ForumThreadReply", request.Id);
 				}
 
-				_context.ForumThreadReplies.Remove(forumThreadReplyToDelete);
+				forumThreadReplyToUpdate.ReplyBody = request.ReplyBody;
+
 				await _context.SaveChangesAsync(cancellationToken);
 
-				return forumThreadReplyToDelete.Id;
+				return forumThreadReplyToUpdate.Id;
 			}
 		}
 	}
