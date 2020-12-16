@@ -47,7 +47,13 @@ namespace LDW.WebAPI.Helpers
 
 			var userIds = userDbContext.Users.Select(u => u.Id).ToList();
 
-			await applicationDbContext.UserRefs.AddRangeAsync(userIds.Select(uid => new UserRefEntity { Id = uid }));
+			var existingUserRefIds = applicationDbContext.UserRefs.Select(ur => ur.Id).ToList();
+
+			var userIdsToAdd = userIds.Except(existingUserRefIds);
+
+			// need to add userIds to UserRefEntity models because its Id has foreign key dependencies
+			// we can't just make foreign key to IdentityUser, because its located in another database
+			await applicationDbContext.UserRefs.AddRangeAsync(userIdsToAdd.Select(uid => new UserRefEntity { Id = uid }));
 			await applicationDbContext.SaveChangesAsync();
 		}
 	}
