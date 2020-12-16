@@ -47,7 +47,7 @@ export class CreateThreadComponent implements OnInit {
 
       this.newThread = {
         id: this.displayedSection.threads.length,
-        userId: this.userService.activeUser.id,
+        userId: 0,
         created: Date.now().toString(),
         replies: [],
 

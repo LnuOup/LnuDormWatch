@@ -1,0 +1,76 @@
+main {
+  margin: auto;
+  padding: 16px;
+  border: 1px gray solid;
+  max-width: 640px;
+}
+
+
+.profile-info {
+  display: flex;
+  width: available;
+  flex-direction: row;
+  place-content: stretch;
+}
+
+.user-info {
+  border-right: 1px gray solid;
+  width: 30%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+  padding-right: 40px;
+}
+.user-info h3, p {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.user-info h5 {
+  width: 128px;
+  text-align: center;
+}
+.user-info img {
+  width: 96px;
+  height: 96px;
+  margin: auto;
+  object-fit: cover;
+  text-align: center;
+  border-radius: 48px;
+}
+
+.user-info button {
+  margin-top: 8px;
+}
+
+.edit-profile {
+  margin: auto;
+}
+
+.edit-profile h4 {
+  display: block;
+  flex: 1;
+}
+
+.edit-profile p {
+  margin-top: 0
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input
+{
+  width: 95%;
+  padding: 4px 8px;
+  font-size: medium;
+}
+
+form button {
+  margin-left: 48px;
+  margin-right: 48px;
+  margin-top: 24px;
+}

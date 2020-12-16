@@ -17,7 +17,10 @@
 
         <a><h3>{{ displayedThread.user.userName }}</h3></a>
 
-        <img src="{{displayedThread.user.photoUrl}}">
+        <img src="{{ displayedThread.user.photoUrl }}"
+             *ngIf="displayedThread.user.photoUrl">
+        <img src="assets/images/account_circle-black-48dp.svg"
+             *ngIf="!displayedThread.user.photoUrl">
 
         <p *ngIf="displayedThread.user.isAdmin">Administrator</p>
         <p *ngIf="!displayedThread.user.isAdmin">Resident</p>
