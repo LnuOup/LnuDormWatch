@@ -18,8 +18,12 @@ namespace LDW.Persistence.Context.Configs
 			builder.Property(dp => dp.IsMain)
 				.IsRequired();
 
-			builder.Property(dp => dp.Image)
+			builder.Property(dp => dp.ImageUrl)
 				.IsRequired();
+
+			builder.Property(dp => dp.ImageUrl)
+				.IsRequired()
+				.HasMaxLength(5000);
 
 			builder
 				.HasOne(dp => dp.Dormitory)

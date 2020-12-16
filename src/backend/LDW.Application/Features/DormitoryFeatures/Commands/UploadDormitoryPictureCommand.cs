@@ -12,7 +12,7 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
 	{
 		public int DormitoryId { get; set; }
 		public bool IsMain { get; set; }
-		public byte[] Image { get; set; }
+		public string ImageUrl { get; set; }
 
 		public class UploadDormitoryPictureCommandHandler : IRequestHandler<UploadDormitoryPictureCommand, DormitoryPictureModel>
 		{
@@ -27,7 +27,7 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
 				{
 					DormitoryId = request.DormitoryId,
 					IsMain = request.IsMain,
-					Image = request.Image
+					ImageUrl = request.ImageUrl
 				};
 
 				await _context.DormitoryPictures.AddAsync(newDormitoryPictureEntity, cancellationToken: cancellationToken);
@@ -37,7 +37,7 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
 				{
 					Id = newDormitoryPictureEntity.Id,
 					IsMain = newDormitoryPictureEntity.IsMain,
-					Image = newDormitoryPictureEntity.Image,
+					ImageUrl = newDormitoryPictureEntity.ImageUrl,
 					DormitoryId = newDormitoryPictureEntity.DormitoryId
 				};
 

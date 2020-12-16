@@ -5,7 +5,7 @@
 		public int Id { get; set; }
 		public int DormitoryId { get; set; }
 		public bool IsMain { get; set; }
-		public byte[] Image { get; set; }
+		public string ImageUrl { get; set; }
 
 		public DormitoryEntity Dormitory { get; set; }
 	}

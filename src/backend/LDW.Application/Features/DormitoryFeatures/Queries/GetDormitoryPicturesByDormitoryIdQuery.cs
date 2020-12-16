@@ -43,7 +43,7 @@ namespace LDW.Application.Features.DormitoryFeatures.Queries
 					{
 						Id = entity.Id,
 						DormitoryId = entity.DormitoryId,
-						Image = entity.Image,
+						ImageUrl = entity.ImageUrl,
 						IsMain = entity.IsMain
 					};
 
