@@ -2,6 +2,7 @@
 using LDW.Application.Features.DormitoryFeatures.Commands;
 using LDW.Application.Features.DormitoryFeatures.Queries;
 using LDW.Application.Features.UserFeatures.Commands;
+using LDW.Application.Features.UserFeatures.Queries;
 using LDW.Application.Interfaces.Services;
 using LDW.Application.Models;
 using LDW.Domain.Entities.Options;
@@ -107,6 +108,17 @@ namespace LDW.WebAPI.Controllers.v1
             }
 
             var response = await Mediator.Send(new GetTokensQuery(model.Email, _jwtOptions));
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("refresh-token")]
+        public async Task<IActionResult> RevokeToken()
+        {
+            var user = await Mediator.Send(new GetUserByIdQuery(User.Identity.Name));
+
+            var response = await Mediator.Send(new GetTokensQuery(user.Email, _jwtOptions));
 
             return Ok(response);
         }

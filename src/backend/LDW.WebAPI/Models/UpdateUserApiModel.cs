@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LDW.Application.Models
+namespace LDW.WebAPI.Models
 {
-    public class UserModel
+    public class UpdateUserApiModel
     {
         public string PhotoUrl { get; set; }
-
-        public string CompressedPhotoUrl { get; set; }
 
         public string UserName { get; set; }
 
@@ -16,8 +15,6 @@ namespace LDW.Application.Models
 
         public string PhoneNumber { get; set; }
 
-        public IList<string> UserRoles { get; set; }
-
-        public bool EmailConfirmed { get; set; }
+        public string CompressedPhotoUrl { get; set; }
     }
 }
