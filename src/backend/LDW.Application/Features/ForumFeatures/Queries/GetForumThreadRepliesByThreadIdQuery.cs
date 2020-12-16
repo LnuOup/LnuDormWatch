@@ -50,6 +50,7 @@ namespace LDW.Application.Features.ForumFeatures.Queries
 					{
 						forumThreadReplyModel.ParentForumThreadReply = new ForumThreadReplyModel
 						{
+							Id = entity.ParentForumThreadReply.Id,
 							AuthorId = entity.ParentForumThreadReply.AuthorId,
 							CreationDate = entity.ParentForumThreadReply.CreationDate,
 							ParentForumThreadId = entity.ParentForumThreadReply.ParentForumThreadId,
