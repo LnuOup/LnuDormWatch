@@ -4,14 +4,16 @@ using LDW.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LDW.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201216200808_AddDormitoryPictures")]
+    partial class AddDormitoryPictures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,12 +31,6 @@ namespace LDW.Persistence.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<int>("Number")
                         .HasColumnType("int")
@@ -59,10 +55,9 @@ namespace LDW.Persistence.Migrations
                     b.Property<int>("DormitoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<byte[]>("Image")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(5000);
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("bit");

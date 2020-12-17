@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {mockUsers} from '../mockdata/mock-users';
 import {User} from '../models/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './auth.service';
@@ -39,8 +40,8 @@ export class UserService {
 
       return this.http.patch(`${environment.apiUrl}/api/v${environment.apiVersion}/User/update-user-info`, userUpd,
         { headers: this.httpHeaders, responseType: 'text'}
-      )
-        .pipe(
+        )
+          .pipe(
           catchError(this.handleError<any>('updateUserInfo'))
         );
     }

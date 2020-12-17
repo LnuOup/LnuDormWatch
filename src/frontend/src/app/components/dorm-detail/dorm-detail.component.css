@@ -1,0 +1,75 @@
+.main-container {
+  display: grid;
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+  grid-template-rows: auto 700px;
+  grid-template-columns: auto;
+}
+
+#gallery-container{
+  margin-top: 24px;
+  margin-bottom: 24px;
+  grid-column: 1/ span 2;
+  grid-row: 2;
+}
+
+#main-info-container{
+  display: grid;
+  grid-template-columns: 600px auto auto;
+  grid-template-rows: 50px 50px 50px 60px 60px 130px 40px;
+  padding: 0;
+  grid-row: 1;
+  grid-column: 1/3;
+}
+
+.dorm-full-image{
+  height: 440px;
+  width: 100%;
+  grid-row: 1/span 7;
+  grid-column: 1;
+}
+
+.info{
+  margin: 0 0 0 13px;
+}
+
+#forum-button{
+  grid-column: 2;
+  grid-row: 4;
+  margin-bottom: 10px;
+}
+
+#submission-button{
+  grid-column: 2;
+  grid-row: 5;
+  margin-bottom: 10px;
+}
+
+#rating{
+  grid-row: 7;
+  grid-column: 2;
+}
+
+#address{
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#phone-number{
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.section-header{
+  height: 40px;
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+
+#disqus_thread{
+  grid-row: 5;
+  grid-column: 1/3;
+}

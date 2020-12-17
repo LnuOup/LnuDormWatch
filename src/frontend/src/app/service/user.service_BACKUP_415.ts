@@ -11,8 +11,13 @@ import {catchError} from 'rxjs/operators';
 })
 export class UserService {
   httpHeaders = new HttpHeaders()
+<<<<<<< HEAD
       .set('Content-Type', 'application/json')
       .set('Accept', '*/*');
+=======
+    .set('Content-Type', 'application/json')
+    .set('Accept', '*/*');
+>>>>>>> dev
 
   constructor(private http: HttpClient) {
   }
@@ -39,8 +44,13 @@ export class UserService {
 
       return this.http.patch(`${environment.apiUrl}/api/v${environment.apiVersion}/User/update-user-info`, userUpd,
         { headers: this.httpHeaders, responseType: 'text'}
+<<<<<<< HEAD
+        )
+          .pipe(
+=======
       )
         .pipe(
+>>>>>>> dev
           catchError(this.handleError<any>('updateUserInfo'))
         );
     }

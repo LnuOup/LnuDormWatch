@@ -19,9 +19,9 @@ namespace LDW.Persistence.Context
 		public DbSet<ForumThreadEntity> ForumThreads { get; set; }
 		public DbSet<ForumThreadReplyEntity> ForumThreadReplies { get; set; }
         public DbSet<UserRefEntity> UserRefs { get; set; }
+		public DbSet<DormitoryPictureEntity> DormitoryPictures { get; set; }
 
-
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+		public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             return await base.SaveChangesAsync(cancellationToken);
         }
@@ -35,6 +35,7 @@ namespace LDW.Persistence.Context
             modelBuilder.ApplyConfiguration(new ForumSectionConfiguration());
             modelBuilder.ApplyConfiguration(new ForumThreadConfiguration());
             modelBuilder.ApplyConfiguration(new ForumThreadReplyConfiguration());
+            modelBuilder.ApplyConfiguration(new DormitoryPictureConfiguration());
         }
     }
 }

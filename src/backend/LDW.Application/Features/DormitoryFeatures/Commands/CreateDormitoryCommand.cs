@@ -11,8 +11,10 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
         public int Number { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
+		public double? Latitude { get; set; }
+		public double? Longitude { get; set; }
 
-        public class CreateProductCommandHandler : IRequestHandler<CreateDormitoryCommand, int>
+		public class CreateProductCommandHandler : IRequestHandler<CreateDormitoryCommand, int>
         {
             private readonly IApplicationDbContext _context;
             public CreateProductCommandHandler(IApplicationDbContext context)
@@ -25,7 +27,9 @@ namespace LDW.Application.Features.DormitoryFeatures.Commands
                 {
                     Number = command.Number,
                     Address = command.Address,
-                    PhoneNumber = command.PhoneNumber
+                    PhoneNumber = command.PhoneNumber,
+					Latitude = command.Latitude,
+					Longitude = command.Longitude
                 };
                 await _context.Dormitories.AddAsync(newDormitory, cancellationToken: cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);

@@ -44,6 +44,8 @@
     <Compile Remove="Migrations\20201216120507_MakeUserRefFKNotRequired.Designer.cs" />
     <Compile Remove="Migrations\20201216120544_MakeUserRefFKNotRequired.cs" />
     <Compile Remove="Migrations\20201216120544_MakeUserRefFKNotRequired.Designer.cs" />
+    <Compile Remove="Migrations\20201216215807_ChangeDormitoryImageToImageUrl.cs" />
+    <Compile Remove="Migrations\20201216215807_ChangeDormitoryImageToImageUrl.Designer.cs" />
     <Compile Remove="Migrations\UserDb\20201113214211_removeOddId.cs" />
     <Compile Remove="Migrations\UserDb\20201113214211_removeOddId.Designer.cs" />
   </ItemGroup>
