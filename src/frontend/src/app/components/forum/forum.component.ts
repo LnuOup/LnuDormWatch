@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ForumSection} from '../../models/forum-section';
-import {mockForumSections} from '../../mockdata/mock-forum';
+import {ForumService} from '../../service/forum.service';
 
 @Component({
   selector: 'app-forum',
@@ -9,19 +9,22 @@ import {mockForumSections} from '../../mockdata/mock-forum';
 })
 export class ForumComponent implements OnInit {
   forumSections: ForumSection[];
+  isInProgress: boolean;
 
-  constructor() { }
+  constructor(private forumService: ForumService) { }
 
   ngOnInit(): void {
-    this.forumSections = mockForumSections.map(fs => {
-      fs.numOfThreads = fs.threads.length;
-      if (fs.numOfThreads > 0)
-      {
-        fs.lastReply = fs.threads[0].lastReply;
-      }
+    this.isInProgress = true;
 
-      return fs;
-    });
+    this.forumService.getSections()
+      .subscribe(res => {
+        this.isInProgress = false;
+
+        if (res !== undefined) {
+          this.forumSections = res.sort((sct1, sct2) =>
+            (new Date(sct1.creationDate)).getTime() - (new Date(sct2.creationDate)).getTime());
+        }
+      });
   }
 
 }

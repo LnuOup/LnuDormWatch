@@ -17,7 +17,7 @@
       <textarea type="text" rows="10" maxlength="1024" placeholder="Enter content" formControlName="threadContent" required></textarea>
     </label>
 
-    <button type="submit" class="detail">
+    <button type="submit" class="detail" [disabled]="isInProgress">
       Create thread
     </button>
   </form>

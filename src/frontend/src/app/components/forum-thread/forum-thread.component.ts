@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {mockForumSections} from '../../mockdata/mock-forum';
 import {ActivatedRoute} from '@angular/router';
 import {ForumThread} from '../../models/forum-thread';
 import {mockUsers} from '../../mockdata/mock-users';
 import {AuthService} from '../../service/auth.service';
+import {ForumService} from '../../service/forum.service';
 
 @Component({
   selector: 'app-forum-thread',
@@ -12,28 +12,36 @@ import {AuthService} from '../../service/auth.service';
 })
 export class ForumThreadComponent implements OnInit {
   displayedThread: ForumThread;
+  isInProgress: boolean;
   get isSignedIn(): boolean {
     return AuthService.isSignedIn();
   }
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private forumService: ForumService) { }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('threadId');
+    this.isInProgress = true;
 
-    this.displayedThread = mockForumSections.find(sct =>
-        sct.threads.find(thrd => thrd.id === id) !== undefined)
-      .threads.find(thrd => thrd.id === id);
+    const id = this.route.snapshot.paramMap.get('threadId');
 
-    this.displayedThread.user = mockUsers.find(usr => usr.id === this.displayedThread.userId);
+    this.forumService.getThreadById(id)
+      .subscribe(res => {
+        if (res !== undefined) {
+          this.forumService.getReplies(id)
+            .subscribe(replRes => {
+              this.isInProgress = false;
 
-    this.displayedThread.replies.forEach(rpl => {
-      rpl.user = mockUsers.find(usr => usr.id === rpl.userId);
-      if (rpl.quoteId !== undefined)
-      {
-        rpl.quote = this.displayedThread.replies.find(repl => repl.id === rpl.quoteId);
-      }
-    });
+              if (replRes !== undefined) {
+                // fetch replies
+                res.replies = replRes.sort((repl1, repl2) =>
+                  (new Date(repl1.creationDate)).getTime() - (new Date(repl2.creationDate)).getTime());
+
+                this.displayedThread = res;
+              }
+            });
+        }
+      });
   }
 
 }

@@ -11,8 +11,8 @@ import {catchError} from 'rxjs/operators';
 })
 export class UserService {
   httpHeaders = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Accept', '*/*');
+      .set('Content-Type', 'application/json')
+      .set('Accept', '*/*');
 
   constructor(private http: HttpClient) {
   }

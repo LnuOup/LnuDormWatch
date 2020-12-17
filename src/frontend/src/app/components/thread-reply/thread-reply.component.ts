@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {mockForumSections} from '../../mockdata/mock-forum';
 import {ForumThread} from '../../models/forum-thread';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ForumReply} from '../../models/forum-reply';
 import {UserService} from '../../service/user.service';
+import {ForumService} from '../../service/forum.service';
+import {mockUsers} from '../../mockdata/mock-users';
 
 @Component({
   selector: 'app-thread-reply',
@@ -16,29 +17,43 @@ export class ThreadReplyComponent implements OnInit {
   selectedQuote: ForumReply;
   @Input() newReply: ForumReply;
 
+  isInProgress: boolean;
   errorMessage: string;
   newReplyForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private forumService: ForumService) {
     this.newReplyForm = this.formBuilder.group({
       replyContent: ''
     });
   }
 
   ngOnInit(): void {
+    this.isInProgress = true;
+
     this.route.queryParams.subscribe((params: any) => {
-      const id = +params.threadId;
+      const id = params.threadId;
       const quoteId = params.quoteId;
 
-      this.displayedThread = mockForumSections.find(sct =>
-        sct.threads.find(thrd => thrd.id === id) !== undefined)
-        .threads.find(thrd => thrd.id === id);
+      this.forumService.getThreadById(id)
+        .subscribe(res => {
+          if (res !== undefined) {
+            this.isInProgress = false;
+            this.displayedThread = res;
+          }
+        });
 
+      // get quote if present
       if (params.quoteId !== undefined) {
-        this.selectedQuote = this.displayedThread.replies.find(rpl => rpl.id === +quoteId);
+        this.forumService.getReplyById(quoteId)
+          .subscribe(res => {
+            if (res !== undefined) {
+              this.selectedQuote = res;
+            }
+          });
       }
     });
   }
@@ -48,22 +63,29 @@ export class ThreadReplyComponent implements OnInit {
       this.errorMessage = 'Please enter the reply content';
     } else {
       this.errorMessage = undefined;
-
-      this.newReply = {
-        id: this.displayedThread.replies.length,
-        userId: 0,
-        posted: Date.now().toString(),
-
-        content: this.newReplyForm.value.replyContent
-      };
+      this.isInProgress = true;
 
       if (this.selectedQuote !== undefined) {
-        this.newReply.quoteId = this.selectedQuote.id;
+        this.forumService.postReplyToReply(this.selectedQuote.id, this.newReplyForm.value.replyContent)
+          .subscribe(res => {
+            this.isInProgress = false;
+            if (res !== undefined) {
+              this.router.navigateByUrl(`/forum/thread/${this.displayedThread.id}`);
+            } else {
+              this.errorMessage = 'Failed to post reply';
+            }
+          });
+      } else {
+        this.forumService.postReplyToThread(this.displayedThread.id, this.newReplyForm.value.replyContent)
+          .subscribe(res => {
+            this.isInProgress = false;
+            if (res !== undefined) {
+              this.router.navigateByUrl(`/forum/thread/${this.displayedThread.id}`);
+            } else {
+              this.errorMessage = 'Failed to post reply';
+            }
+          });
       }
-
-      this.displayedThread.replies.push(this.newReply);
-
-      this.router.navigateByUrl(`/forum/thread/${this.displayedThread.id}`);
     }
   }
 

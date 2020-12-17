@@ -8,28 +8,29 @@
 
       <a *ngIf="isSignedIn" id="reply-to-thread"
          [routerLink]="['/forum/thread_reply']"
-         [queryParams]="{threadId: displayedThread.id}"> >> Reply to this thread</a>
+         [queryParams]="{threadId: displayedThread?.id}"> >> Reply to this thread</a>
     </header>
 
     <!-- thread content-->
-    <article id="thread-content">
+    <article id="thread-content"
+      *ngIf="displayedThread">
       <div class="user-info">
 
-        <a><h3>{{ displayedThread.user.userName }}</h3></a>
+        <a><h3>{{ displayedThread.authorInfo.userName }}</h3></a>
 
-        <img src="{{ displayedThread.user.photoUrl }}"
-             *ngIf="displayedThread.user.photoUrl">
+        <img src="{{ displayedThread.authorInfo.photoUrl }}"
+             *ngIf="displayedThread.authorInfo.photoUrl">
         <img src="assets/images/account_circle-black-48dp.svg"
-             *ngIf="!displayedThread.user.photoUrl">
+             *ngIf="!displayedThread.authorInfo.photoUrl">
 
-        <p *ngIf="displayedThread.user.isAdmin">Administrator</p>
-        <p *ngIf="!displayedThread.user.isAdmin">Resident</p>
+<!--        <p *ngIf="displayedThread.author.isAdmin">Administrator</p>-->
+<!--        <p *ngIf="!displayedThread.author.isAdmin">Resident</p>-->
       </div>
 
       <div class="reply-content">
-        <h4>Posted on {{displayedThread.created | date: "medium"}}</h4>
+        <h4>Posted on {{displayedThread.creationDate | date: "medium"}}</h4>
 
-        <p>{{displayedThread.content}}</p>
+        <p>{{displayedThread.threadBody}}</p>
       </div>
     </article>
 
@@ -44,29 +45,29 @@
     </header>
     <!--  thread replies-->
     <article class="thread-reply"
-             *ngFor="let reply of displayedThread.replies;">
+             *ngFor="let reply of displayedThread?.replies;">
 
       <div class="user-info">
 
-        <a><h3>{{ reply.user.userName }}</h3></a>
+        <a><h3>{{ reply.authorInfo.userName }}</h3></a>
 
-        <img src="{{reply.user.photoUrl}}">
+        <img src="{{reply.authorInfo.photoUrl}}">
 
-        <p *ngIf="reply.user.isAdmin">Administrator</p>
-        <p *ngIf="!reply.user.isAdmin">Resident</p>
+<!--        <p *ngIf="reply.authorInfo.isAdmin">Administrator</p>-->
+<!--        <p *ngIf="!reply.authorInfo.isAdmin">Resident</p>-->
       </div>
 
       <div class="reply-content">
-        <h4>Posted on {{reply.posted | date: "medium"}}</h4>
+        <h4>Posted on {{reply.creationDate | date: "medium"}}</h4>
 
         <!--quote content-->
-        <div *ngIf="reply.quote" class="reply-quote">
-          <h5>Posted by {{ reply.quote.user.userName }} on {{ reply.quote.posted | date: "medium" }}:</h5>
+        <div *ngIf="reply.parentForumThreadReply" class="reply-quote">
+          <h5>Posted by {{ reply.parentForumThreadReply.authorInfo.userName }} on {{ reply.parentForumThreadReply.creationDate | date: "medium" }}:</h5>
 
-          <q>{{reply.quote.content}}</q>
+          <q>{{reply.parentForumThreadReply.replyBody}}</q>
         </div>
 
-        <p>{{reply.content}}</p>
+        <p>{{reply.replyBody}}</p>
 
         <div class="reply-action-panel"
             *ngIf="isSignedIn">
@@ -79,4 +80,6 @@
 
     </article>
   </section>
+
+  <p *ngIf="isInProgress">Loading thread...</p>
 </main>
