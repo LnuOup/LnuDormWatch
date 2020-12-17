@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {mockUsers} from '../mockdata/mock-users';
 import {User} from '../models/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './auth.service';
@@ -11,11 +10,9 @@ import {catchError} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  httpOptions = {
-    headers: new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Accept', '*/*')
-  };
+  httpHeaders = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Accept', '*/*');
 
   constructor(private http: HttpClient) {
   }
@@ -23,7 +20,8 @@ export class UserService {
   // GET
   getUserInfo(): Observable<User> {
     if (AuthService.isSignedIn()) {
-      return this.http.get<User>(`${environment.apiUrl}/api/v${environment.apiVersion}/User`, this.httpOptions)
+      return this.http.get<User>(`${environment.apiUrl}/api/v${environment.apiVersion}/User`,
+        { headers: this.httpHeaders })
         .pipe(
           catchError(this.handleError<User>('getUserInfo'))
         );
@@ -35,12 +33,14 @@ export class UserService {
     if (AuthService.isSignedIn()) {
       const userUpd = {
         email: user.email,
-        userName: user.userName
+        userName: user.userName,
+        phoneNumber: user.phoneNumber
       };
 
       return this.http.patch(`${environment.apiUrl}/api/v${environment.apiVersion}/User/update-user-info`, userUpd,
-        { headers: this.httpOptions, responseType: 'text'})
-          .pipe(
+        { headers: this.httpHeaders, responseType: 'text'}
+      )
+        .pipe(
           catchError(this.handleError<any>('updateUserInfo'))
         );
     }
