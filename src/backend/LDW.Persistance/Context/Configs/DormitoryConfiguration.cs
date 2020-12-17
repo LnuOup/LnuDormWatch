@@ -21,6 +21,6 @@ namespace LDW.Persistence.Context.Configs
 
             builder.Property(e => e.PhoneNumber)
                 .HasMaxLength(15);
-        }
+		}
     }
 }
