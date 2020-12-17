@@ -3,9 +3,8 @@ declare function disqus(pageIdentifier: string): any;
 
 import { mockDorms } from '../../mockdata/mock-dorms';
 import {DOCUMENT} from '@angular/common';
-import {Dormitory} from "../../models/dormitory";
-import { Location } from "../../models/location";
-import {DormitoryService} from "../../service/dormitory.service";
+import {DormitoryService} from '../../service/dormitory.service';
+import {Dormitory} from '../../models/dormitory';
 
 @Component({
   selector: 'app-dorm-list',
@@ -16,12 +15,11 @@ import {DormitoryService} from "../../service/dormitory.service";
   providedIn: 'root'
 })
 export class DormListComponent implements OnInit, AfterViewInit {
-  dorms = mockDorms;
+  dorms: Dormitory[];
   openAsMap = false;
   initialLat: number;
   initialLng: number;
   zoomLevel: number;
-
 
   clickedMarker(label: string, index: number): void{
     console.log(`clicked the marker: ${label || index}`);
@@ -42,7 +40,21 @@ export class DormListComponent implements OnInit, AfterViewInit {
     this.zoomLevel = 13;
     this.dormService.getAllDormitories()
       .subscribe(res => {
-          //this.dorms = res;
+          if (res !== undefined) {
+
+            // fetch pictures
+            res.forEach(drm => {
+              this.dormService.getDormitoryPictures(drm.id)
+                .subscribe(pctsRes => {
+                  if (pctsRes !== undefined) {
+                    const mainPct = pctsRes.find(pct => pct.isMain);
+                    drm.mainImageUrl = mainPct.imageUrl;
+                  }
+                });
+            });
+
+            this.dorms = res;
+          }
         }
       );
   }
@@ -60,12 +72,12 @@ export class DormListComponent implements OnInit, AfterViewInit {
 
   showDormOnMap(dorm: Dormitory): void {
     this.showOnMap();
-    this.setMapLocation(dorm.location);
+    this.setMapLocation(dorm.latitude, dorm.longitude);
   }
 
-  private setMapLocation(location: Location): void {
-    this.initialLng = location.lng;
-    this.initialLat = location.lat;
+  private setMapLocation(latitude: number, longitude: number): void {
+    this.initialLng = latitude;
+    this.initialLat = longitude;
     this.zoomLevel = 15;
   }
 }

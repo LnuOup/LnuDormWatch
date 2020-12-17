@@ -1,25 +1,23 @@
 <div class="main-container">
 
   <div id="main-info-container">
-    <img class="dorm-full-image" [src]="dorm.mainImageUrl">
+    <img class="dorm-full-image" [src]="dorm?.mainImageUrl">
 
-    <p class="info" id="phone-number" > Dorm phone number : {{ dorm.phoneNumber }}</p>
-    <p class="info" id="address"> Dorm address : {{ dorm.location.address }}</p>
+    <p class="info" id="phone-number" > Dorm phone number : {{ dorm?.phoneNumber }}</p>
+    <p class="info" id="address"> Dorm address : {{ dorm?.address }}</p>
 
     <button class="info" id="forum-button">Go to dormitory forum page</button>
 
     <button class="info" id="submission-button">Request submission for this dormitory</button>
 
-    <h3 class="info" id="rating"> Like: {{ dorm.rating.positive }} / Dislike: {{dorm.rating.negative}}</h3>
+<!--    <h3 class="info" id="rating"> Like: {{ dorm.rating.positive }} / Dislike: {{dorm.rating.negative}}</h3>-->
   </div>
 
 <!--  gallery-->
-  <div id="gallery-container">
+  <div id="gallery-container" *ngIf="dorm?.dormitoryPictures?.length > 0">
     <h3 class="section-header">Gallery</h3>
-    <ks-carousel [images]="dorm.images"></ks-carousel>
+    <ks-carousel [id]="1" [images]="dorm?.dormitoryPictures"></ks-carousel>
   </div>
-
-
 
   <!-- Disqus comments -->
   <div id="disqus_thread"></div>
