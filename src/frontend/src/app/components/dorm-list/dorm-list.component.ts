@@ -42,7 +42,7 @@ export class DormListComponent implements OnInit, AfterViewInit {
     this.zoomLevel = 13;
     this.dormService.getAllDormitories()
       .subscribe(res => {
-          this.dorms = res;
+          //this.dorms = res;
         }
       );
   }

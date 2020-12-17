@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  onFileChanged(event: Event): void {
+  onFileChanged(event): void {
     this.newImageFile = event.target.files[0]; // pick the image
   }
 
