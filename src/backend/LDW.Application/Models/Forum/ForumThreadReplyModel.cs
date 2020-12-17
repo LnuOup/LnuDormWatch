@@ -12,5 +12,6 @@ namespace LDW.Application.Models.Forum
 		public Guid ParentForumThreadId { get; set; }
 		public DateTime CreationDate { get; set; }
 		public ForumThreadReplyModel ParentForumThreadReply { get; set; }
+		public ForumAuthorInfo AuthorInfo { get; set; }
 	}
 }
