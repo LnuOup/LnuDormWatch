@@ -10,7 +10,7 @@
 
     <!--quote content-->
     <div *ngIf="selectedQuote" class="reply-quote">
-      <h5>Posted by {{ selectedQuote.author.userName }} on {{ selectedQuote.creationDate | date: "medium" }}:</h5>
+      <h5>Posted by {{ selectedQuote.authorInfo.userName }} on {{ selectedQuote.creationDate | date: "medium" }}:</h5>
 
       <q>{{selectedQuote.replyBody}}</q>
     </div>
@@ -20,7 +20,7 @@
       <textarea type="text" rows="10" maxlength="1024" placeholder="Enter content" formControlName="replyContent" required></textarea>
     </label>
 
-    <button type="submit" class="detail">
+    <button type="submit" class="detail" [disabled]="isInProgress">
       Post a reply
     </button>
   </form>

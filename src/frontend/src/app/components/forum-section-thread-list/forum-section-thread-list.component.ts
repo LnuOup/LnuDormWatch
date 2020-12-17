@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ForumSection} from '../../models/forum-section';
-import {mockForumSections} from '../../mockdata/mock-forum';
 import {ActivatedRoute} from '@angular/router';
-import {mockUsers} from '../../mockdata/mock-users';
 import {AuthService} from '../../service/auth.service';
 import {ForumService} from '../../service/forum.service';
 
@@ -13,6 +11,7 @@ import {ForumService} from '../../service/forum.service';
 })
 export class ForumSectionThreadListComponent implements OnInit {
   displayedSection: ForumSection;
+  isInProgress: boolean;
   get isSignedIn(): boolean {
     return AuthService.isSignedIn();
   }
@@ -21,6 +20,8 @@ export class ForumSectionThreadListComponent implements OnInit {
               private forumService: ForumService) { }
 
   ngOnInit(): void {
+    this.isInProgress = true;
+
     const id = this.route.snapshot.paramMap.get('sectionId');
     this.forumService.getSectionById(id)
       .subscribe(res => {
@@ -28,6 +29,7 @@ export class ForumSectionThreadListComponent implements OnInit {
           this.forumService.getThreads(id)
             .subscribe(thrdRes => {
               if (thrdRes !== undefined) {
+                this.isInProgress = false;
                 // fetch thread list
                 res.threads = thrdRes.sort(
                   (thrd1, thrd2) =>

@@ -1,9 +1,12 @@
-import {User} from './user';
+
 
 export interface ForumReply {
   id: string;
   authorId: number;
-  author?: User;
+  authorInfo: {
+    userName: string,
+    photoUrl: string
+  };
 
   parentForumThreadReply?: ForumReply;
   creationDate: string;

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {mockForumSections} from '../../mockdata/mock-forum';
 import {ForumThread} from '../../models/forum-thread';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -18,6 +17,7 @@ export class ThreadReplyComponent implements OnInit {
   selectedQuote: ForumReply;
   @Input() newReply: ForumReply;
 
+  isInProgress: boolean;
   errorMessage: string;
   newReplyForm: FormGroup;
 
@@ -32,6 +32,8 @@ export class ThreadReplyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isInProgress = true;
+
     this.route.queryParams.subscribe((params: any) => {
       const id = params.threadId;
       const quoteId = params.quoteId;
@@ -39,6 +41,7 @@ export class ThreadReplyComponent implements OnInit {
       this.forumService.getThreadById(id)
         .subscribe(res => {
           if (res !== undefined) {
+            this.isInProgress = false;
             this.displayedThread = res;
           }
         });
@@ -48,7 +51,6 @@ export class ThreadReplyComponent implements OnInit {
         this.forumService.getReplyById(quoteId)
           .subscribe(res => {
             if (res !== undefined) {
-              res.author = mockUsers[0]; // TODO
               this.selectedQuote = res;
             }
           });
@@ -61,10 +63,12 @@ export class ThreadReplyComponent implements OnInit {
       this.errorMessage = 'Please enter the reply content';
     } else {
       this.errorMessage = undefined;
+      this.isInProgress = true;
 
       if (this.selectedQuote !== undefined) {
         this.forumService.postReplyToReply(this.selectedQuote.id, this.newReplyForm.value.replyContent)
           .subscribe(res => {
+            this.isInProgress = false;
             if (res !== undefined) {
               this.router.navigateByUrl(`/forum/thread/${this.displayedThread.id}`);
             } else {
@@ -74,6 +78,7 @@ export class ThreadReplyComponent implements OnInit {
       } else {
         this.forumService.postReplyToThread(this.displayedThread.id, this.newReplyForm.value.replyContent)
           .subscribe(res => {
+            this.isInProgress = false;
             if (res !== undefined) {
               this.router.navigateByUrl(`/forum/thread/${this.displayedThread.id}`);
             } else {

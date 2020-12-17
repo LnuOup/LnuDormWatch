@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ForumThread} from '../../models/forum-thread';
-import {mockForumSections} from '../../mockdata/mock-forum';
-import {ForumSection} from '../../models/forum-section';
 import {ActivatedRoute, Router, ParamMap } from '@angular/router';
 import {Form, FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../service/user.service';
@@ -16,6 +14,7 @@ export class CreateThreadComponent implements OnInit {
   displayedSectionId: string;
   @Input() newThread: ForumThread;
 
+  isInProgress: boolean;
   errorMessage: string;
   newThreadForm: FormGroup;
 
@@ -43,9 +42,12 @@ export class CreateThreadComponent implements OnInit {
       this.errorMessage = 'Please enter the thread content';
     } else {
       this.errorMessage = undefined;
+      this.isInProgress = true;
 
       this.forumService.postThread(this.displayedSectionId, this.newThreadForm.value.threadName, this.newThreadForm.value.threadContent)
         .subscribe(res => {
+          this.isInProgress = false;
+
           if (res !== undefined) {
             this.router.navigateByUrl(`/forum/section/${this.displayedSectionId}`);
           } else {

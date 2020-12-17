@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   refreshToken(): Observable<AuthData> {
-    return this.http.get<AuthData>(`${environment.apiUrl}/api/v${environment.apiVersion}/Account/login`, this.httpOptions)
+    return this.http.get<AuthData>(`${environment.apiUrl}/api/v${environment.apiVersion}/Account/refresh-token`, this.httpOptions)
       .pipe(
         tap(res => this.setupSession(res)),
         catchError(this.handleError<AuthData>('refreshToken')),

@@ -35,9 +35,9 @@
         </h3>
       </a>
 
-<!--      <p id="thread-creator">-->
-<!--        by {{ thread.author.userName }}-->
-<!--      </p>-->
+      <p id="thread-creator">
+        Posted on {{ thread.creationDate | date:'medium' }}
+      </p>
 
       <p id="thread-num-of-replies">
         {{ thread.numberOfReplies }}
@@ -54,4 +54,6 @@
 <!--      </p>-->
     </article>
   </section>
+
+  <p *ngIf="isInProgress">Loading threads...</p>
 </main>

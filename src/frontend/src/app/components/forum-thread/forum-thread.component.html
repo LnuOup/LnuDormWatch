@@ -16,15 +16,15 @@
       *ngIf="displayedThread">
       <div class="user-info">
 
-        <a><h3>{{ displayedThread.author.userName }}</h3></a>
+        <a><h3>{{ displayedThread.authorInfo.userName }}</h3></a>
 
-        <img src="{{ displayedThread.author.photoUrl }}"
-             *ngIf="displayedThread.author.photoUrl">
+        <img src="{{ displayedThread.authorInfo.photoUrl }}"
+             *ngIf="displayedThread.authorInfo.photoUrl">
         <img src="assets/images/account_circle-black-48dp.svg"
-             *ngIf="!displayedThread.author.photoUrl">
+             *ngIf="!displayedThread.authorInfo.photoUrl">
 
-        <p *ngIf="displayedThread.author.isAdmin">Administrator</p>
-        <p *ngIf="!displayedThread.author.isAdmin">Resident</p>
+<!--        <p *ngIf="displayedThread.author.isAdmin">Administrator</p>-->
+<!--        <p *ngIf="!displayedThread.author.isAdmin">Resident</p>-->
       </div>
 
       <div class="reply-content">
@@ -49,12 +49,12 @@
 
       <div class="user-info">
 
-        <a><h3>{{ reply.author.userName }}</h3></a>
+        <a><h3>{{ reply.authorInfo.userName }}</h3></a>
 
-        <img src="{{reply.author.photoUrl}}">
+        <img src="{{reply.authorInfo.photoUrl}}">
 
-        <p *ngIf="reply.author.isAdmin">Administrator</p>
-        <p *ngIf="!reply.author.isAdmin">Resident</p>
+<!--        <p *ngIf="reply.authorInfo.isAdmin">Administrator</p>-->
+<!--        <p *ngIf="!reply.authorInfo.isAdmin">Resident</p>-->
       </div>
 
       <div class="reply-content">
@@ -62,7 +62,7 @@
 
         <!--quote content-->
         <div *ngIf="reply.parentForumThreadReply" class="reply-quote">
-          <h5>Posted by {{ reply.parentForumThreadReply.author.userName }} on {{ reply.parentForumThreadReply.creationDate | date: "medium" }}:</h5>
+          <h5>Posted by {{ reply.parentForumThreadReply.authorInfo.userName }} on {{ reply.parentForumThreadReply.creationDate | date: "medium" }}:</h5>
 
           <q>{{reply.parentForumThreadReply.replyBody}}</q>
         </div>
@@ -80,4 +80,6 @@
 
     </article>
   </section>
+
+  <p *ngIf="isInProgress">Loading thread...</p>
 </main>

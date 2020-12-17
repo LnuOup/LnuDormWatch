@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {mockForumSections} from '../../mockdata/mock-forum';
 import {ActivatedRoute} from '@angular/router';
 import {ForumThread} from '../../models/forum-thread';
 import {mockUsers} from '../../mockdata/mock-users';
@@ -13,6 +12,7 @@ import {ForumService} from '../../service/forum.service';
 })
 export class ForumThreadComponent implements OnInit {
   displayedThread: ForumThread;
+  isInProgress: boolean;
   get isSignedIn(): boolean {
     return AuthService.isSignedIn();
   }
@@ -21,6 +21,8 @@ export class ForumThreadComponent implements OnInit {
               private forumService: ForumService) { }
 
   ngOnInit(): void {
+    this.isInProgress = true;
+
     const id = this.route.snapshot.paramMap.get('threadId');
 
     this.forumService.getThreadById(id)
@@ -28,14 +30,12 @@ export class ForumThreadComponent implements OnInit {
         if (res !== undefined) {
           this.forumService.getReplies(id)
             .subscribe(replRes => {
+              this.isInProgress = false;
+
               if (replRes !== undefined) {
                 // fetch replies
                 res.replies = replRes.sort((repl1, repl2) =>
                   (new Date(repl1.creationDate)).getTime() - (new Date(repl2.creationDate)).getTime());
-
-                // TODO
-                res.author = mockUsers[1];
-                res.replies.forEach(repl => repl.author = mockUsers[0]);
 
                 this.displayedThread = res;
               }
