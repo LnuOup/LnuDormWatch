@@ -17,46 +17,67 @@ using LDW.WebAPI.Models;
 
 namespace LDW.WebAPI.Controllers.v1
 {
-    [Authorize]
-    public class UserController : BaseV1Controller
-    {
+	[Authorize]
+	public class UserController : BaseV1Controller
+	{
 
-        private readonly AzureStorageOptions _azureStorageConfig;
-        private readonly IImageService _imageService;
+		private readonly AzureStorageOptions _azureStorageConfig;
+		private readonly IImageService _imageService;
 
-        public UserController(IOptions<AzureStorageOptions> azureStorageConfig,
-                IImageService imageService)
-        {
-            _azureStorageConfig = azureStorageConfig.Value;
-            _imageService = imageService;
-        }
+		public UserController(IOptions<AzureStorageOptions> azureStorageConfig,
+				IImageService imageService)
+		{
+			_azureStorageConfig = azureStorageConfig.Value;
+			_imageService = imageService;
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> GetUser()
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		[HttpGet]
+		public async Task<IActionResult> GetCurrentUser()
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            var user = await Mediator.Send(new GetUserByIdQuery(User.Identity.Name));
+			var user = await Mediator.Send(new GetUserByIdQuery(User.Identity.Name));
 
-            var response = new
-            {
-                user.UserName,
-                user.Email,
-                user.EmailConfirmed,
-                user.PhoneNumber,
-                user.PhotoUrl,
-                user.CompressedPhotoUrl,
-                user.UserRoles
-            };
+			var response = new
+			{
+				user.UserName,
+				user.Email,
+				user.EmailConfirmed,
+				user.PhoneNumber,
+				user.PhotoUrl,
+				user.CompressedPhotoUrl,
+				user.UserRoles
+			};
 
-            return Ok(response);
-        }
+			return Ok(response);
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("{id}")]
+		public async Task<IActionResult> GetUserById(string id)
+		{
+			var user = await Mediator.Send(new GetUserByIdQuery(id));
+
+			var response = new
+			{
+				user.UserName,
+				user.Email,
+				user.EmailConfirmed,
+				user.PhoneNumber,
+				user.PhotoUrl,
+				user.CompressedPhotoUrl,
+				user.UserRoles
+			};
+
+			return Ok(response);
+		}
 
 
-        [HttpPut]
+		[HttpPut]
         [Route("upload-user-photo")]
         public async Task<IActionResult> UploadUserPhoto( IFormFile formFile)
         {
